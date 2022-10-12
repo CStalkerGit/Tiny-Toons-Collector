@@ -6,22 +6,36 @@ using UnityEngine.UI;
 [RequireComponent(typeof(BoxCollider2D))]
 public class Actor2D : MonoBehaviour
 {
+    const int GroundLayer = 1 << 9;
+
     public float speed = 3;
     public float jumpHeight = 3;
-    public Text debug;
+    public float maxSlopeAngle = 50;
+    public PhysicsMaterial2D fullFriction;
+    public PhysicsMaterial2D zeroFriction;
 
     public bool IsGrounded { get; private set; }
     public Vector2 Position => transform.position;
 
-    BoxCollider2D boxCollider;
+    Animator anim;
     Rigidbody2D rb;
     Vector2 motion;
-    bool jump;
+
+    bool isFlipped;
+    bool isMoving;
+    bool isJumping;
+    bool inputJump;
+
+    // tmp
+    ContactPoint2D[] contacts = new ContactPoint2D[4];
+    bool isOnSlope = false;
+    float slopeAngle = 0;
+    Vector2 perp = Vector2.up;
 
     void Start()
     {
-        boxCollider = GetComponent<BoxCollider2D>();
         rb = GetComponent<Rigidbody2D>();
+        anim = GetComponent<Animator>();
     }
 
     void Update()
@@ -31,15 +45,113 @@ public class Actor2D : MonoBehaviour
 
     void FixedUpdate()
     {
-        rb.velocity = new Vector2(motion.x * speed, rb.velocity.y); 
+        //var count = rb.Cast(Vector2.down, results, 1.0f);
 
-        if (jump) //&& IsGrounded
+        isMoving = true;
+        if (motion.x > 0.01f) Flip(false); else if (motion.x < -0.01f) Flip(true); else isMoving = false;
+        if (isMoving) rb.sharedMaterial = zeroFriction; else rb.sharedMaterial = fullFriction;
+
+        if (isJumping)
         {
-            rb.velocity = new Vector2(rb.velocity.x, jumpHeight);
+            if (rb.velocity.y <= 0) isJumping = false;
+            // TODO change animation
+        }
+
+        CheckContacts();
+        UpdateVelocity();
+        UpdateDebugStats();
+
+        // update animation
+        anim.SetFloat("Speed", Mathf.Abs(rb.velocity.x));
+        anim.SetBool("IsGrounded", IsGrounded);
+    }
+
+    void CheckContacts()
+    {
+        int countContacts = rb.GetContacts(contacts);
+        float dirSign = motion.x > 0 ? 1 : -1;
+        float contactX = -1000 * dirSign;
+
+        for (int i = 0; i < countContacts; i++)
+        {
+            var contact = contacts[i];
+
+            float angle = Vector2.Angle(contact.normal, Vector2.up);
+            if (contactX * dirSign < contact.point.x * dirSign) //slopeAngle < angle
+            {
+                contactX = contact.point.x;
+                slopeAngle = angle;
+                perp = Vector2.Perpendicular(contact.normal).normalized;
+            }
+        }
+
+        isOnSlope = false;
+        if (countContacts > 0)
+        {
+            IsGrounded = true;
+            if (slopeAngle > 0) isOnSlope = true;
+        }
+        else
+        {
             IsGrounded = false;
         }
-        jump = false;
     }
+
+    void UpdateVelocity()
+    {
+        var velocity = rb.velocity;
+
+        velocity.x = motion.x * speed;
+
+        if (!isMoving && isOnSlope && !isJumping)
+        {
+            if (velocity.y > 0) velocity.y = 0;
+        }
+
+        // on slope
+        if (isMoving && isOnSlope && !isJumping)
+        {
+            velocity.Set(-motion.x * speed * perp.x, -motion.x * speed * perp.y);
+            //if (velocity.y > 0 && slopeAngle > maxSlopeAngle) velocity.y = 0;
+        }
+
+        if (isMoving && !isOnSlope && !isJumping && velocity.y > 0)
+        {
+           velocity.y = -1;
+        }
+
+        // jumping
+        if (inputJump && IsGrounded && !isJumping)
+        {
+            velocity.y = jumpHeight;
+            IsGrounded = false;
+            isJumping = true;
+            anim.SetTrigger("Jump");
+        }
+        inputJump = false;
+
+        rb.velocity = velocity;
+    }
+
+    void Flip(bool flip)
+    {
+        if (isFlipped != flip)
+        {
+            transform.localScale = new Vector3(flip ? -1 : 1, 1, 1);
+            isFlipped = flip;
+        }
+    }
+
+    void UpdateDebugStats()
+    {
+        DebugStats.Velocity = rb.velocity;
+        DebugStats.IsJumping = isJumping;
+        DebugStats.IsGrounded = IsGrounded;
+        DebugStats.IsOnSlope = isOnSlope;
+        DebugStats.Angle = slopeAngle;
+    }
+
+    // public
 
     public void Move(float x)
     {
@@ -48,18 +160,6 @@ public class Actor2D : MonoBehaviour
 
     public void Jump()
     {
-        jump = true;
-    }
-
-    bool IsCollision(Vector2 move)
-    {
-        var hits = Physics2D.OverlapBoxAll(Position + boxCollider.offset + move, boxCollider.size, 0);
-        foreach (var hit in hits)
-        {
-            if (hit == boxCollider) continue;
-            return true;
-        }
-
-        return false;
+        inputJump = true;
     }
 }
