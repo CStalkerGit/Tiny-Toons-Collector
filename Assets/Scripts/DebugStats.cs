@@ -12,6 +12,7 @@ public class DebugStats : MonoBehaviour
     public static bool IsJumping { get; set; }
     public static bool IsGrounded { get; set; }
     public static bool IsOnSlope { get; set; }
+    public static bool IsWall { get; set; }
     public static float Angle { get; set; }
 
     void Awake()
@@ -26,6 +27,7 @@ public class DebugStats : MonoBehaviour
                    + $"IsJumping = {IsJumping}\n"
                    + $"OnGround = {IsGrounded}\n"
                    + $"OnSlope = {IsOnSlope}\n"
+                   + $"IsWall = {IsWall}\n"
                    + $"Angle = {Angle}\n";
     }
 }

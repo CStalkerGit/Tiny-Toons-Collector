@@ -24,6 +24,7 @@ public class Actor2D : MonoBehaviour
     bool isFlipped;
     bool isMoving;
     bool isJumping;
+    bool isWall;
     bool inputJump;
 
     // tmp
@@ -72,6 +73,7 @@ public class Actor2D : MonoBehaviour
         float dirSign = motion.x > 0 ? 1 : -1;
         float contactX = -1000 * dirSign;
 
+        isWall = false;
         for (int i = 0; i < countContacts; i++)
         {
             var contact = contacts[i];
@@ -83,6 +85,7 @@ public class Actor2D : MonoBehaviour
                 slopeAngle = angle;
                 perp = Vector2.Perpendicular(contact.normal).normalized;
             }
+            if (contact.normal.y == 0 && contact.normal.x * dirSign > 0) isWall = true;
         }
 
         isOnSlope = false;
@@ -100,28 +103,36 @@ public class Actor2D : MonoBehaviour
     void UpdateVelocity()
     {
         var velocity = rb.velocity;
+        bool isSteepSlope = slopeAngle > maxSlopeAngle;
 
-        velocity.x = motion.x * speed;
-
-        if (!isMoving && isOnSlope && !isJumping)
+        if (isJumping)
         {
-            if (velocity.y > 0) velocity.y = 0;
+            velocity.x = motion.x * speed;
         }
-
-        // on slope
-        if (isMoving && isOnSlope && !isJumping)
+        else
         {
-            velocity.Set(-motion.x * speed * perp.x, -motion.x * speed * perp.y);
-            //if (velocity.y > 0 && slopeAngle > maxSlopeAngle) velocity.y = 0;
-        }
-
-        if (isMoving && !isOnSlope && !isJumping && velocity.y > 0)
-        {
-           velocity.y = -1;
+            if (isMoving)
+            {
+                // on slope
+                if (isOnSlope)
+                {
+                    if (!isSteepSlope) velocity.Set(-motion.x * speed * perp.x, -motion.x * speed * perp.y);
+                }
+                else
+                {
+                    velocity.x = motion.x * speed;
+                    if (velocity.y > 0) velocity.y = -1;
+                }
+            }
+            else
+            {
+                if (!isSteepSlope) velocity.x = 0;
+                if (velocity.y > 0) velocity.y = 0;
+            }
         }
 
         // jumping
-        if (inputJump && IsGrounded && !isJumping)
+        if (inputJump && IsGrounded && !isJumping && !isSteepSlope)
         {
             velocity.y = jumpHeight;
             IsGrounded = false;
@@ -148,6 +159,7 @@ public class Actor2D : MonoBehaviour
         DebugStats.IsJumping = isJumping;
         DebugStats.IsGrounded = IsGrounded;
         DebugStats.IsOnSlope = isOnSlope;
+        DebugStats.IsWall = isWall;
         DebugStats.Angle = slopeAngle;
     }
 
