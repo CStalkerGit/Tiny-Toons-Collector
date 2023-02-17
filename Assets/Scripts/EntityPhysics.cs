@@ -6,13 +6,14 @@ using UnityEngine;
 public class EntityPhysics : MonoBehaviour
 {
     // data
-    public Vector3 velocity;
     public bool bouncing;
 
     // components
     Entity entity = null;
 
     // physics
+    [System.NonSerialized]
+    public Vector3 velocity;
     [System.NonSerialized]
     public bool deceleration;
     public bool OnGround { get; private set; }
@@ -35,29 +36,41 @@ public class EntityPhysics : MonoBehaviour
     void FixedUpdate()
     {
         Vector3 newPosition = transform.position + velocity * Time.deltaTime;
-        Vector3 position = transform.position;
 
+        entity.pos = transform.position;
         AlignRect align = new AlignRect();
 
         // axis Y
-        OnGround = false;
-        position.y = newPosition.y;
-        if (CollisionGrid.IsCollision(entity, position, ref align))
+        if (Mathf.Abs(newPosition.y - entity.pos.y) > CollisionGrid.MinStep)
         {
-            position.y = transform.position.y;          
-            if (velocity.y < 0) OnGround = true;
-            velocity.y = 0;
+            OnGround = false;
+            entity.pos.y = newPosition.y;
+            if (CollisionGrid.IsCollision(entity, ref align))
+            {
+                entity.pos.y = transform.position.y;
+                if (velocity.y < 0)
+                {
+                    OnGround = true;
+                    entity.pos.y = align.top + entity.rh + CollisionGrid.MinStep;
+                }
+                else
+                {
+                    //float alignY = align.bottom - entity.rh - CollisionGrid.MinStep;
+                    // position.y = alignY;
+                }
+                velocity.y = 0;
+            }
         }
 
         // axis X
-        position.x = newPosition.x;
-        if (CollisionGrid.IsCollision(entity, position, ref align))
+        entity.pos.x = newPosition.x;
+        if (CollisionGrid.IsCollision(entity, ref align))
         {
-            position.x = transform.position.x;
+            entity.pos.x = transform.position.x;
             velocity.x = 0;
         }
 
-        transform.position = position;
+        transform.position = entity.pos;
 
         // gravity
         velocity.y -= CollisionGrid.Gravity * Time.deltaTime;
@@ -66,10 +79,12 @@ public class EntityPhysics : MonoBehaviour
         // deceleration
         if (deceleration)
         {
+            const float airFriction = 0.965f;
+            const float groundFriction = 0.8f;
             if (OnGround)
-                velocity.x = velocity.x * 0.80f;
+                velocity.x = velocity.x * groundFriction;
             else
-                velocity.x = velocity.x * 0.95f;
+                velocity.x = velocity.x * airFriction;
             if (Mathf.Abs(velocity.x) < CollisionGrid.MinStep) velocity.x = 0;
         }
     }

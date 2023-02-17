@@ -18,6 +18,8 @@ public class Entity : MonoBehaviour
 
     [System.NonSerialized]
     public Vector3 prev_pos;
+    [System.NonSerialized]
+    public Vector3 pos;
 
     [System.NonSerialized]
     public Vector3 velocity;
@@ -55,22 +57,22 @@ public class Entity : MonoBehaviour
 
     public bool IsCollision(Entity entity)
     {
-        //if (Mathf.Abs(pos.x - entity.pos.x) > (rw + entity.rw)) return false;
-        //if (Mathf.Abs(pos.y - entity.pos.y) > (rh + entity.rh)) return false;
+        if (Mathf.Abs(pos.x - entity.pos.x) > (rw + entity.rw)) return false;
+        if (Mathf.Abs(pos.y - entity.pos.y) > (rh + entity.rh)) return false;
         return true;
     }
 
     public bool IsCollision(Vector2 position, float rw, float rh)
     {
-        //if (Mathf.Abs(pos.x - position.x) > (rw + this.rw)) return false;
-        //if (Mathf.Abs(pos.y - position.y) > (rh + this.rh)) return false;
+        if (Mathf.Abs(pos.x - position.x) > (rw + this.rw)) return false;
+        if (Mathf.Abs(pos.y - position.y) > (rh + this.rh)) return false;
         return true;
     }
 
     public bool IsCollision(float x, float y, float r)
     {
-        //if (Mathf.Abs(pos.x - x) > (rw + r)) return false;
-        //if (Mathf.Abs(pos.y - y) > (rh + r)) return false;
+        if (Mathf.Abs(pos.x - x) > (rw + r)) return false;
+        if (Mathf.Abs(pos.y - y) > (rh + r)) return false;
         return true;
     }
 

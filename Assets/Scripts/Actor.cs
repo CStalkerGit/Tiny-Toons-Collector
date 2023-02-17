@@ -6,7 +6,8 @@ using UnityEngine;
 [RequireComponent(typeof(EntityPhysics))]
 public class Actor : MonoBehaviour
 {
-    public float speed = 3.5f;
+    public float acceleration = 2.5f;
+    public float maxSpeed = 3.5f;
     public float jumpHeight = 2f;
 
     Entity entity;
@@ -27,16 +28,15 @@ public class Actor : MonoBehaviour
     void FixedUpdate()
     {
         float horSpeed = Mathf.Abs(physics.velocity.x);
-        float accel = 2;
-        float newVelocity = physics.velocity.x + move * speed * accel * Time.deltaTime;
+        float newVelocity = physics.velocity.x + move * acceleration * Time.deltaTime;
 
-        if (horSpeed < speed) // если текущая скорость меньше максимальной
-            physics.velocity.x = Mathf.Clamp(newVelocity, -speed, speed); // ограничиваем ее максимальной скоростью
+        if (horSpeed < maxSpeed) // если текущая скорость меньше максимальной
+            physics.velocity.x = Mathf.Clamp(newVelocity, -maxSpeed, maxSpeed); // ограничиваем ее максимальной скоростью
         else // иначе ограничиваем ее текущей скоростью
             physics.velocity.x = Mathf.Clamp(newVelocity, -horSpeed, horSpeed);
 
         // disable slowing down when moving
-        physics.deceleration = Mathf.Abs(move) < 0.01f || horSpeed > speed;
+        physics.deceleration = Mathf.Abs(move) < 0.01f || horSpeed > maxSpeed;
 
         if (jump && physics.OnGround)
             physics.velocity.y = Mathf.Sqrt(2.0f * CollisionGrid.Gravity * jumpHeight);

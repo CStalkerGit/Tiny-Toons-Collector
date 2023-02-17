@@ -118,7 +118,7 @@ public class CustomTile : TileBase
         switch (type)
         {
             case TileType.FullBlock:
-                return true;
+                return entity.IsCollision(x + 0.5f, y + 0.5f, 0.5f);
             default:
                 return false;
         }
@@ -129,10 +129,10 @@ public class CustomTile : TileBase
         switch (type)
         {
             case TileType.FullBlock:
-                rect.top = tileY;
-                rect.bottom = tileY - 1;
-                rect.left = tileX;
-                rect.right = tileX + 1;
+                rect.top = tileY + 1f;
+                rect.bottom = tileY - 0.5f;
+                rect.left = tileX - 0.5f;
+                rect.right = tileX + 0.5f;
                 break;
         }
     }

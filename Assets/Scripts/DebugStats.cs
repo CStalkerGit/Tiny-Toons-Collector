@@ -17,6 +17,7 @@ public class DebugStats : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        text.text = $"{entity.velocity.x} {entity.velocity.y}";
+        text.text = $"speed = {entity.velocity.x} {entity.velocity.y}\n" +
+            $"coord = {entity.transform.position.x} {entity.transform.position.y}";
     }
 }

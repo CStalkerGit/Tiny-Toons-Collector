@@ -12,7 +12,7 @@ public class CollisionGrid : MonoBehaviour
 {
     public Tilemap map;
     public static float Gravity => 18f;
-    public static float MinStep => 0.05f;
+    public static float MinStep => 0.01f;
 
     static CollisionGrid instance = null;
 
@@ -34,15 +34,15 @@ public class CollisionGrid : MonoBehaviour
         instance = null;
     }
 
-    public static bool IsCollision(Entity entity, Vector3 position, ref AlignRect align)
+    public static bool IsCollision(Entity entity, ref AlignRect align)
     {
         bool result = false;
         const float offset = 0.1f;
 
-        int x1 = Mathf.FloorToInt(position.x - entity.rw + 0.0f - offset);
-        int x2 = Mathf.CeilToInt(position.x + entity.rw - 1.0f + offset);
-        int y1 = Mathf.FloorToInt(position.y - entity.rh + 0.0f - offset);
-        int y2 = Mathf.CeilToInt(position.y + entity.rh - 1.0f + offset);
+        int x1 = Mathf.FloorToInt(entity.pos.x - entity.rw + 0.0f - offset);
+        int x2 = Mathf.CeilToInt(entity.pos.x + entity.rw - 1.0f + offset);
+        int y1 = Mathf.FloorToInt(entity.pos.y - entity.rh + 0.0f - offset);
+        int y2 = Mathf.CeilToInt(entity.pos.y + entity.rh - 1.0f + offset);
 
         for (int x = x1; x <= x2; x++)
             for (int y = y1; y <= y2; y++)
