@@ -3,10 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
+public struct AlignRect
+{
+    public float top, bottom, right, left;
+}
+
 public class CollisionGrid : MonoBehaviour
 {
     public Tilemap map;
-    public float sv_gravity = 1.0f;
+    public static float Gravity => 18f;
+    public static float MinStep => 0.05f;
 
     static CollisionGrid instance = null;
 
@@ -28,17 +34,15 @@ public class CollisionGrid : MonoBehaviour
         instance = null;
     }
 
-    public static float Gravity => instance.sv_gravity;
-
-    public static bool IsCollision(Entity entity)
+    public static bool IsCollision(Entity entity, Vector3 position, ref AlignRect align)
     {
         bool result = false;
         const float offset = 0.1f;
 
-        int x1 = Mathf.FloorToInt(entity.transform.position.x - entity.rw + 0.0f - offset);
-        int x2 = Mathf.CeilToInt(entity.transform.position.x + entity.rw - 1.0f + offset);
-        int y1 = Mathf.FloorToInt(entity.transform.position.y - entity.rh + 0.0f - offset);
-        int y2 = Mathf.CeilToInt(entity.transform.position.y + entity.rh - 1.0f + offset);
+        int x1 = Mathf.FloorToInt(position.x - entity.rw + 0.0f - offset);
+        int x2 = Mathf.CeilToInt(position.x + entity.rw - 1.0f + offset);
+        int y1 = Mathf.FloorToInt(position.y - entity.rh + 0.0f - offset);
+        int y2 = Mathf.CeilToInt(position.y + entity.rh - 1.0f + offset);
 
         for (int x = x1; x <= x2; x++)
             for (int y = y1; y <= y2; y++)
@@ -47,10 +51,16 @@ public class CollisionGrid : MonoBehaviour
                 if (tile == null) continue;
                 if (tile.IsCollision(x, y, entity))
                 {
+                    tile.GetAlignRect(ref align, x, y);
                     result = true;
                 }
             }
 
         return result;
+    }
+
+    public static void ProcessCollision(Entity entity)
+    {
+
     }
 }

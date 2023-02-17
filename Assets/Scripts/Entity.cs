@@ -12,19 +12,23 @@ public enum CollisionAlignment
 
 public class Entity : MonoBehaviour
 {
-    public float rw;
-    public float rh;
+    public float rw = 0.5f;
+    public float rh = 0.5f;
     public bool useFlatforms;
 
     [System.NonSerialized]
-    public Vector2 prev_pos;
+    public Vector3 prev_pos;
 
     [System.NonSerialized]
-    public Vector2 velocity;
+    public Vector3 velocity;
 
     private bool isDeleted = false;
 
-    // Update is called once per frame
+    void Awake()
+    {
+
+    }
+
     void Update()
     {
         

@@ -124,6 +124,19 @@ public class CustomTile : TileBase
         }
     }
 
+    public void GetAlignRect(ref AlignRect rect, int tileX, int tileY)
+    {
+        switch (type)
+        {
+            case TileType.FullBlock:
+                rect.top = tileY;
+                rect.bottom = tileY - 1;
+                rect.left = tileX;
+                rect.right = tileX + 1;
+                break;
+        }
+    }
+
     public bool CanWalk(Entity entity)
     {
         switch (type)

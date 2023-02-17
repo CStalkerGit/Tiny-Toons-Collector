@@ -2,18 +2,20 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(Actor))]
 public class PlayerInput : MonoBehaviour
 {
-   //Actor2D actor;
+    Actor actor;
 
     void Awake()
     {
-        //actor = GetComponent<Actor2D>();
+        actor = GetComponent<Actor>();
     }
 
     void Update()
     {
-        //if (Input.GetButtonDown("Jump")) actor.Jump();
-        //actor.Move(Input.GetAxisRaw("Horizontal"));
+        if (Input.GetButton("Jump")) actor.Jump();
+        actor.Move(Input.GetAxisRaw("Horizontal"));
+        if (Input.GetKeyDown(KeyCode.F)) actor.AddForce(new Vector3(10, 0, 0));
     }
 }

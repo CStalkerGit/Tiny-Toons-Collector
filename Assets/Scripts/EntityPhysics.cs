@@ -6,21 +6,23 @@ using UnityEngine;
 public class EntityPhysics : MonoBehaviour
 {
     // data
-    public float friction = 1.0f;
+    public Vector3 velocity;
     public bool bouncing;
 
     // components
     Entity entity = null;
 
     // physics
+    [System.NonSerialized]
+    public bool deceleration;
     public bool OnGround { get; private set; }
-    Vector3 velocity;
 
     void Awake()
     {
         // components
         entity = GetComponent<Entity>();
 
+        deceleration = true;
         OnGround = false;
     }
 
@@ -32,21 +34,43 @@ public class EntityPhysics : MonoBehaviour
 
     void FixedUpdate()
     {
-        Vector3 oldPosition = transform.position;
         Vector3 newPosition = transform.position + velocity * Time.deltaTime;
+        Vector3 position = transform.position;
 
-        transform.position = newPosition;
-        if (CollisionGrid.IsCollision(entity))
+        AlignRect align = new AlignRect();
+
+        // axis Y
+        OnGround = false;
+        position.y = newPosition.y;
+        if (CollisionGrid.IsCollision(entity, position, ref align))
         {
-            transform.position = oldPosition;
+            position.y = transform.position.y;          
+            if (velocity.y < 0) OnGround = true;
+            velocity.y = 0;
         }
 
+        // axis X
+        position.x = newPosition.x;
+        if (CollisionGrid.IsCollision(entity, position, ref align))
+        {
+            position.x = transform.position.x;
+            velocity.x = 0;
+        }
+
+        transform.position = position;
+
+        // gravity
         velocity.y -= CollisionGrid.Gravity * Time.deltaTime;
-        if (velocity.y < -10) velocity.y = -10;
-    }
+        if (velocity.y < -20) velocity.y = -20;
 
-    public void Move(int move, float speed)
-    {
-
+        // deceleration
+        if (deceleration)
+        {
+            if (OnGround)
+                velocity.x = velocity.x * 0.80f;
+            else
+                velocity.x = velocity.x * 0.95f;
+            if (Mathf.Abs(velocity.x) < CollisionGrid.MinStep) velocity.x = 0;
+        }
     }
 }
