@@ -45,6 +45,7 @@ public class EntityPhysics : MonoBehaviour
         {
             OnGround = false;
             entity.pos.y = newPosition.y;
+            align.Reset(entity, newPosition);
             if (CollisionGrid.IsCollision(entity, ref align))
             {
                 entity.pos.y = transform.position.y;
@@ -64,6 +65,7 @@ public class EntityPhysics : MonoBehaviour
 
         // axis X
         entity.pos.x = newPosition.x;
+        align.Reset(entity, newPosition);
         if (CollisionGrid.IsCollision(entity, ref align))
         {
             entity.pos.x = transform.position.x;
