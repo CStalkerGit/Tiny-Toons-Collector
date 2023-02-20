@@ -16,6 +16,7 @@ public enum TileType
 {
     Background,
     FullBlock,
+    Slope45,
     Platform,
     Spikes
 }
@@ -25,6 +26,7 @@ public class CustomTile : TileBase
 {
     public TileCompatible compatible;
     public TileType type;
+    public bool orientToRight;
 
     public Sprite[] sprites;
 
@@ -115,24 +117,32 @@ public class CustomTile : TileBase
 
     public bool IsCollision(int x, int y, Entity entity)
     {
+        if (!entity.IsCollision(x + 0.5f, y + 0.5f, 0.5f)) return false;
+
         switch (type)
         {
             case TileType.FullBlock:
-                return entity.IsCollision(x + 0.5f, y + 0.5f, 0.5f);
+                return true; // entity.IsCollision(x + 0.5f, y + 0.5f, 0.5f);
+            case TileType.Slope45:
+                return entity.IsCollisionSlope45(x, y, orientToRight);
             default:
                 return false;
         }
     }
 
-    public void GetAlignRect(ref AlignRect rect, int tileX, int tileY)
+    public void GetAlignRect(ref AlignRect rect, int tileX, int tileY, Entity entity)
     {
         switch (type)
         {
             case TileType.FullBlock:
-                if (tileY + 1f > rect.top) rect.top = tileY + 1f;
-                if (tileY < rect.bottom) rect.bottom = tileY;
-                if (tileX + 1f > rect.right) rect.right = tileX + 1f;
-                if (tileX < rect.left) rect.left = tileX;
+                rect.Inflate(tileY + 1f, tileY, tileX + 1f, tileX);
+                break;
+            case TileType.Slope45:
+                var point = entity.GetSlopeCollisionPoint(orientToRight);
+                if (orientToRight)
+                    rect.Inflate(1 - point.x, tileY, tileX + 1f, 1 - point.y);
+                else
+                    rect.Inflate(point.x - tileX, tileY, point.y - tileY, tileX);
                 break;
         }
     }

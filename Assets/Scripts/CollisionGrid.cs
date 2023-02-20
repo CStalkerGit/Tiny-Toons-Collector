@@ -13,6 +13,13 @@ public struct AlignRect
         right = newPosition.x - entity.rw;
         left = newPosition.x + entity.rw;
     }
+    public void Inflate(float _top, float _bottom, float _right, float _left)
+    {
+        if (top < _top) top = _top;
+        if (bottom > _bottom) bottom = _bottom;
+        if (right < _right) right = _right;
+        if (left > _left) left = _left;
+    }
 }
 
 public class CollisionGrid : MonoBehaviour
@@ -58,7 +65,7 @@ public class CollisionGrid : MonoBehaviour
                 if (tile == null) continue;
                 if (tile.IsCollision(x, y, entity))
                 {
-                    tile.GetAlignRect(ref align, x, y);
+                    tile.GetAlignRect(ref align, x, y, entity);
                     result = true;
                 }
             }

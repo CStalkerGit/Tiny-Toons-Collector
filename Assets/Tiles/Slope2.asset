@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Slope2
   m_EditorClassIdentifier: 
   compatible: 0
-  type: 0
+  type: 2
+  orientToRight: 0
   sprites:
   - {fileID: 21300008, guid: dc98b5d166fc1d64ba470ba7f536a783, type: 3}

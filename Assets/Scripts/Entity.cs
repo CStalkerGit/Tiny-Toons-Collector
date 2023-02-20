@@ -76,9 +76,26 @@ public class Entity : MonoBehaviour
         return true;
     }
 
+    public bool IsCollisionSlope45(float x, float y, bool toRight)
+    {
+        var point = GetSlopeCollisionPoint(toRight);
+        if (toRight)
+            return point.x - x <= 1 - (point.y - y);
+        else
+            return point.x - x >= point.y - y;
+    }
+
     public float PrevBottomCoord()
     {
         return prev_pos.y - rh;
+    }
+
+    public Vector2 GetSlopeCollisionPoint(bool bottomLeft)
+    {
+        if (bottomLeft)
+            return new Vector2(pos.x - rw, pos.y - rh);
+        else
+            return new Vector2(pos.x + rw, pos.y - rh);
     }
 
 #if UNITY_EDITOR
