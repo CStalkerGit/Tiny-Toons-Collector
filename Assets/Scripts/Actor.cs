@@ -41,7 +41,15 @@ public class Actor : MonoBehaviour
 
         if (jump && physics.OnGround)
             physics.velocity.y = Mathf.Sqrt(2 * CollisionGrid.Gravity * jumpHeight);
-        jump = false;    
+        jump = false;
+
+        if (-0.1f > move || move > 0.1f)
+        {
+            MovingRight = move > 0;
+            Moving = true;
+        }
+        else
+            Moving = false;
     }
 
     public void StopJumping()
@@ -52,4 +60,6 @@ public class Actor : MonoBehaviour
     public void Move(float v) => move = v;
     public void Jump() => jump = true;
     public void AddForce(Vector3 force) => physics.velocity += force;
+    public bool MovingRight { get; private set; }
+    public bool Moving { get; private set; }
 }
