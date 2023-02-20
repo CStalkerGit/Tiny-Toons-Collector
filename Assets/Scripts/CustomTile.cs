@@ -129,10 +129,10 @@ public class CustomTile : TileBase
         switch (type)
         {
             case TileType.FullBlock:
-                rect.top = tileY + 1f;
-                rect.bottom = tileY - 0.5f;
-                rect.left = tileX - 0.5f;
-                rect.right = tileX + 0.5f;
+                if (tileY + 1f > rect.top) rect.top = tileY + 1f;
+                if (tileY < rect.bottom) rect.bottom = tileY;
+                if (tileX + 1f > rect.right) rect.right = tileX + 1f;
+                if (tileX < rect.left) rect.left = tileX;
                 break;
         }
     }

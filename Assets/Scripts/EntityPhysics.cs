@@ -45,31 +45,35 @@ public class EntityPhysics : MonoBehaviour
         {
             OnGround = false;
             entity.pos.y = newPosition.y;
-            align.Reset(entity, newPosition);
+            align.Reset(entity, entity.pos);
             if (CollisionGrid.IsCollision(entity, ref align))
             {
-                entity.pos.y = transform.position.y;
-                if (velocity.y < 0)
-                {
-                    OnGround = true;
+                //entity.pos.y = transform.position.y;
+                if (velocity.y <= 0)
                     entity.pos.y = align.top + entity.rh + CollisionGrid.MinStep;
-                }
                 else
-                {
-                    //float alignY = align.bottom - entity.rh - CollisionGrid.MinStep;
-                    // position.y = alignY;
-                }
+                    entity.pos.y = align.bottom - entity.rh - CollisionGrid.MinStep;
+
+                if (velocity.y <= 0) OnGround = true;
                 velocity.y = 0;
             }
         }
 
         // axis X
-        entity.pos.x = newPosition.x;
-        align.Reset(entity, newPosition);
-        if (CollisionGrid.IsCollision(entity, ref align))
+        if (Mathf.Abs(newPosition.x - entity.pos.x) > CollisionGrid.MinStep)
         {
-            entity.pos.x = transform.position.x;
-            velocity.x = 0;
+            entity.pos.x = newPosition.x;
+            align.Reset(entity, entity.pos);
+            if (CollisionGrid.IsCollision(entity, ref align))
+            {
+                //entity.pos.x = transform.position.x;
+                if (velocity.x < 0)
+                    entity.pos.x = align.right + entity.rw + CollisionGrid.MinStep;
+                else
+                    entity.pos.x = align.left - entity.rw - CollisionGrid.MinStep;
+
+                velocity.x = 0;
+            }
         }
 
         transform.position = entity.pos;
@@ -81,13 +85,11 @@ public class EntityPhysics : MonoBehaviour
         // deceleration
         if (deceleration)
         {
-            const float airFriction = 0.965f;
-            const float groundFriction = 0.8f;
-            if (OnGround)
-                velocity.x = velocity.x * groundFriction;
-            else
-                velocity.x = velocity.x * airFriction;
-            if (Mathf.Abs(velocity.x) < CollisionGrid.MinStep) velocity.x = 0;
+            float drag = 3f;
+            if (OnGround) drag = 10f;
+
+            velocity.x = velocity.x * (1 - Time.deltaTime * drag);
+            if (Mathf.Abs(velocity.x) < 0.1f) velocity.x = 0;
         }
     }
 }

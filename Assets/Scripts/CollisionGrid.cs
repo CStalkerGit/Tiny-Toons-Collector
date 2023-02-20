@@ -8,10 +8,10 @@ public struct AlignRect
     public float top, bottom, right, left;
     public void Reset(Entity entity, Vector3 newPosition)
     {
-        top = newPosition.y + entity.rh;
-        bottom = newPosition.y - entity.rh;
-        right = newPosition.x + entity.rw;
-        left = newPosition.x - entity.rw;
+        top = newPosition.y - entity.rh;
+        bottom = newPosition.y + entity.rh;
+        right = newPosition.x - entity.rw;
+        left = newPosition.x + entity.rw;
     }
 }
 

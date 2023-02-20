@@ -11,7 +11,8 @@ public class Actor : MonoBehaviour
     public float jumpHeight = 2f;
 
     Entity entity;
-    EntityPhysics physics;
+    [System.NonSerialized]
+    public EntityPhysics physics;
 
     // moving
     float move;
@@ -39,8 +40,13 @@ public class Actor : MonoBehaviour
         physics.deceleration = Mathf.Abs(move) < 0.01f || horSpeed > maxSpeed;
 
         if (jump && physics.OnGround)
-            physics.velocity.y = Mathf.Sqrt(2.0f * CollisionGrid.Gravity * jumpHeight);
+            physics.velocity.y = Mathf.Sqrt(2 * CollisionGrid.Gravity * jumpHeight);
         jump = false;    
+    }
+
+    public void StopJumping()
+    {
+        if (physics.velocity.y > 0) physics.velocity.y = 0;
     }
 
     public void Move(float v) => move = v;
