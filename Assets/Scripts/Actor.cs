@@ -60,6 +60,6 @@ public class Actor : MonoBehaviour
     public void Move(float v) => move = v;
     public void Jump() => jump = true;
     public void AddForce(Vector3 force) => physics.velocity += force;
-    public bool MovingRight { get; private set; }
+    public bool MovingRight { get; private set; } = true;
     public bool Moving { get; private set; }
 }

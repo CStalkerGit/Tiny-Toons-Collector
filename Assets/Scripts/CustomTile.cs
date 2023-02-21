@@ -135,14 +135,16 @@ public class CustomTile : TileBase
         switch (type)
         {
             case TileType.FullBlock:
-                rect.Inflate(tileY + 1f, tileY, tileX + 1f, tileX);
+                //rect.Inflate(tileY + 1f, tileY, tileX + 1f, tileX);
+                rect.Inflate(tileX, tileY);
                 break;
             case TileType.Slope45:
-                var point = entity.GetSlopeCollisionPoint(orientToRight);
+                var point = entity.GetSlopeCollisionPoint(tileX, tileY, orientToRight);
                 if (orientToRight)
-                    rect.Inflate(1 - point.x, tileY, tileX + 1f, 1 - point.y);
+                    rect.Inflate(tileX, tileY,  1 - point.x, tileY, 1 - point.y, tileX);
                 else
-                    rect.Inflate(point.x - tileX, tileY, point.y - tileY, tileX);
+                    //rect.Inflate(tileX, tileY,  point.x + tileY, tileY, tileX + 1f, point.y + tileX);
+                    rect.InflateLocal(tileX, tileY, point.x, 0, 1f, point.y);
                 break;
         }
     }

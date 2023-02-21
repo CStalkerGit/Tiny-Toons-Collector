@@ -11,7 +11,7 @@ public class ActorAnimator : MonoBehaviour
     SpriteRenderer spriteRenderer;
 
     // animation flags
-    bool right;
+    bool right = true;
     bool onGround;
     bool movingUp;
     bool moving;

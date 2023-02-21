@@ -78,16 +78,24 @@ public class Entity : MonoBehaviour
 
     public bool IsCollisionSlope45(float x, float y, bool toRight)
     {
-        var point = GetSlopeCollisionPoint(toRight);
+        var point = GetSlopeCollisionPoint(x, y, toRight);
         if (toRight)
-            return point.x - x <= 1 - (point.y - y);
+            return point.x <= 1 - point.y;
         else
-            return point.x - x >= point.y - y;
+            return point.x >= point.y;
     }
 
     public float PrevBottomCoord()
     {
         return prev_pos.y - rh;
+    }
+
+    public Vector2 GetSlopeCollisionPoint(float x, float y, bool bottomLeft)
+    {
+        if (bottomLeft)
+            return new Vector2(pos.x - rw - x, pos.y - rh - y);
+        else
+            return new Vector2(pos.x + rw - x, pos.y - rh - y);
     }
 
     public Vector2 GetSlopeCollisionPoint(bool bottomLeft)
