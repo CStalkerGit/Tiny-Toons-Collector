@@ -140,11 +140,15 @@ public class CustomTile : TileBase
             case TileType.Slope45:
                 var point = entity.GetSlopeCollisionPoint(tileX, tileY, orientToRight);
                 if (orientToRight)
-                    //rect.Inflate(tileX, tileY,  1 - point.x, tileY, 1 - point.y, tileX);
+                {
+                    if (rect.rightSlope < 1) rect.rightSlope = 1;
                     rect.InflateLocal(tileX, tileY, 1 - point.x, 0, 1 - point.y, 0f);
+                }
                 else
-                    //rect.Inflate(tileX, tileY,  point.x + tileY, tileY, tileX + 1f, point.y + tileX);
+                {
+                    if (rect.leftSlope < 1) rect.leftSlope = 1;
                     rect.InflateLocal(tileX, tileY, point.x, 0, 1f, point.y);
+                }
                 break;
         }
     }

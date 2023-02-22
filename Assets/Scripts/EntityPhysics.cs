@@ -38,43 +38,26 @@ public class EntityPhysics : MonoBehaviour
         Vector3 newPosition = transform.position + velocity * Time.deltaTime;
 
         entity.pos = transform.position;
-        AlignRect align = new AlignRect();
+        AlignRect rect = new AlignRect();
 
         // axis Y
-        if (Mathf.Abs(newPosition.y - entity.pos.y) > CollisionGrid.MinStep)
-        {
-            OnGround = false;
-            entity.pos.y = newPosition.y;
-            align.Reset(entity, entity.pos);
-            if (CollisionGrid.IsCollision(entity, ref align))
-            {
-                //entity.pos.y = transform.position.y;
-                if (velocity.y <= 0)
-                    entity.pos.y = align.top + entity.rh + CollisionGrid.MinStep;
-                else
-                    entity.pos.y = align.bottom - entity.rh - CollisionGrid.MinStep;
+        bool blockedY = IsCollisionAxisY(newPosition.y, ref rect);
+        bool blockedX = IsCollisionAxisX(newPosition.x, ref rect);
 
-                if (velocity.y <= 0) OnGround = true;
-                velocity.y = 0;
+        if (blockedX)
+        {
+            if (rect.leftSlope == 1 && velocity.x > 0)
+            {
+                // redirect
+
+                newPosition = transform.position + velocity * Time.deltaTime;
+                blockedY = IsCollisionAxisY(newPosition.y, ref rect);
+                blockedX = IsCollisionAxisX(newPosition.x, ref rect);
             }
         }
 
-        // axis X
-        if (Mathf.Abs(newPosition.x - entity.pos.x) > CollisionGrid.MinStep)
-        {
-            entity.pos.x = newPosition.x;
-            align.Reset(entity, entity.pos);
-            if (CollisionGrid.IsCollision(entity, ref align))
-            {
-                //entity.pos.x = transform.position.x;
-                if (velocity.x < 0)
-                    entity.pos.x = align.right + entity.rw + CollisionGrid.MinStep;
-                else
-                    entity.pos.x = align.left - entity.rw - CollisionGrid.MinStep;
-
-                velocity.x = 0;
-            }
-        }
+        if (blockedY) velocity.y = 0;
+        if (blockedX) velocity.x = 0;
 
         transform.position = entity.pos;
 
@@ -91,5 +74,48 @@ public class EntityPhysics : MonoBehaviour
             velocity.x = velocity.x * (1 - Time.deltaTime * drag);
             if (Mathf.Abs(velocity.x) < 0.1f) velocity.x = 0;
         }
+    }
+
+    bool IsCollisionAxisY(float y, ref AlignRect rect)
+    {
+        // axis Y
+        if (Mathf.Abs(y - entity.pos.y) < CollisionGrid.MinStep) return false;
+       
+        OnGround = false;
+        entity.pos.y = y;
+        if (CollisionGrid.IsCollision(entity, ref rect))
+        {
+            if (velocity.y <= 0)
+                entity.pos.y = rect.top + entity.rh + CollisionGrid.MinStep;
+            else
+                entity.pos.y = rect.bottom - entity.rh - CollisionGrid.MinStep;
+
+            if (velocity.y <= 0) OnGround = true;
+            //velocity.y = 0;
+            return true;
+        }
+        else
+            return false;
+    }
+
+    bool IsCollisionAxisX(float x, ref AlignRect rect)
+    {
+        // axis X
+        if (Mathf.Abs(x - entity.pos.x) < CollisionGrid.MinStep) return false;
+
+        entity.pos.x = x;
+        if (CollisionGrid.IsCollision(entity, ref rect))
+        {
+            //entity.pos.x = transform.position.x;
+            if (velocity.x < 0)
+                entity.pos.x = rect.right + entity.rw + CollisionGrid.MinStep;
+            else
+                entity.pos.x = rect.left - entity.rw - CollisionGrid.MinStep;
+
+            //velocity.x = 0;
+            return true;
+        }
+        else
+            return false;
     }
 }
