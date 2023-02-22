@@ -44,15 +44,29 @@ public class EntityPhysics : MonoBehaviour
         bool blockedY = IsCollisionAxisY(newPosition.y, ref rect);
         bool blockedX = IsCollisionAxisX(newPosition.x, ref rect);
 
-        if (blockedX)
+        if (blockedY)
         {
-            if (rect.leftSlope == 1 && velocity.x > 0)
+            float slope = velocity.x > 0 ? rect.leftSlope : rect.rightSlope;
+            if (slope > 0.1f)
             {
                 // redirect
+                newPosition = transform.position + new Vector3(velocity.x, velocity.x * 1, 0) * Time.deltaTime;
+                blockedX = IsCollisionAxisX(newPosition.x, ref rect);
+                blockedY = IsCollisionAxisY(newPosition.y, ref rect);
+                OnGround = true;
+            }
+        }
 
-                newPosition = transform.position + velocity * Time.deltaTime;
+        if (blockedX)
+        {
+            float slope = velocity.x > 0 ? rect.leftSlope : rect.rightSlope;
+            if (slope > 0.1f)
+            {
+                // redirect
+                newPosition = transform.position + new Vector3(velocity.x, velocity.x * slope, 0) * Time.deltaTime;
                 blockedY = IsCollisionAxisY(newPosition.y, ref rect);
                 blockedX = IsCollisionAxisX(newPosition.x, ref rect);
+                OnGround = true;
             }
         }
 
@@ -78,6 +92,7 @@ public class EntityPhysics : MonoBehaviour
 
     bool IsCollisionAxisY(float y, ref AlignRect rect)
     {
+        bool down = entity.pos.y >= y;
         // axis Y
         if (Mathf.Abs(y - entity.pos.y) < CollisionGrid.MinStep) return false;
        
@@ -85,7 +100,7 @@ public class EntityPhysics : MonoBehaviour
         entity.pos.y = y;
         if (CollisionGrid.IsCollision(entity, ref rect))
         {
-            if (velocity.y <= 0)
+            if (down)
                 entity.pos.y = rect.top + entity.rh + CollisionGrid.MinStep;
             else
                 entity.pos.y = rect.bottom - entity.rh - CollisionGrid.MinStep;
@@ -100,6 +115,7 @@ public class EntityPhysics : MonoBehaviour
 
     bool IsCollisionAxisX(float x, ref AlignRect rect)
     {
+        bool right = entity.pos.x < x;
         // axis X
         if (Mathf.Abs(x - entity.pos.x) < CollisionGrid.MinStep) return false;
 
@@ -107,10 +123,10 @@ public class EntityPhysics : MonoBehaviour
         if (CollisionGrid.IsCollision(entity, ref rect))
         {
             //entity.pos.x = transform.position.x;
-            if (velocity.x < 0)
-                entity.pos.x = rect.right + entity.rw + CollisionGrid.MinStep;
-            else
+            if (right)
                 entity.pos.x = rect.left - entity.rw - CollisionGrid.MinStep;
+            else
+                entity.pos.x = rect.right + entity.rw + CollisionGrid.MinStep;
 
             //velocity.x = 0;
             return true;

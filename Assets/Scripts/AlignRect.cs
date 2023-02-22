@@ -5,8 +5,8 @@ using UnityEngine;
 public class AlignRect
 {
     public float top, bottom, right, left;
-    public int rightSlope;
-    public int leftSlope;
+    public float rightSlope;
+    public float leftSlope;
 
     public AlignRect()
     {
@@ -36,6 +36,7 @@ public class AlignRect
         if (right < _right) right = _right < tileX + 1f ? _right : tileX + 1f;
         if (left > _left) left = _left > tileX ? _left : tileX;
     }
+
     public void InflateLocal(float tileX, float tileY, float localTop, float localBottom, float localRight, float localLeft)
     {
         localTop += tileY;
@@ -46,5 +47,17 @@ public class AlignRect
         if (bottom > localBottom) bottom = Mathf.Max(localBottom, tileY);
         if (right < localRight) right = Mathf.Min(localRight, tileX + 1f);
         if (left > localLeft) left = Mathf.Max(localLeft, tileX);
+    }
+
+    public void UpdateSlopes(bool toRight, float angle) // 1 = 45 degrees, -0.5 = -25.5 degrees etc
+    {
+        float angle2 = -angle;
+        if (!toRight)
+        {
+            angle2 = angle;
+            angle = -angle;
+        }
+        if (rightSlope < angle) rightSlope = angle;
+        if (leftSlope < angle2) leftSlope = angle2;
     }
 }
