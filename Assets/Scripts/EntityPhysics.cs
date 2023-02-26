@@ -17,6 +17,7 @@ public class EntityPhysics : MonoBehaviour
     [System.NonSerialized]
     public bool deceleration;
     public bool OnGround { get; private set; }
+    public bool OnSlope { get; private set; }
 
     void Awake()
     {
@@ -35,34 +36,29 @@ public class EntityPhysics : MonoBehaviour
 
     void FixedUpdate()
     {
-        Vector3 newPosition = transform.position + velocity * Time.deltaTime;
-
+        Vector3 moving = velocity * Time.deltaTime;
         entity.pos = transform.position;
-        AlignRect rect = new AlignRect();
 
-        // axis Y
-        bool blockedY = IsCollisionAxisY(newPosition.y, ref rect);
-        bool blockedX = IsCollisionAxisX(newPosition.x, ref rect);
+        bool blockedY = ProcessMovingAxisY(moving.y);
+        bool blockedX = ProcessMovingAxisX(moving.x);
 
-        if (rect.isSlope && Mathf.Abs(velocity.x) >= CollisionGrid.MinStep) 
+        float distanceX = Mathf.Abs(moving.x);
+        if (OnSlope && distanceX >= CollisionGrid.MinStep) 
         {
-            float slope = velocity.x > 0 ? rect.leftSlope : rect.rightSlope;
             // redirect
-            newPosition = transform.position + new Vector3(velocity.x, Mathf.Abs(velocity.x) * slope, 0) * Time.deltaTime;
             if (blockedX)
             {
-                blockedY = IsCollisionAxisY(newPosition.y, ref rect);
-                blockedX = IsCollisionAxisX(newPosition.x, ref rect);
+                blockedX = ProcessMovingAxisY(distanceX);
+                ProcessMovingAxisX(moving.x);
+                ProcessMovingAxisY(-distanceX);
             }
             else
             {
-                if (slope < 0)
-                {
-                    blockedX = IsCollisionAxisX(newPosition.x, ref rect);
-                    blockedY = IsCollisionAxisY(newPosition.y, ref rect);
-                }
+                //ProcessMovingAxisX(moving.x);
+                ProcessMovingAxisY(-distanceX);
             }
             OnGround = true;
+            OnSlope = true;
         }
 
         if (blockedY) velocity.y = 0;
@@ -77,56 +73,57 @@ public class EntityPhysics : MonoBehaviour
         // deceleration
         if (deceleration)
         {
-            float drag = 3f;
-            if (OnGround) drag = 10f;
+            float drag = 1f;
+            if (OnGround) drag = 3.5f;
 
             velocity.x = velocity.x * (1 - Time.deltaTime * drag);
             if (Mathf.Abs(velocity.x) < 0.1f) velocity.x = 0;
         }
     }
 
-    bool IsCollisionAxisY(float y, ref AlignRect rect)
+    bool ProcessMovingAxisY(float y)
     {
-        bool down = entity.pos.y >= y;
-        // axis Y
-        if (Mathf.Abs(y - entity.pos.y) < CollisionGrid.MinStep) return false;
-       
+        if (Mathf.Abs(y) < CollisionGrid.MinStep) return false;
+
+        AlignRect rect = new AlignRect();
+
         OnGround = false;
-        entity.pos.y = y;
+        OnSlope = false;
+        entity.pos.y += y;
         if (CollisionGrid.IsCollision(entity, ref rect))
         {
-            if (down)
+            if (y < 0)
+            {
                 entity.pos.y = rect.top + entity.rh + CollisionGrid.MinStep;
+                OnGround = true;
+                OnSlope = rect.isSlope;
+            }
             else
                 entity.pos.y = rect.bottom - entity.rh - CollisionGrid.MinStep;
-
-            if (velocity.y <= 0) OnGround = true;
-            //velocity.y = 0;
+            
             return true;
         }
-        else
-            return false;
+        return false;
     }
 
-    bool IsCollisionAxisX(float x, ref AlignRect rect)
+    bool ProcessMovingAxisX(float x)
     {
-        bool right = entity.pos.x < x;
-        // axis X
-        if (Mathf.Abs(x - entity.pos.x) < CollisionGrid.MinStep) return false;
+        if (Mathf.Abs(x) < CollisionGrid.MinStep) return false;
 
-        entity.pos.x = x;
+        bool right = x > 0;
+        AlignRect rect = new AlignRect();
+
+        entity.pos.x += x;
         if (CollisionGrid.IsCollision(entity, ref rect))
         {
-            //entity.pos.x = transform.position.x;
             if (right)
                 entity.pos.x = rect.left - entity.rw - CollisionGrid.MinStep;
             else
                 entity.pos.x = rect.right + entity.rw + CollisionGrid.MinStep;
 
-            //velocity.x = 0;
+            OnSlope = rect.isSlope;
             return true;
         }
-        else
-            return false;
+        return false;
     }
 }

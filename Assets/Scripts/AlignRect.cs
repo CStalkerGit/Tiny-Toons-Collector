@@ -5,14 +5,10 @@ using UnityEngine;
 public class AlignRect
 {
     public float top, bottom, right, left;
-    public float rightSlope;
-    public float leftSlope;
     public bool isSlope;
 
     public AlignRect()
     {
-        rightSlope = -1;
-        leftSlope = -1;
         isSlope = false;
     }
 
@@ -22,6 +18,7 @@ public class AlignRect
         bottom = newPosition.y + entity.rh;
         right = newPosition.x - entity.rw;
         left = newPosition.x + entity.rw;
+        isSlope = false;
     }
     public void Inflate(float tileX, float tileY)
     {
@@ -49,18 +46,5 @@ public class AlignRect
         if (bottom > localBottom) bottom = Mathf.Max(localBottom, tileY);
         if (right < localRight) right = Mathf.Min(localRight, tileX + 1f);
         if (left > localLeft) left = Mathf.Max(localLeft, tileX);
-    }
-
-    public void UpdateSlopes(bool toRight, float angle) // 1 = 45 degrees, -0.5 = -25.5 degrees etc
-    {
-        isSlope = true;
-        float angle2 = -angle;
-        if (!toRight)
-        {
-            angle2 = angle;
-            angle = -angle;
-        }
-        if (rightSlope < angle) rightSlope = angle;
-        if (leftSlope < angle2) leftSlope = angle2;
     }
 }

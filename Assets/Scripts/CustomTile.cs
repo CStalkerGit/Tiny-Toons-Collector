@@ -143,7 +143,7 @@ public class CustomTile : TileBase
                     rect.InflateLocal(tileX, tileY, 1 - point.x, 0, 1 - point.y, 0f);
                 else
                     rect.InflateLocal(tileX, tileY, point.x, 0, 1f, point.y);
-                rect.UpdateSlopes(orientToRight, 1);
+                rect.isSlope = true;
                 break;
         }
     }

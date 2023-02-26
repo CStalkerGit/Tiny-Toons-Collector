@@ -18,6 +18,8 @@ public class DebugStats : MonoBehaviour
     void FixedUpdate()
     {
         text.text = $"speed = {entity.velocity.x} {entity.velocity.y}\n" +
-            $"coord = {entity.transform.position.x} {entity.transform.position.y}";
+            $"coord = {entity.transform.position.x} {entity.transform.position.y}\n" +
+            $"OnGround = {entity.OnGround}, OnSlope = {entity.OnSlope}\n";// +
+            //$"BlockedX = {entity.BlockedX}, BlockedY = {entity.BlockedY}";
     }
 }
