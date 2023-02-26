@@ -7,11 +7,13 @@ public class AlignRect
     public float top, bottom, right, left;
     public float rightSlope;
     public float leftSlope;
+    public bool isSlope;
 
     public AlignRect()
     {
-        rightSlope = 0;
-        leftSlope = 0;
+        rightSlope = -1;
+        leftSlope = -1;
+        isSlope = false;
     }
 
     public void Reset(Entity entity, Vector3 newPosition)
@@ -51,6 +53,7 @@ public class AlignRect
 
     public void UpdateSlopes(bool toRight, float angle) // 1 = 45 degrees, -0.5 = -25.5 degrees etc
     {
+        isSlope = true;
         float angle2 = -angle;
         if (!toRight)
         {

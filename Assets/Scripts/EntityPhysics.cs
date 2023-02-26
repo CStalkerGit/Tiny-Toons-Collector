@@ -44,30 +44,25 @@ public class EntityPhysics : MonoBehaviour
         bool blockedY = IsCollisionAxisY(newPosition.y, ref rect);
         bool blockedX = IsCollisionAxisX(newPosition.x, ref rect);
 
-        if (blockedY)
+        if (rect.isSlope && Mathf.Abs(velocity.x) >= CollisionGrid.MinStep) 
         {
             float slope = velocity.x > 0 ? rect.leftSlope : rect.rightSlope;
-            if (slope > 0.1f)
+            // redirect
+            newPosition = transform.position + new Vector3(velocity.x, Mathf.Abs(velocity.x) * slope, 0) * Time.deltaTime;
+            if (blockedX)
             {
-                // redirect
-                newPosition = transform.position + new Vector3(velocity.x, velocity.x * 1, 0) * Time.deltaTime;
-                blockedX = IsCollisionAxisX(newPosition.x, ref rect);
-                blockedY = IsCollisionAxisY(newPosition.y, ref rect);
-                OnGround = true;
-            }
-        }
-
-        if (blockedX)
-        {
-            float slope = velocity.x > 0 ? rect.leftSlope : rect.rightSlope;
-            if (slope > 0.1f)
-            {
-                // redirect
-                newPosition = transform.position + new Vector3(velocity.x, velocity.x * slope, 0) * Time.deltaTime;
                 blockedY = IsCollisionAxisY(newPosition.y, ref rect);
                 blockedX = IsCollisionAxisX(newPosition.x, ref rect);
-                OnGround = true;
             }
+            else
+            {
+                if (slope < 0)
+                {
+                    blockedX = IsCollisionAxisX(newPosition.x, ref rect);
+                    blockedY = IsCollisionAxisY(newPosition.y, ref rect);
+                }
+            }
+            OnGround = true;
         }
 
         if (blockedY) velocity.y = 0;
