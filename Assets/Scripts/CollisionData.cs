@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AlignRect
+public class CollisionData
 {
     public float top, bottom, right, left;
     public bool isSlope;
 
-    public AlignRect()
+    public CollisionData()
     {
         isSlope = false;
     }

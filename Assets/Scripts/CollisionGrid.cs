@@ -29,12 +29,12 @@ public class CollisionGrid : MonoBehaviour
         instance = null;
     }
 
-    public static bool IsCollision(Entity entity, ref AlignRect align)
+    public static bool IsCollision(Entity entity, ref CollisionData data)
     {
         bool result = false;
         const float offset = 0.1f;
 
-        align.Reset(entity, entity.pos);
+        data.Reset(entity, entity.pos);
 
         int x1 = Mathf.FloorToInt(entity.pos.x - entity.rw + 0.0f - offset);
         int x2 = Mathf.CeilToInt(entity.pos.x + entity.rw - 1.0f + offset);
@@ -48,7 +48,7 @@ public class CollisionGrid : MonoBehaviour
                 if (tile == null) continue;
                 if (tile.IsCollision(x, y, entity))
                 {
-                    tile.GetAlignRect(ref align, x, y, entity);
+                    tile.GetAlignRect(ref data, x, y, entity);
                     result = true;
                 }
             }

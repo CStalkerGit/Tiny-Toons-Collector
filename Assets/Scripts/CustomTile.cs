@@ -130,7 +130,7 @@ public class CustomTile : TileBase
         }
     }
 
-    public void GetAlignRect(ref AlignRect rect, int tileX, int tileY, Entity entity)
+    public void GetAlignRect(ref CollisionData rect, int tileX, int tileY, Entity entity)
     {
         switch (type)
         {
