@@ -2,6 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum CollisionState
+{
+    Pending, None, Wall, Slope
+}
+
 [RequireComponent(typeof(Entity))]
 public class EntityPhysics : MonoBehaviour
 {
@@ -18,8 +23,6 @@ public class EntityPhysics : MonoBehaviour
     public bool deceleration;
     public bool OnGround { get; private set; }
     public bool OnSlope { get; private set; }
-    public bool BlockedX { get; private set; }
-    public bool BlockedY { get; private set; }
 
     void Awake()
     {
@@ -38,43 +41,42 @@ public class EntityPhysics : MonoBehaviour
 
     void FixedUpdate()
     {
-        Vector3 lastVelocity = velocity;
         Vector3 moving = velocity * Time.deltaTime;
         entity.pos = transform.position;
+        Vector3 lastPosition = entity.pos;
 
-        ProcessMovingAxisY(moving.y);
-        ProcessMovingAxisX(moving.x);
+        var stateY = ProcessMovingAxisY(moving.y);
+        var stateX = ProcessMovingAxisX(moving.x);
+
+        if (stateY != CollisionState.Pending)
+        {
+            OnGround = false;
+            if (stateY != CollisionState.None && velocity.y < 0) OnGround = true;
+        }
+        OnSlope = (stateY == CollisionState.Slope || stateX == CollisionState.Slope) && OnGround;
 
         float distanceX = Mathf.Abs(moving.x);
-        if (OnSlope && distanceX >= CollisionGrid.MinStep) 
+        if (OnSlope && stateX != CollisionState.Pending && stateX != CollisionState.Wall) 
         {
             // slopes
-            if (BlockedX)
+            if (stateX == CollisionState.Slope)
             {
-                Vector3 lastPos = entity.pos;
-                float dist1 = Mathf.Abs(transform.position.x - entity.pos.x);
                 ProcessMovingAxisY(distanceX);
                 ProcessMovingAxisX(moving.x);
-                float dist2 = Mathf.Abs(transform.position.x - entity.pos.x);
-                //ProcessMovingAxisY(-distanceX);
-                if (dist2 > dist1)
-                {
-                    BlockedX = false;
-                    velocity = lastVelocity;
-                }
-                else
-                {
-                    entity.pos = lastPos;
-                    BlockedX = true;
-                }
+                ProcessMovingAxisY(-distanceX);
+                if (Mathf.Abs(entity.pos.x - lastPosition.x) < distanceX / 2) velocity.x = 0;
             }
             else
             {
                 //ProcessMovingAxisX(moving.x);
                 ProcessMovingAxisY(-distanceX);
             }
-            OnGround = true;
+            velocity.y = -1;
         }
+
+        if (stateY == CollisionState.Wall || stateY == CollisionState.Slope) velocity.y = 0;
+        if (stateX == CollisionState.Wall) velocity.x = 0;
+        if (OnGround) velocity.y = -1;
 
         transform.position = entity.pos;
 
@@ -93,38 +95,32 @@ public class EntityPhysics : MonoBehaviour
         }
     }
 
-    void ProcessMovingAxisY(float y)
+    CollisionState ProcessMovingAxisY(float y)
     {
-        if (Mathf.Abs(y) < CollisionGrid.MinStep) return;
+        if (Mathf.Abs(y) < CollisionGrid.MinStep) return CollisionState.Pending;
 
         CollisionData data = new CollisionData();
 
-        BlockedY = false;
-        OnGround = false;
         entity.pos.y += y;
         if (CollisionGrid.IsCollision(entity, ref data))
         {
             if (y < 0)
-            {
                 entity.pos.y = data.top + entity.rh + CollisionGrid.MinStep;
-                OnGround = true;
-                if (data.isSlope) OnSlope = true;
-            }
             else
                 entity.pos.y = data.bottom - entity.rh - CollisionGrid.MinStep;
 
-            velocity.y = 0;
-            BlockedY = true;
+            return data.isSlope ? CollisionState.Slope : CollisionState.Wall;
         }
+
+        return CollisionState.None;
     }
 
-    void ProcessMovingAxisX(float x)
+    CollisionState ProcessMovingAxisX(float x)
     {
-        if (Mathf.Abs(x) < CollisionGrid.MinStep) return;
+        if (Mathf.Abs(x) < CollisionGrid.MinStep) return CollisionState.Pending;
 
         CollisionData data = new CollisionData();
 
-        BlockedX = false;
         entity.pos.x += x;
         if (CollisionGrid.IsCollision(entity, ref data))
         {
@@ -132,10 +128,10 @@ public class EntityPhysics : MonoBehaviour
                 entity.pos.x = data.left - entity.rw - CollisionGrid.MinStep;
             else
                 entity.pos.x = data.right + entity.rw + CollisionGrid.MinStep;
-            if (data.isSlope) OnSlope = true;
 
-            velocity.x = 0;
-            BlockedX = true;
+            return data.isSlope ? CollisionState.Slope : CollisionState.Wall;
         }
+
+        return CollisionState.None;
     }
 }
