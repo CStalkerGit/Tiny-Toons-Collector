@@ -54,7 +54,7 @@ public class Actor : MonoBehaviour
 
     public void StopJumping()
     {
-        if (physics.velocity.y > 0) physics.velocity.y = 0;
+        //if (physics.velocity.y > 0) physics.velocity.y = 0;
     }
 
     public void Move(float v) => move = v;

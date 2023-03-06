@@ -12,21 +12,10 @@ public enum TileCompatible
     Ground
 }
 
-public enum TileType
-{
-    Background,
-    FullBlock,
-    Slope45,
-    Platform,
-    Spikes
-}
-
 [CreateAssetMenu]
-public class CustomTile : TileBase
+public class CustomTile : CollisionTile
 {
     public TileCompatible compatible;
-    public TileType type;
-    public bool orientToRight;
 
     public Sprite[] sprites;
 
@@ -113,62 +102,5 @@ public class CustomTile : TileBase
         if (tile.compatible == TileCompatible.OnlySelf) return false;
         if (tile.compatible == TileCompatible.Anything) return true;
         return (tile.compatible == compatible);
-    }
-
-    public bool IsCollision(int x, int y, Entity entity)
-    {
-        if (!entity.IsCollision(x + 0.5f, y + 0.5f, 0.5f)) return false;
-
-        switch (type)
-        {
-            case TileType.FullBlock:
-                return true; // entity.IsCollision(x + 0.5f, y + 0.5f, 0.5f);
-            case TileType.Slope45:
-                return entity.IsCollisionSlope45(x, y, orientToRight);
-            default:
-                return false;
-        }
-    }
-
-    public void GetAlignRect(ref CollisionData rect, int tileX, int tileY, Entity entity)
-    {
-        switch (type)
-        {
-            case TileType.FullBlock:
-                rect.Inflate(tileX, tileY);
-                break;
-            case TileType.Slope45:
-                var point = entity.GetSlopeCollisionPoint(tileX, tileY, orientToRight);
-                if (orientToRight)
-                    rect.InflateLocal(tileX, tileY, 1 - point.x, 0, 1 - point.y, 0f);
-                else
-                    rect.InflateLocal(tileX, tileY, point.x, 0, 1f, point.y);
-                rect.isSlope = true;
-                break;
-        }
-    }
-
-    public bool CanWalk(Entity entity)
-    {
-        switch (type)
-        {
-            case TileType.FullBlock:
-                return true;
-            case TileType.Platform:
-                return entity.useFlatforms;
-            default:
-                return false;
-        }
-    }
-
-    public bool Solid(Entity entity)
-    {
-        switch (type)
-        {
-            case TileType.FullBlock:
-                return true;
-            default:
-                return false;
-        }
     }
 }

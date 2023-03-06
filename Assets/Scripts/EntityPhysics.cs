@@ -51,14 +51,17 @@ public class EntityPhysics : MonoBehaviour
         if (stateY != CollisionState.Pending)
         {
             OnGround = false;
-            if (stateY != CollisionState.None && velocity.y < 0) OnGround = true;
+            if (stateY != CollisionState.None)
+            {
+                if (velocity.y < 0) OnGround = true;                   
+                velocity.y = 0;
+            }
+            OnSlope = (stateY == CollisionState.Slope && OnGround);
         }
-        OnSlope = (stateY == CollisionState.Slope || stateX == CollisionState.Slope) && OnGround;
-
+ 
         float distanceX = Mathf.Abs(moving.x);
-        if (OnSlope && stateX != CollisionState.Pending && stateX != CollisionState.Wall) 
+        if (stateX != CollisionState.Pending) 
         {
-            // slopes
             if (stateX == CollisionState.Slope)
             {
                 ProcessMovingAxisY(distanceX);
@@ -66,17 +69,17 @@ public class EntityPhysics : MonoBehaviour
                 ProcessMovingAxisY(-distanceX);
                 if (Mathf.Abs(entity.pos.x - lastPosition.x) < distanceX / 2) velocity.x = 0;
             }
-            else
+            else if (OnSlope && stateX == CollisionState.None)
             {
                 //ProcessMovingAxisX(moving.x);
                 ProcessMovingAxisY(-distanceX);
             }
-            velocity.y = -1;
+
+            if (stateX == CollisionState.Wall) velocity.x = 0;
         }
 
-        if (stateY == CollisionState.Wall || stateY == CollisionState.Slope) velocity.y = 0;
-        if (stateX == CollisionState.Wall) velocity.x = 0;
-        if (OnGround) velocity.y = -1;
+        //if (stateY == CollisionState.Wall || stateY == CollisionState.Slope) velocity.y = 0;
+        
 
         transform.position = entity.pos;
 

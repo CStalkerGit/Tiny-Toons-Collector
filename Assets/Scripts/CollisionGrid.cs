@@ -44,7 +44,7 @@ public class CollisionGrid : MonoBehaviour
         for (int x = x1; x <= x2; x++)
             for (int y = y1; y <= y2; y++)
             {
-                CustomTile tile = instance.map.GetTile<CustomTile>(new Vector3Int(x, y, 0));
+                var tile = instance.map.GetTile<CollisionTile>(new Vector3Int(x, y, 0));
                 if (tile == null) continue;
                 if (tile.IsCollision(x, y, entity))
                 {

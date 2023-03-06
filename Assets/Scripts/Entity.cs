@@ -85,6 +85,18 @@ public class Entity : MonoBehaviour
             return point.x >= point.y;
     }
 
+    public bool IsCollisionSlope225half(float x, float y, bool toRight)
+    {
+        var point = GetSlopeCollisionPoint(x, y, toRight);
+
+        if (point.y > 0.5f) return false;
+
+        if (toRight)
+            return point.x <= 1 - point.y * 2;
+        else
+            return point.x >= point.y * 2;
+    }
+
     public float PrevBottomCoord()
     {
         return prev_pos.y - rh;
