@@ -47,4 +47,14 @@ public class CollisionData
         if (right < localRight) right = Mathf.Min(localRight, tileX + 1f);
         if (left > localLeft) left = Mathf.Max(localLeft, tileX);
     }
+
+    //public void AddToTileSlope(float tileX, float tileY, Vector2 entityPoint, float maxTop, float maxBottom, float maxRight, float maxLeft)
+    //{
+    //    top = Mathf.Max(top, Mathf.Min(localTop, tileY + 1));
+
+    //    if (top < localTop) top = Mathf.Min(localTop, tileY + 1); // newTop < tileY + 1 ? newTop : tileY + 1;
+    //    if (bottom > localBottom) bottom = Mathf.Max(localBottom, tileY);
+    //    if (right < localRight) right = Mathf.Min(localRight, tileX + 1f);
+    //    if (left > localLeft) left = Mathf.Max(localLeft, tileX);
+    //}
 }

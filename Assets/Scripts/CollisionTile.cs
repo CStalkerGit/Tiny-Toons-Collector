@@ -44,6 +44,8 @@ public class CollisionTile : TileBase
                 return entity.IsCollisionSlope45(x, y, orientToRight);
             case TileType.Slope225half:
                 return entity.IsCollisionSlope225half(x, y, orientToRight);
+            case TileType.Slope225full:
+                return entity.IsCollisionSlope225full(x, y, orientToRight);
             default:
                 return false;
         }
@@ -51,17 +53,34 @@ public class CollisionTile : TileBase
 
     public void GetAlignRect(ref CollisionData rect, int tileX, int tileY, Entity entity)
     {
+        Vector2 point;
         switch (type)
         {
             case TileType.FullBlock:
                 rect.Inflate(tileX, tileY);
                 break;
             case TileType.Slope45:
-                var point = entity.GetSlopeCollisionPoint(tileX, tileY, orientToRight);
+                point = entity.GetSlopeCollisionPoint(tileX, tileY, orientToRight);
                 if (orientToRight)
                     rect.InflateLocal(tileX, tileY, 1 - point.x, 0, 1 - point.y, 0f);
                 else
                     rect.InflateLocal(tileX, tileY, point.x, 0, 1f, point.y);
+                rect.isSlope = true;
+                break;
+            case TileType.Slope225half:
+                point = entity.GetSlopeCollisionPoint(tileX, tileY, orientToRight);
+                if (orientToRight)
+                    rect.InflateLocal(tileX, tileY, Mathf.Min(0.5f - point.x / 2, 0.5f), 0, 1 - point.y * 2, 0f);
+                else
+                    rect.InflateLocal(tileX, tileY, Mathf.Min(point.x / 2, 0.5f), 0, 1f, point.y * 2);
+                rect.isSlope = true;
+                break;
+            case TileType.Slope225full:
+                point = entity.GetSlopeCollisionPoint(tileX, tileY, orientToRight);
+                if (orientToRight)
+                    rect.InflateLocal(tileX, tileY, 1 - point.x / 2, 0, 1 - (point.y - 0.5f) * 2, 0f);
+                else
+                    rect.InflateLocal(tileX, tileY, point.x / 2 + 0.5f, 0, 1f, (point.y - 0.5f) * 2);
                 rect.isSlope = true;
                 break;
         }

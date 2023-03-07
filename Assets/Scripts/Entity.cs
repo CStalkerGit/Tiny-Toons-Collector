@@ -97,11 +97,25 @@ public class Entity : MonoBehaviour
             return point.x >= point.y * 2;
     }
 
+    public bool IsCollisionSlope225full(float x, float y, bool toRight)
+    {
+        var point = GetSlopeCollisionPoint(x, y, toRight);
+
+        if (point.y <= 0.5f) return true;
+
+        if (toRight)
+            return point.x <= 1 - (point.y * 2 - 1);
+        else
+            return point.x >= point.y * 2 - 1;
+    }
+
     public float PrevBottomCoord()
     {
         return prev_pos.y - rh;
     }
 
+    // получает точку необходимую для правильно рассчета коллизии с наклонной поверхностью
+    // это ближайшая точка к прямой этой поверхности
     public Vector2 GetSlopeCollisionPoint(float x, float y, bool bottomLeft)
     {
         if (bottomLeft)
