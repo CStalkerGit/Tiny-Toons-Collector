@@ -39,6 +39,7 @@ public class CollisionTile : TileBase
         switch (type)
         {
             case TileType.FullBlock:
+            case TileType.Platform:
                 rect.UnionTile(tileX, tileY);
                 break;
             case TileType.SlopeP4:

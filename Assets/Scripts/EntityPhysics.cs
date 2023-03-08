@@ -42,6 +42,7 @@ public class EntityPhysics : MonoBehaviour
     void FixedUpdate()
     {
         Vector3 moving = velocity * Time.deltaTime;
+        entity.prev_pos = transform.position;
         entity.pos = transform.position;
         Vector3 lastPosition = entity.pos;
 

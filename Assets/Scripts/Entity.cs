@@ -79,7 +79,13 @@ public class Entity : MonoBehaviour
     public bool IsCollision(TileType type, float x, float y, bool toRight)
     {
         if (!IsCollision(x + 0.5f, y + 0.5f, 0.5f)) return false;
-        if (type == TileType.FullBlock) return true;
+        switch (type)
+        {
+            case TileType.FullBlock:
+                return true;
+            case TileType.Platform:
+                return PrevBottomCoord > y + 1;
+        }
 
         var p = toRight ? BottomLeft : BottomRight;
         p.x -= x;
@@ -100,10 +106,7 @@ public class Entity : MonoBehaviour
         }
     }
 
-    public float PrevBottomCoord()
-    {
-        return prev_pos.y - rh;
-    }
+    public float PrevBottomCoord => prev_pos.y - rh;
 
     // получает точку необходимую для правильно рассчета коллизии с наклонной поверхностью
     // это ближайшая точка нижней части entity к наклонной поверхности
