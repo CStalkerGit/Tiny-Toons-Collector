@@ -76,37 +76,28 @@ public class Entity : MonoBehaviour
         return true;
     }
 
-    public bool IsCollisionSlope45(float x, float y, bool toRight)
+    public bool IsCollision(TileType type, float x, float y, bool toRight)
     {
-        var point = GetSlopeCollisionPoint(x, y, toRight);
-        if (toRight)
-            return point.x <= 1 - point.y;
-        else
-            return point.x >= point.y;
-    }
+        if (!IsCollision(x + 0.5f, y + 0.5f, 0.5f)) return false;
+        if (type == TileType.FullBlock) return true;
 
-    public bool IsCollisionSlope225half(float x, float y, bool toRight)
-    {
-        var point = GetSlopeCollisionPoint(x, y, toRight);
+        var p = toRight ? BottomLeft : BottomRight;
+        p.x -= x;
+        p.y -= y;
 
-        if (point.y > 0.5f) return false;
-
-        if (toRight)
-            return point.x <= 1 - point.y * 2;
-        else
-            return point.x >= point.y * 2;
-    }
-
-    public bool IsCollisionSlope225full(float x, float y, bool toRight)
-    {
-        var point = GetSlopeCollisionPoint(x, y, toRight);
-
-        if (point.y <= 0.5f) return true;
-
-        if (toRight)
-            return point.x <= 1 - (point.y * 2 - 1);
-        else
-            return point.x >= point.y * 2 - 1;
+        switch (type)
+        {           
+            case TileType.SlopeP4:
+                return toRight ? (p.x <= 1 - p.y) : (p.x >= p.y);
+            case TileType.SlopeP8half:
+                if (p.y > 0.5f) return false;
+                return toRight ? (p.x <= 1 - p.y * 2) : (p.x >= p.y * 2);
+            case TileType.SlopeP8full:
+                if (p.y <= 0.5f) return true;
+                return toRight ? (p.x <= 1 - (p.y * 2 - 1)) : (p.x >= p.y * 2 - 1);
+            default:
+                return false;
+        }
     }
 
     public float PrevBottomCoord()
@@ -115,22 +106,9 @@ public class Entity : MonoBehaviour
     }
 
     // получает точку необходимую для правильно рассчета коллизии с наклонной поверхностью
-    // это ближайшая точка к прямой этой поверхности
-    public Vector2 GetSlopeCollisionPoint(float x, float y, bool bottomLeft)
-    {
-        if (bottomLeft)
-            return new Vector2(pos.x - rw - x, pos.y - rh - y);
-        else
-            return new Vector2(pos.x + rw - x, pos.y - rh - y);
-    }
-
-    public Vector2 GetSlopeCollisionPoint(bool bottomLeft)
-    {
-        if (bottomLeft)
-            return new Vector2(pos.x - rw, pos.y - rh);
-        else
-            return new Vector2(pos.x + rw, pos.y - rh);
-    }
+    // это ближайшая точка нижней части entity к наклонной поверхности
+    public Vector2 BottomLeft => new Vector2(pos.x - rw, pos.y - rh); 
+    public Vector2 BottomRight => new Vector2(pos.x + rw, pos.y - rh);
 
 #if UNITY_EDITOR
     [ContextMenu("Align")]

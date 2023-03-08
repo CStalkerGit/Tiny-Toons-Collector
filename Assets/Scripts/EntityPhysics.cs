@@ -102,7 +102,7 @@ public class EntityPhysics : MonoBehaviour
     {
         if (Mathf.Abs(y) < CollisionGrid.MinStep) return CollisionState.Pending;
 
-        CollisionData data = new CollisionData();
+        CollisionRect data = new CollisionRect();
 
         entity.pos.y += y;
         if (CollisionGrid.IsCollision(entity, ref data))
@@ -122,7 +122,7 @@ public class EntityPhysics : MonoBehaviour
     {
         if (Mathf.Abs(x) < CollisionGrid.MinStep) return CollisionState.Pending;
 
-        CollisionData data = new CollisionData();
+        CollisionRect data = new CollisionRect();
 
         entity.pos.x += x;
         if (CollisionGrid.IsCollision(entity, ref data))

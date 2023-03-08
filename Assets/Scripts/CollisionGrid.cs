@@ -29,7 +29,7 @@ public class CollisionGrid : MonoBehaviour
         instance = null;
     }
 
-    public static bool IsCollision(Entity entity, ref CollisionData data)
+    public static bool IsCollision(Entity entity, ref CollisionRect data)
     {
         bool result = false;
         const float offset = 0.1f;
@@ -56,8 +56,10 @@ public class CollisionGrid : MonoBehaviour
         return result;
     }
 
-    public static void ProcessCollision(Entity entity)
+    [ContextMenu("Clear All Tiles")]
+    void ClearAllTiles()
     {
-
+        map.ClearAllTiles();
+        map.CompressBounds();
     }
 }

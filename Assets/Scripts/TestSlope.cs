@@ -15,7 +15,7 @@ public class TestSlope : MonoBehaviour
     {
         var spr = GetComponent<SpriteRenderer>();
         var entity = GetComponent<Entity>();
-        var align = new CollisionData();
+        var align = new CollisionRect();
         align.Reset(entity, entity.transform.position);
         if (CollisionGrid.IsCollision(entity, ref align))
             spr.color = Color.red;

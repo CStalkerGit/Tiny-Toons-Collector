@@ -9,11 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e829d1e68d08b594e85d4e4e79db2309, type: 3}
-  m_Name: Slope2
+  m_Script: {fileID: 11500000, guid: 93cfd1cd9880e124ebbd1c971212767b, type: 3}
+  m_Name: TestPlatform
   m_EditorClassIdentifier: 
-  compatible: 0
-  type: 2
+  type: 5
   orientToRight: 0
-  sprites:
-  - {fileID: 21300008, guid: dc98b5d166fc1d64ba470ba7f536a783, type: 3}
+  sprite: {fileID: 21300006, guid: 80a0ea11dfe0f6d449af9386359db0a3, type: 3}
