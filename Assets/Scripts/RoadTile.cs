@@ -13,14 +13,14 @@ public enum TileCompatible
 }
 
 [CreateAssetMenu]
-public class CustomTile : CollisionTile
+public class RoadTile : CollisionTile
 {
     public TileCompatible compatible;
 
     public Sprite[] sprites;
 
-    static readonly int[] indices4 = new int[4] { 3, 2, 0, 1 };
-    static readonly int[] indices16 = new int[16] { 15, 11, 12, 8, 3, 7, 0, 4, 14, 10, 13, 9, 2, 6, 1, 5 };
+    static protected readonly int[] indices4 = new int[4] { 3, 2, 0, 1 };
+    static protected readonly int[] indices16 = new int[16] { 15, 11, 12, 8, 3, 7, 0, 4, 14, 10, 13, 9, 2, 6, 1, 5 };
 
     public override bool StartUp(Vector3Int location, ITilemap tilemap, GameObject go)
     {
@@ -93,14 +93,14 @@ public class CustomTile : CollisionTile
         else Debug.LogWarning("Not enough sprites in instance");
     }
 
-    private bool IsCompatible(ITilemap tilemap, Vector3Int position)
+    protected virtual bool IsCompatible(ITilemap tilemap, Vector3Int position)
     {
-        CustomTile tile = tilemap.GetTile(position) as CustomTile;
+        var tile = tilemap.GetTile(position) as CollisionTile;
         if (tile == null) return false;
         if (tile == this) return true;
-        if (sprites.Length < 16) return false;
-        if (tile.compatible == TileCompatible.OnlySelf) return false;
-        if (tile.compatible == TileCompatible.Anything) return true;
-        return (tile.compatible == compatible);
+        //if (sprites.Length < 16) return false;
+        if (compatible == TileCompatible.OnlySelf) return false;
+        if (compatible == TileCompatible.Anything) return true;
+        return false;// (tile.compatible == compatible);
     }
 }

@@ -89,4 +89,17 @@ public class CollisionTile : TileBase
                 return false;
         }
     }
+
+    public bool IsSlope()
+    {
+        switch (type)
+        {
+            case TileType.SlopeP4:
+            case TileType.SlopeP8full:
+            case TileType.SlopeP8half:
+                return true;
+            default:
+                return false;
+        }
+    }
 }

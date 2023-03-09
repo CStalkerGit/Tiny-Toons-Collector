@@ -1,13 +1,15 @@
 fileFormatVersion: 2
-guid: dc98b5d166fc1d64ba470ba7f536a783
+guid: 68db31c447e1b98469802df903ad7186
 TextureImporter:
   fileIDToRecycleName:
-    21300000: Ground2_0
-    21300002: Ground2_1
-    21300004: Ground2_2
-    21300006: Ground2_3
-    21300008: Ground2_4
-    21300010: Ground2_5
+    21300000: Ground1_12
+    21300002: Ground1_13
+    21300004: Ground1_14
+    21300006: Ground1_15
+    21300008: PlainPlatform_0
+    21300010: PlainPlatform_1
+    21300012: PlainPlatform_2
+    21300014: PlainPlatform_3
   externalObjects: {}
   serializedVersion: 9
   mipmaps:
@@ -79,7 +81,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Ground2_0
+      name: PlainPlatform_0
       rect:
         serializedVersion: 2
         x: 0
@@ -93,13 +95,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 651764663569d7447bc4b5d91b45b1e5
+      spriteID: 468d9cea8f237544eb4165f7069f8bec
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Ground2_1
+      name: PlainPlatform_1
       rect:
         serializedVersion: 2
         x: 32
@@ -113,13 +115,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 04814e129afb11f4ea70b86a6ce167ab
+      spriteID: 944cbceffb0891346ad3d4982f9a6c9a
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Ground2_2
+      name: PlainPlatform_2
       rect:
         serializedVersion: 2
         x: 64
@@ -133,13 +135,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5bc258ed55517744985d7a2c4ae30df4
+      spriteID: edcc9c2f915b0264eaea25c579e2debc
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Ground2_3
+      name: PlainPlatform_3
       rect:
         serializedVersion: 2
         x: 96
@@ -153,47 +155,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 94334df77b9305e449b992a9ee114daa
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Ground2_4
-      rect:
-        serializedVersion: 2
-        x: 128
-        y: 0
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: ee5b1f27c13f59c47867791632329acb
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Ground2_5
-      rect:
-        serializedVersion: 2
-        x: 160
-        y: 0
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: a6bbdbd0bae3c8d4db8cda56e90b18c2
+      spriteID: 710bcfedb0ebac74cab9cae800a455fd
       vertices: []
       indices: 
       edges: []
@@ -201,7 +163,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: b4abd6e73ca0b884bbe3870d880f3c43
+    spriteID: 4c1f1419777569c46b92e20a2209ed63
     vertices: []
     indices: 
     edges: []

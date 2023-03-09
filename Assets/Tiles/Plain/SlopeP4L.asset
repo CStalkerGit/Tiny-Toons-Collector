@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 2
   orientToRight: 0
-  sprite: {fileID: 21300008, guid: dc98b5d166fc1d64ba470ba7f536a783, type: 3}
+  sprite: {fileID: 21300024, guid: e62f63c34a7a15e4e8770f72c10f2b0c, type: 3}

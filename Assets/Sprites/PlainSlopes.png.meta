@@ -1,8 +1,29 @@
 fileFormatVersion: 2
-guid: 921e653e408d08546ae6556bc74cf010
+guid: e62f63c34a7a15e4e8770f72c10f2b0c
 TextureImporter:
   fileIDToRecycleName:
-    21300000: Ground1_12
+    21300000: Ground1_8
+    21300002: Ground1_9
+    21300004: Ground1_10
+    21300006: Ground1_11
+    21300008: Ground1_12
+    21300010: Ground1_13
+    21300012: Ground1_14
+    21300014: Ground1_15
+    21300016: PlainSlopes_0
+    21300018: PlainSlopes_1
+    21300020: PlainSlopes_2
+    21300022: PlainSlopes_3
+    21300024: PlainSlopes_4
+    21300026: PlainSlopes_5
+    21300028: PlainSlopes_6
+    21300030: PlainSlopes_7
+    21300032: PlainSlopes_8
+    21300034: PlainSlopes_9
+    21300036: PlainSlopes_10
+    21300038: PlainSlopes_11
+    21300040: PlainSlopes_12
+    21300042: PlainSlopes_13
   externalObjects: {}
   serializedVersion: 9
   mipmaps:
@@ -41,17 +62,17 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
-  spriteMeshType: 1
+  spriteMeshType: 0
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
   spritePixelsToUnits: 32
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
-  spriteGenerateFallbackPhysicsShape: 1
+  spriteGenerateFallbackPhysicsShape: 0
   alphaUsage: 1
   alphaIsTransparency: 1
-  spriteTessellationDetail: 0
+  spriteTessellationDetail: -1
   textureType: 8
   textureShape: 1
   singleChannelComponent: 0
@@ -63,7 +84,7 @@ TextureImporter:
     buildTarget: DefaultTexturePlatform
     maxTextureSize: 2048
     resizeAlgorithm: 0
-    textureFormat: 4
+    textureFormat: -1
     textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
@@ -74,7 +95,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Ground1_0
+      name: PlainSlopes_0
       rect:
         serializedVersion: 2
         x: 0
@@ -82,19 +103,19 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0c299421b92afb94c91fb602651383cf
+      spriteID: 430555179a4facb429a08d683fccb60e
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Ground1_1
+      name: PlainSlopes_1
       rect:
         serializedVersion: 2
         x: 32
@@ -102,19 +123,19 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4c7a2c40bbb2b774fb40e7c15d3e0ecc
+      spriteID: 9ff8831306a4bd34e97716c38c1fd9ab
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Ground1_2
+      name: PlainSlopes_2
       rect:
         serializedVersion: 2
         x: 64
@@ -122,19 +143,19 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3b38c5c174a84a94e83129ca63b9608e
+      spriteID: df361eae05bed5640b3a21287b7ba230
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Ground1_3
+      name: PlainSlopes_3
       rect:
         serializedVersion: 2
         x: 96
@@ -142,19 +163,19 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: df77969d587b30d478e534560b83749e
+      spriteID: a5ca4ed0d7b8c5645b76ae07e9ebe337
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Ground1_4
+      name: PlainSlopes_4
       rect:
         serializedVersion: 2
         x: 0
@@ -162,19 +183,19 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b98ef782140558944af52e6d335d206a
+      spriteID: 4f7f1a1115c84dd4bba5552d55b5fc6f
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Ground1_5
+      name: PlainSlopes_5
       rect:
         serializedVersion: 2
         x: 32
@@ -182,19 +203,19 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e96752d8b3c06594db7813655b5e1201
+      spriteID: f49e35acae3fd98439ea01dbfcca4a9a
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Ground1_6
+      name: PlainSlopes_6
       rect:
         serializedVersion: 2
         x: 64
@@ -202,19 +223,19 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 12c46a1fa61d882449052c7774fff356
+      spriteID: 0f25041c12beea941bdbcd6bcfe012ac
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Ground1_7
+      name: PlainSlopes_7
       rect:
         serializedVersion: 2
         x: 96
@@ -222,19 +243,19 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: dfefa40885f509c449163b81ae9b2af1
+      spriteID: 7ce46dc6bd6ba7e4e968f860251e9129
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Ground1_8
+      name: PlainSlopes_8
       rect:
         serializedVersion: 2
         x: 0
@@ -242,19 +263,19 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 58bf5d9a7954b144195665bb0c147a7f
+      spriteID: 71e246967eb5c2d498549ebd8253f17c
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Ground1_9
+      name: PlainSlopes_9
       rect:
         serializedVersion: 2
         x: 32
@@ -262,19 +283,19 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f2332be3db8467a4b9c2826fc73ccb4e
+      spriteID: 981f5b7b045ab554fbc762cc6106d206
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Ground1_10
+      name: PlainSlopes_10
       rect:
         serializedVersion: 2
         x: 64
@@ -282,19 +303,19 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e09d200e4e4d26542b2cf83f922d3845
+      spriteID: a3596533071ca3d438bed6852fdb80eb
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Ground1_11
+      name: PlainSlopes_11
       rect:
         serializedVersion: 2
         x: 96
@@ -302,19 +323,19 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: fa2468e58ea5d684380155b890ff54b7
+      spriteID: 82eb41b4550566f4f83e72559b1d5e90
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Ground1_12
+      name: PlainSlopes_12
       rect:
         serializedVersion: 2
         x: 0
@@ -322,19 +343,19 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a69457a4b11e7e14c934c311a7bb4491
+      spriteID: 39ec6ce797ec1dd48b0f755ac66f2cb8
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Ground1_13
+      name: PlainSlopes_13
       rect:
         serializedVersion: 2
         x: 32
@@ -342,64 +363,19 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 30f32ff10c2e55a41aff30095908375b
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Ground1_14
-      rect:
-        serializedVersion: 2
-        x: 64
-        y: 0
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 06f29af3c05095448a37e16a75de6e15
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Ground1_15
-      rect:
-        serializedVersion: 2
-        x: 96
-        y: 0
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 38de9f83f7f63184a9626d4de2953a9c
+      spriteID: 658eb2c5c9c12be4f9536454bde037bd
       vertices: []
       indices: 
       edges: []
       weights: []
     outline: []
-    physicsShape:
-    - - {x: 16, y: 16}
-      - {x: -16, y: -16}
-      - {x: -16, y: -16}
-      - {x: 16, y: -16}
-      - {x: 16, y: 16}
+    physicsShape: []
     bones: []
     spriteID: 4c1f1419777569c46b92e20a2209ed63
     vertices: []
