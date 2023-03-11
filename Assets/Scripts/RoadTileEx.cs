@@ -18,7 +18,12 @@ public class RoadTileEx : RoadTile
             else if (CheckSlope(location, tilemap, 1, 0))
                 tileData.sprite = spritesSlopes[1];
             else
+            {
+
                 tileData.sprite = spritesSlopes[tileUp.orientToRight ? 3 : 2];
+            }
+            if (tileUp.type == TileType.SlopeP8full)
+                tileData.sprite = base.sprites[5];
         }
         else
         {

@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PlayerEntity : MonoBehaviour
 {
+    public AudioClip coinSound;
+
     Entity entity;
 
     // Start is called before the first frame update
@@ -19,7 +21,11 @@ public class PlayerEntity : MonoBehaviour
         foreach(var item in items)
         {
             if (item.IsCollision(entity))
-                Destroy(item.gameObject, 0.2f); //item.Delete();
+            {
+                if (coinSound) GetComponent<AudioSource>().PlayOneShot(coinSound);
+                Destroy(item.gameObject, 0.1f); //item.Delete();
+                item.gameObject.SetActive(false);
+            }
         }
     }
 }
