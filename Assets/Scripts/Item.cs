@@ -2,17 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(Entity))]
 public class Item : MonoBehaviour
 {
+    Entity entity;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        entity = GetComponent<Entity>();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    public bool IsCollision(Entity actor) => entity.IsCollision(actor);
+    public void Delete() => entity.Delete();
 }

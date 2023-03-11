@@ -22,6 +22,7 @@ public class CameraControl : MonoBehaviour
         Vector2 pos = follow.position;
 
         pos.x = Mathf.Clamp(pos.x, x1 + 5, x2 - 4);
+        pos.y = 0;
 
         transform.position = new Vector3(pos.x, pos.y, transform.position.z);
     }

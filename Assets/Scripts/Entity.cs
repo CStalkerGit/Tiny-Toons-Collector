@@ -28,7 +28,7 @@ public class Entity : MonoBehaviour
 
     void Awake()
     {
-
+        pos = transform.position;
     }
 
     void Update()
