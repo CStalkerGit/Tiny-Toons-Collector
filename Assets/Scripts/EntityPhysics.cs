@@ -91,8 +91,8 @@ public class EntityPhysics : MonoBehaviour
         // deceleration
         if (deceleration)
         {
-            float drag = 1f;
-            if (OnGround) drag = 3.5f;
+            float drag = 3f;
+            if (OnGround) drag = 11f;
 
             velocity.x = velocity.x * (1 - Time.deltaTime * drag);
             if (Mathf.Abs(velocity.x) < 0.1f) velocity.x = 0;

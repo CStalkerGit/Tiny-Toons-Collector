@@ -39,7 +39,8 @@ public class Actor : MonoBehaviour
             physics.velocity.x = Mathf.Clamp(newVelocity, -horSpeed, horSpeed);
 
         // disable slowing down when moving
-        physics.deceleration = Mathf.Abs(move) < 0.01f || horSpeed > maxSpeed;
+        physics.deceleration = Mathf.Abs(move) < 0.01f || horSpeed > maxSpeed
+            || Mathf.Sign(move) != Mathf.Sign(physics.velocity.x); // включить замедление при резкой смене направления
 
         if (jump && physics.OnGround)
         {
