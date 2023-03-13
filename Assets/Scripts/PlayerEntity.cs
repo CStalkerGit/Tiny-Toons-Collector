@@ -25,6 +25,7 @@ public class PlayerEntity : MonoBehaviour
                 if (coinSound) GetComponent<AudioSource>().PlayOneShot(coinSound);
                 Destroy(item.gameObject, 0.1f); //item.Delete();
                 item.gameObject.SetActive(false);
+                Stats.carrots++;
             }
         }
     }
