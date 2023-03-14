@@ -11,7 +11,6 @@ public class ActorAnimator : MonoBehaviour
     SpriteRenderer spriteRenderer;
 
     // animation flags
-    bool right = true;
     bool onGround;
     bool movingUp;
     bool moving;
@@ -20,7 +19,7 @@ public class ActorAnimator : MonoBehaviour
     int B_GROUND, B_UP, B_MOVING;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
@@ -35,11 +34,7 @@ public class ActorAnimator : MonoBehaviour
     void FixedUpdate()
     {
         // direction
-        if (right != actor.MovingRight)
-        {
-            right = actor.MovingRight;
-            spriteRenderer.flipX = !right;
-        }
+        spriteRenderer.flipX = !actor.MovingRight;
 
         // on ground
         if (onGround != actor.physics.OnGround)

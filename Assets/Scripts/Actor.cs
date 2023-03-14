@@ -63,6 +63,13 @@ public class Actor : MonoBehaviour
         //if (physics.velocity.y > 0) physics.velocity.y = 0;
     }
 
+    public bool WasBlocked()
+    {
+        bool result = physics.Blocked;
+        physics.Blocked = false;
+        return result;
+    }
+
     public void Move(float v) => move = v;
     public void Jump() => jump = true;
     public void AddForce(Vector3 force) => physics.velocity += force;

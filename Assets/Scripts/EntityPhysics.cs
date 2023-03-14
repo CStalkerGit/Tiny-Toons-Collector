@@ -23,6 +23,7 @@ public class EntityPhysics : MonoBehaviour
     public bool deceleration;
     public bool OnGround { get; private set; }
     public bool OnSlope { get; private set; }
+    public bool Blocked { get; set; }
 
     void Awake()
     {
@@ -68,7 +69,11 @@ public class EntityPhysics : MonoBehaviour
                 ProcessMovingAxisY(distanceX);
                 ProcessMovingAxisX(moving.x);
                 ProcessMovingAxisY(-distanceX);
-                if (Mathf.Abs(entity.pos.x - lastPosition.x) < distanceX / 2) velocity.x = 0;
+                if (Mathf.Abs(entity.pos.x - lastPosition.x) < distanceX / 2)
+                {
+                    velocity.x = 0;
+                    Blocked = true;
+                }
             }
             else if (OnSlope && stateX == CollisionState.None)
             {
@@ -76,7 +81,11 @@ public class EntityPhysics : MonoBehaviour
                 ProcessMovingAxisY(-distanceX);
             }
 
-            if (stateX == CollisionState.Wall) velocity.x = 0;
+            if (stateX == CollisionState.Wall)
+            {
+                velocity.x = 0;
+                Blocked = true;
+            }
         }
 
         //if (stateY == CollisionState.Wall || stateY == CollisionState.Slope) velocity.y = 0;
