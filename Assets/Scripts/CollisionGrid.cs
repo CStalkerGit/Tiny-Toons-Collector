@@ -56,6 +56,21 @@ public class CollisionGrid : MonoBehaviour
         return result;
     }
 
+    public static void ProcessActorCollisions(Actor actor)
+    {
+        var targets = FindObjectsOfType<Entity>();
+        foreach (var target in targets)
+        {
+            if (actor.entity.IsCollision(target))
+            {
+                if (actor.entity.PrevBottomCoord > target.TopCoord)
+                {
+                    //if (target.Stomp()) actor.physics.velocity.y = 5;
+                }
+            }
+        }
+    }
+
     [ContextMenu("Clear All Tiles")]
     void ClearAllTiles()
     {

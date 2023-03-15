@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public enum CollisionAlignment
 {
@@ -21,38 +22,14 @@ public class Entity : MonoBehaviour
     [System.NonSerialized]
     public Vector3 pos;
 
-    [System.NonSerialized]
-    public Vector3 velocity;
-
-    private bool isDeleted = false;
-
     void Awake()
     {
         pos = transform.position;
     }
 
-    void Update()
-    {
-        
-    }
-
     void OnDrawGizmos()
     {
         Gizmos.DrawWireCube(transform.position, new Vector3(rw * 2, rh * 2, 0.01f));
-    }
-
-    public bool IsDeleted()
-    {
-        return isDeleted;
-    }
-
-    public void Delete()
-    {
-        if (isDeleted == false)
-        {
-            isDeleted = true;
-            //Engine.ptr.KillEntity(this);
-        }
     }
 
     public bool IsCollision(Entity entity)
@@ -106,6 +83,7 @@ public class Entity : MonoBehaviour
         }
     }
 
+    public float TopCoord => prev_pos.y + rh;
     public float PrevBottomCoord => prev_pos.y - rh;
 
     // получает точку необходимую для правильно рассчета коллизии с наклонной поверхностью

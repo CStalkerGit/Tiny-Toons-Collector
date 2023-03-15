@@ -1,18 +1,24 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using UnityEngine.Events;
 
 [RequireComponent(typeof(Entity))]
 public class Item : MonoBehaviour
 {
     Entity entity;
 
-    // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         entity = GetComponent<Entity>();
     }
 
+    void FixedUpdate()
+    {
+        if (Player.IsCollision(entity))
+        {
+            Stats.carrots++;
+            Destroy(gameObject);
+        }
+    }
+
     public bool IsCollision(Entity actor) => entity.IsCollision(actor);
-    public void Delete() => entity.Delete();
 }

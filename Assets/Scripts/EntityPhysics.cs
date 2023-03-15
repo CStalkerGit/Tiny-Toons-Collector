@@ -89,8 +89,6 @@ public class EntityPhysics : MonoBehaviour
         }
 
         //if (stateY == CollisionState.Wall || stateY == CollisionState.Slope) velocity.y = 0;
-        
-
         transform.position = entity.pos;
 
         // gravity

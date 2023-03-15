@@ -12,7 +12,8 @@ public class Actor : MonoBehaviour
 
     public AudioClip jumpSound;
 
-    Entity entity;
+    [System.NonSerialized]
+    public Entity entity;
     [System.NonSerialized]
     public EntityPhysics physics;
 
