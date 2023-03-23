@@ -10,8 +10,6 @@ public class Actor : MonoBehaviour
     public float maxSpeed = 3.5f;
     public float jumpHeight = 2f;
 
-    public AudioClip jumpSound;
-
     [System.NonSerialized]
     public Entity entity;
     [System.NonSerialized]
@@ -45,7 +43,7 @@ public class Actor : MonoBehaviour
 
         if (jump && physics.OnGround)
         {
-            if (jumpSound) GetComponent<AudioSource>().PlayOneShot(jumpSound);
+            //add sound
             physics.velocity.y = Mathf.Sqrt(2 * CollisionGrid.Gravity * jumpHeight);
         }
         jump = false;

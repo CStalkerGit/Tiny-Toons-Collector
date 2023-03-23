@@ -16,6 +16,7 @@ public class Item : MonoBehaviour
         if (Player.IsCollision(entity))
         {
             Stats.carrots++;
+            EffectSpawner.Pickup(transform.position);
             Destroy(gameObject);
         }
     }

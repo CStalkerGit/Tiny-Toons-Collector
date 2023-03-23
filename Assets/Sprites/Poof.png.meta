@@ -1,9 +1,12 @@
 fileFormatVersion: 2
-guid: cdadbc0f99c954147bad881a672fb937
+guid: 1bf85c7bdca5a8142a1f5fb48629b0d2
 TextureImporter:
   fileIDToRecycleName:
-    21300000: Rat_0
-    21300002: Rat_1
+    21300000: Poof_0
+    21300002: Poof_1
+    21300004: Poof_2
+    21300006: Poof_3
+    21300008: Poof_4
   externalObjects: {}
   serializedVersion: 9
   mipmaps:
@@ -62,7 +65,7 @@ TextureImporter:
   platformSettings:
   - serializedVersion: 2
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 2048
+    maxTextureSize: 256
     resizeAlgorithm: 0
     textureFormat: 4
     textureCompression: 1
@@ -75,7 +78,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Rat_0
+      name: Poof_0
       rect:
         serializedVersion: 2
         x: 0
@@ -89,13 +92,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 27c2b2edbc88d664bbd10bcf24b8f607
+      spriteID: c7b03bccb2ef1064dbcfad3f1bb1ced5
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Rat_1
+      name: Poof_1
       rect:
         serializedVersion: 2
         x: 32
@@ -109,7 +112,67 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1ae2f05a26dfc1b45b12f97eb6f6fe6a
+      spriteID: 7bbf5f5c3429d724bb24f3c42d7d2630
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Poof_2
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 032bbe083e686e24fab531fe2673606e
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Poof_3
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f0dc488b8a6be9542b4571bd63c3c741
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Poof_4
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e0d8a35b8ccf68f4d9c37f509e9c4b78
       vertices: []
       indices: 
       edges: []

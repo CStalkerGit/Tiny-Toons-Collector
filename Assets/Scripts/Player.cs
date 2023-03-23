@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    public AudioClip coinSound;
-
     Entity entity;
     Actor actor;
 
@@ -16,6 +14,11 @@ public class Player : MonoBehaviour
         ptr = this;
         entity = GetComponent<Entity>();
         actor = GetComponent<Actor>();
+    }
+
+    void OnDestroy()
+    {
+        ptr = null;
     }
 
     // Update is called once per frame
