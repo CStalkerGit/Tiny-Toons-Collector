@@ -10,6 +10,7 @@ TextureImporter:
     21300010: Buster_5
     21300012: Buster_6
     21300014: Buster_7
+    21300016: Buster_8
   externalObjects: {}
   serializedVersion: 9
   mipmaps:
@@ -85,17 +86,17 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 48
+        y: 96
         width: 32
         height: 48
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 705366fe8c1d06c44b53c135f4e76e24
+      spriteID: 37c580111b455b640b3be9b23b07e590
       vertices: []
       indices: 
       edges: []
@@ -105,17 +106,17 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 32
-        y: 48
+        y: 96
         width: 32
         height: 48
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3d6b2a745eef05141881df4534de882f
+      spriteID: 32bfeccf61b3f24409afdf85915f7ed9
       vertices: []
       indices: 
       edges: []
@@ -125,17 +126,17 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 64
-        y: 48
+        y: 96
         width: 32
         height: 48
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 206c1c29d02ed3d4e883d8119939a4ab
+      spriteID: 5fd7ac64febddb84db9b300e4c691b77
       vertices: []
       indices: 
       edges: []
@@ -145,17 +146,17 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 96
-        y: 48
+        y: 96
         width: 32
         height: 48
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: aefeb40f6d18e9947a82ef81580221c9
+      spriteID: 62458f1783704664e86a1dad80cbe9f1
       vertices: []
       indices: 
       edges: []
@@ -165,17 +166,17 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 0
+        y: 48
         width: 32
         height: 48
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9002434eb208302438edc00aa9a57e30
+      spriteID: 79dc38861f21a144ca090b68bd42afcd
       vertices: []
       indices: 
       edges: []
@@ -185,17 +186,17 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 32
-        y: 0
+        y: 48
         width: 32
         height: 48
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 654534d365d201a45965528be77246b8
+      spriteID: 36f2d2a3235eee4458e866bc9cc98ff1
       vertices: []
       indices: 
       edges: []
@@ -205,17 +206,17 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 64
-        y: 0
+        y: 48
         width: 32
         height: 48
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 54b530cc7fe3369468a441353b9e5ad8
+      spriteID: 6cd248e36af54004eb2c2284214d2afc
       vertices: []
       indices: 
       edges: []
@@ -225,17 +226,37 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 96
-        y: 0
+        y: 48
         width: 32
         height: 48
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: aaf334a514982e841bd8352c24e2dfcb
+      spriteID: d5a2db88a388be441894d3814b13ff43
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Buster_8
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 32
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f7ceeba17d73f3b4bacc87c7ae5a95d3
       vertices: []
       indices: 
       edges: []
