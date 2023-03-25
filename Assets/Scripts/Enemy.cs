@@ -5,8 +5,6 @@ using UnityEngine;
 [RequireComponent(typeof(Entity))]
 public class Enemy : MonoBehaviour
 {
-    public int health = 1;
-
     Entity entity;
 
     void Awake()

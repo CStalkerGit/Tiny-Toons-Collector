@@ -5,7 +5,8 @@ using UnityEngine;
 [RequireComponent(typeof(SpriteRenderer))]
 public class SpriteAnimator : MonoBehaviour
 {
-    public SpriteAnimation anim;
+    [SerializeField]
+    private SpriteAnimation anim;
     public bool playOnAwake = true;
 
     // components
@@ -48,9 +49,26 @@ public class SpriteAnimator : MonoBehaviour
 
     public void Play()
     {
-        if (anim.sprites.Length < 2) return;
+        if (!anim) return;
+        spriteRenderer.sprite = anim.sprites[0];
         frame = 0;
         time = 0;
-        isPlaying = true;
+        isPlaying = anim.sprites.Length > 1 ? true : false;
+    }
+
+    public void SetAnimation(SpriteAnimation a)
+    {
+        if (anim != a)
+        {
+            anim = a;
+            Play();
+        }
+    }
+
+    public void SetSprite(Sprite spr)
+    {
+        isPlaying = false;
+        anim = null;
+        if (spriteRenderer.sprite != spr) spriteRenderer.sprite = spr;
     }
 }

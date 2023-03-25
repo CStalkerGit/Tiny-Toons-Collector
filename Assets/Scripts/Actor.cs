@@ -6,6 +6,8 @@ using UnityEngine;
 [RequireComponent(typeof(EntityPhysics))]
 public class Actor : MonoBehaviour
 {
+    public int health = 1;
+
     public float acceleration = 2.5f;
     public float maxSpeed = 3.5f;
     public float jumpHeight = 2f;
@@ -19,6 +21,8 @@ public class Actor : MonoBehaviour
     float move;
     bool jump;
 
+    float statusTimer = -1;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -29,6 +33,24 @@ public class Actor : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        if (WasHit || IsInvulnerable)
+        {
+            if (WasHit) move = 0;
+
+            statusTimer -= Time.deltaTime;
+            if (statusTimer < 0)
+            {
+                if (WasHit)
+                {
+                    WasHit = false;
+                    statusTimer = 1.5f; // Invulnerability timer
+                }
+                else
+                    IsInvulnerable = false;
+            }
+        }
+
+
         float horSpeed = Mathf.Abs(physics.velocity.x);
         float newVelocity = physics.velocity.x + move * acceleration * Time.deltaTime;
 
@@ -41,7 +63,7 @@ public class Actor : MonoBehaviour
         physics.deceleration = Mathf.Abs(move) < 0.01f || horSpeed > maxSpeed
             || Mathf.Sign(move) != Mathf.Sign(physics.velocity.x); // включить замедление при резкой смене направления
 
-        if (jump && physics.OnGround)
+        if (jump && physics.OnGround && !WasHit)
         {
             //add sound
             physics.velocity.y = Mathf.Sqrt(2 * CollisionGrid.Gravity * jumpHeight);
@@ -69,9 +91,24 @@ public class Actor : MonoBehaviour
         return result;
     }
 
+    public void TakeDamage()
+    {
+        if (IsInvulnerable) return;
+
+        health--;
+        if (health <= 0)
+            Destroy(gameObject);
+
+        WasHit = true;
+        IsInvulnerable = true;
+        statusTimer = 1.0f;
+    }
+
     public void Move(float v) => move = v;
     public void Jump() => jump = true;
     public void AddForce(Vector3 force) => physics.velocity += force;
     public bool MovingRight { get; private set; } = true;
     public bool Moving { get; private set; }
+    public bool WasHit { get; private set; } = false;
+    public bool IsInvulnerable { get; private set; } = false;
 }

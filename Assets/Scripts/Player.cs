@@ -7,8 +7,6 @@ public class Player : MonoBehaviour
     Entity entity;
     Actor actor;
 
-    float invulnerability = -1;
-
     private static Player ptr = null;
 
    void Awake()
@@ -26,11 +24,7 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (invulnerability > -0.1f)
-        {
-            invulnerability -= Time.deltaTime;
-
-        }
+        Stats.health = actor.health;
     }
 
     public static bool IsCollision(Entity target)
@@ -53,11 +47,6 @@ public class Player : MonoBehaviour
     public static void TakeDamage()
     {
         if (ptr == null) return;
-        if (ptr.invulnerability > 0) return;
-        Stats.health--;
-        if (Stats.health <= 0)
-            Destroy(ptr.gameObject);
-        else
-            ptr.invulnerability = 1.5f;
+        ptr.actor.TakeDamage();
     }
 }

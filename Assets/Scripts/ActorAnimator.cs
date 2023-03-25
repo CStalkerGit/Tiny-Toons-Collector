@@ -2,32 +2,26 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(Animator))]
+[RequireComponent(typeof(SpriteAnimator))]
 public class ActorAnimator : MonoBehaviour
 {
     public Actor actor;
 
-    Animator animator;
+    public SpriteAnimation staying;
+    public SpriteAnimation walking;
+
+    public Sprite jumping;
+    public Sprite falling;
+    public Sprite hit;
+
+    SpriteAnimator animator;
     SpriteRenderer spriteRenderer;
-
-    // animation flags
-    bool onGround;
-    bool movingUp;
-    bool moving;
-
-    // animations hashes
-    int B_GROUND, B_UP, B_MOVING;
 
     // Start is called before the first frame update
     void Awake()
     {
-        animator = GetComponent<Animator>();
+        animator = GetComponent<SpriteAnimator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
-
-        //F_SPEED = Animator.StringToHash("Speed");
-        B_GROUND = Animator.StringToHash("OnGround");
-        B_UP = Animator.StringToHash("Up");
-        B_MOVING = Animator.StringToHash("Moving");
     }
 
     // Update is called once per frame
@@ -36,25 +30,25 @@ public class ActorAnimator : MonoBehaviour
         // direction
         spriteRenderer.flipX = !actor.MovingRight;
 
-        // on ground
-        if (onGround != actor.physics.OnGround)
+        if (actor.WasHit)
+            animator.SetSprite(hit);
+        else
         {
-            onGround = !onGround;
-            animator.SetBool(B_GROUND, onGround);
+            // on ground
+            if (actor.physics.OnGround)
+            {
+                if (actor.Moving)
+                    animator.SetAnimation(walking);
+                else
+                    animator.SetAnimation(staying);
+            }
+            else
+            {
+                if (actor.physics.velocity.y > 0.25f)
+                    animator.SetSprite(jumping);
+                else
+                    animator.SetSprite(falling);
+            }
         }
-
-        // movingUp
-        if (movingUp != (actor.physics.velocity.y > 0.25f))
-        {
-            movingUp = !movingUp;
-            animator.SetBool(B_UP, movingUp);
-        }
-
-        // moving
-        if (moving != (actor.Moving))
-        {
-            moving = !moving;
-            animator.SetBool(B_MOVING, moving);
-        }    
     }
 }
