@@ -24,7 +24,7 @@ public class Enemy : MonoBehaviour
             }
             else
             {
-                Player.TakeDamage();
+                Player.TakeDamage(entity);
             }
         }
     }

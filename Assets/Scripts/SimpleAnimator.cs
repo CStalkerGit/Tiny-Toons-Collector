@@ -17,6 +17,6 @@ public class SimpleAnimator : MonoBehaviour
     void FixedUpdate()
     {
         // direction
-        spriteRenderer.flipX = !actor.MovingRight;
+        spriteRenderer.flipX = !actor.FacingRight;
     }
 }

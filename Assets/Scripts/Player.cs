@@ -44,9 +44,14 @@ public class Player : MonoBehaviour
         if (ptr) ptr.actor.physics.velocity.y = 7f;
     }
 
-    public static void TakeDamage()
+    public static void TakeDamage(Entity attacker)
     {
         if (ptr == null) return;
-        ptr.actor.TakeDamage();
+        if (!ptr.actor.IsInvulnerable && !ptr.actor.IsDown)
+        {
+            float x = 5 * (attacker.pos.x > ptr.transform.position.x ? -1 : 1);
+            ptr.actor.physics.velocity = new Vector3(x, 5, 0);
+        }
+        ptr.actor.TakeDamage(attacker);
     }
 }

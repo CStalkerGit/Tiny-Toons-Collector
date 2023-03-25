@@ -7,6 +7,7 @@ using UnityEngine;
 public class Actor : MonoBehaviour
 {
     public int health = 1;
+    public bool keepBody = false;
 
     public float acceleration = 2.5f;
     public float maxSpeed = 3.5f;
@@ -33,10 +34,10 @@ public class Actor : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        bool canMove = !WasHit && !IsDown;
+
         if (WasHit || IsInvulnerable)
         {
-            if (WasHit) move = 0;
-
             statusTimer -= Time.deltaTime;
             if (statusTimer < 0)
             {
@@ -50,7 +51,7 @@ public class Actor : MonoBehaviour
             }
         }
 
-
+        if (!canMove) move = 0;
         float horSpeed = Mathf.Abs(physics.velocity.x);
         float newVelocity = physics.velocity.x + move * acceleration * Time.deltaTime;
 
@@ -63,7 +64,7 @@ public class Actor : MonoBehaviour
         physics.deceleration = Mathf.Abs(move) < 0.01f || horSpeed > maxSpeed
             || Mathf.Sign(move) != Mathf.Sign(physics.velocity.x); // включить замедление при резкой смене направления
 
-        if (jump && physics.OnGround && !WasHit)
+        if (jump && physics.OnGround && canMove)
         {
             //add sound
             physics.velocity.y = Mathf.Sqrt(2 * CollisionGrid.Gravity * jumpHeight);
@@ -72,7 +73,7 @@ public class Actor : MonoBehaviour
 
         if (-0.1f > move || move > 0.1f)
         {
-            MovingRight = move > 0;
+            FacingRight = move > 0;
             Moving = true;
         }
         else
@@ -91,13 +92,19 @@ public class Actor : MonoBehaviour
         return result;
     }
 
-    public void TakeDamage()
+    public void TakeDamage(Entity attacker)
     {
         if (IsInvulnerable) return;
+        if (IsDown) return;
+
+        FacingRight = attacker.transform.position.x > transform.position.x;
 
         health--;
         if (health <= 0)
-            Destroy(gameObject);
+        {
+            if (!keepBody) Destroy(gameObject);
+            IsDown = true;
+        }
 
         WasHit = true;
         IsInvulnerable = true;
@@ -107,8 +114,9 @@ public class Actor : MonoBehaviour
     public void Move(float v) => move = v;
     public void Jump() => jump = true;
     public void AddForce(Vector3 force) => physics.velocity += force;
-    public bool MovingRight { get; private set; } = true;
+    public bool FacingRight { get; private set; } = true;
     public bool Moving { get; private set; }
     public bool WasHit { get; private set; } = false;
     public bool IsInvulnerable { get; private set; } = false;
+    public bool IsDown { get; private set; } = false;
 }

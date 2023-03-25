@@ -9,6 +9,7 @@ public class ActorAnimator : MonoBehaviour
 
     public SpriteAnimation staying;
     public SpriteAnimation walking;
+    public SpriteAnimation down;
 
     public Sprite jumping;
     public Sprite falling;
@@ -28,7 +29,13 @@ public class ActorAnimator : MonoBehaviour
     void FixedUpdate()
     {
         // direction
-        spriteRenderer.flipX = !actor.MovingRight;
+        spriteRenderer.flipX = !actor.FacingRight;
+
+        if (actor.IsDown)
+        {
+            animator.SetAnimation(down);
+            return;
+        }
 
         if (actor.WasHit)
             animator.SetSprite(hit);

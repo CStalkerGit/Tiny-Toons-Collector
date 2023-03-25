@@ -11,6 +11,10 @@ TextureImporter:
     21300012: Buster_6
     21300014: Buster_7
     21300016: Buster_8
+    21300018: Buster_9
+    21300020: Buster_10
+    21300022: Buster_11
+    21300024: Buster_12
   externalObjects: {}
   serializedVersion: 9
   mipmaps:
@@ -69,7 +73,7 @@ TextureImporter:
   platformSettings:
   - serializedVersion: 2
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 2048
+    maxTextureSize: 512
     resizeAlgorithm: 0
     textureFormat: 4
     textureCompression: 1
@@ -86,6 +90,86 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
+        y: 144
+        width: 32
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c095d5f5b80bc12439ef257f7251bcdc
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Buster_1
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 144
+        width: 32
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7aafbd32bef6512448caec1823d95563
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Buster_2
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 144
+        width: 32
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1397f9e19f6baed4fbc419d17073fbce
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Buster_3
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 144
+        width: 32
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1a1f7541b44fd654887f492302424814
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Buster_4
+      rect:
+        serializedVersion: 2
+        x: 0
         y: 96
         width: 32
         height: 48
@@ -96,13 +180,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 37c580111b455b640b3be9b23b07e590
+      spriteID: c5a341d9cb9b9464e9b5d5bd79b59216
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Buster_1
+      name: Buster_5
       rect:
         serializedVersion: 2
         x: 32
@@ -116,13 +200,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 32bfeccf61b3f24409afdf85915f7ed9
+      spriteID: bbc1d866dd3c6fc43ade507146c3c349
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Buster_2
+      name: Buster_6
       rect:
         serializedVersion: 2
         x: 64
@@ -136,13 +220,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5fd7ac64febddb84db9b300e4c691b77
+      spriteID: f7199b8e509ab41488316a587c1637ff
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Buster_3
+      name: Buster_7
       rect:
         serializedVersion: 2
         x: 96
@@ -156,13 +240,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 62458f1783704664e86a1dad80cbe9f1
+      spriteID: bc74c950508c9004eaf51bc36c0165eb
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Buster_4
+      name: Buster_8
       rect:
         serializedVersion: 2
         x: 0
@@ -176,13 +260,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 79dc38861f21a144ca090b68bd42afcd
+      spriteID: b3c66f39f13857c4e805d5a58ad288a9
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Buster_5
+      name: Buster_9
       rect:
         serializedVersion: 2
         x: 32
@@ -196,13 +280,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 36f2d2a3235eee4458e866bc9cc98ff1
+      spriteID: 745bdc92954823c44a83e6175c046da5
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Buster_6
+      name: Buster_10
       rect:
         serializedVersion: 2
         x: 64
@@ -216,13 +300,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6cd248e36af54004eb2c2284214d2afc
+      spriteID: 4ead83dbd1107a34e924696f83c8e8c1
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Buster_7
+      name: Buster_11
       rect:
         serializedVersion: 2
         x: 96
@@ -236,13 +320,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d5a2db88a388be441894d3814b13ff43
+      spriteID: 42c3cd34d22723244a9a9ce54a44726a
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Buster_8
+      name: Buster_12
       rect:
         serializedVersion: 2
         x: 0
@@ -256,7 +340,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f7ceeba17d73f3b4bacc87c7ae5a95d3
+      spriteID: 350879a0e36ab19419ae8b4bd0c6379c
       vertices: []
       indices: 
       edges: []
