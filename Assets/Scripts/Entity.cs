@@ -59,6 +59,7 @@ public class Entity : MonoBehaviour
         switch (type)
         {
             case TileType.FullBlock:
+            //case TileType.Spikes:
                 return true;
             case TileType.Platform:
                 return PrevBottomCoord > y + 1;

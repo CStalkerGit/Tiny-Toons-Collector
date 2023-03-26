@@ -24,7 +24,7 @@ public class CollisionTile : TileBase
         return entity.IsCollision(type, x, y, orientToRight);
     }
 
-    public void GetAlignRect(ref CollisionRect rect, int tileX, int tileY, Entity entity)
+    public void GetCollisionRect(ref CollisionData rect, int tileX, int tileY, Entity entity)
     {
         switch (type)
         {

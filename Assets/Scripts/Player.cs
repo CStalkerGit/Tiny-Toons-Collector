@@ -25,6 +25,13 @@ public class Player : MonoBehaviour
     void FixedUpdate()
     {
         Stats.health = actor.health;
+
+        if (actor.IsDown) return;
+
+        // unstuck
+        var data = CollisionGrid.IsSpecialCollision(entity);
+        if (data.isStuck) entity.pos.y += 0.01f;
+        if (data.isSpike) actor.Kill();
     }
 
     public static bool IsCollision(Entity target)
@@ -36,6 +43,7 @@ public class Player : MonoBehaviour
     public static bool IsTargetWasStomped(Entity target)
     {
         if (ptr == null) return false;
+        if (ptr.actor.WasHit || ptr.actor.IsDown) return false;
         return ptr.entity.PrevBottomCoord > target.TopCoord;
     }
 

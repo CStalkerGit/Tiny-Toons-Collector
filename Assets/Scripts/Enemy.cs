@@ -6,20 +6,27 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     Entity entity;
+    Actor actor;
 
     void Awake()
     {
         entity = GetComponent<Entity>();
+        actor = GetComponent<Actor>();
     }
 
     void FixedUpdate()
     {
+        // unstuck
+        var data = CollisionGrid.IsSpecialCollision(entity);
+        if (data.isStuck) entity.pos.y += 0.01f;
+        if (data.isSpike) actor.Kill();
+
         if (Player.IsCollision(entity))
         {
             if (Player.IsTargetWasStomped(entity))
             {
+                actor.Kill();
                 EffectSpawner.Poof(transform.position);
-                Destroy(gameObject);
                 Player.GiveFrag();
             }
             else

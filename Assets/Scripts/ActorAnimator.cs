@@ -15,8 +15,11 @@ public class ActorAnimator : MonoBehaviour
     public Sprite falling;
     public Sprite hit;
 
+    // components
     SpriteAnimator animator;
     SpriteRenderer spriteRenderer;
+
+    float invulnerability;
 
     // Start is called before the first frame update
     void Awake()
@@ -30,6 +33,18 @@ public class ActorAnimator : MonoBehaviour
     {
         // direction
         spriteRenderer.flipX = !actor.FacingRight;
+        
+        // flashing
+        if (actor.IsInvulnerable && !actor.WasHit)
+        {
+            invulnerability -= Time.deltaTime;
+            if (invulnerability < 0)
+            {
+                invulnerability = 0.05f;
+                spriteRenderer.enabled = !spriteRenderer.enabled;
+            }
+        }
+        else if (!spriteRenderer.enabled) spriteRenderer.enabled = true;
 
         if (actor.IsDown)
         {

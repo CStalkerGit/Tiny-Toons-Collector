@@ -51,10 +51,6 @@ public class EntityPhysics : MonoBehaviour
 
         Vector3 lastPosition = entity.pos;
 
-        // unstuck
-        CollisionRect data = new CollisionRect();
-        if (CollisionGrid.IsCollision(entity, ref data)) entity.pos.y += 0.01f;
-
         if (stateY != CollisionState.Pending)
         {
             OnGround = false;
@@ -117,12 +113,11 @@ public class EntityPhysics : MonoBehaviour
     {
         if (Mathf.Abs(y) < CollisionGrid.MinStep) return CollisionState.Pending;
 
-        CollisionRect data = new CollisionRect();
-
         float lastY = entity.pos.y;
 
         entity.pos.y += y;
-        if (CollisionGrid.IsCollision(entity, ref data))
+        var data = CollisionGrid.IsCollision(entity);
+        if (data.isCollision)
         {
             if (y < 0)
             {
@@ -145,12 +140,11 @@ public class EntityPhysics : MonoBehaviour
     {
         if (Mathf.Abs(x) < CollisionGrid.MinStep) return CollisionState.Pending;
 
-        CollisionRect data = new CollisionRect();
-
         float lastX = entity.pos.x;
 
         entity.pos.x += x;
-        if (CollisionGrid.IsCollision(entity, ref data))
+        var data = CollisionGrid.IsCollision(entity);
+        if (data.isCollision)
         {
             if (x > 0)
             {

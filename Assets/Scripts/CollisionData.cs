@@ -2,14 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CollisionRect
+public class CollisionData
 {
     public float top, bottom, right, left;
-    public bool isSlope;
+    public bool isSlope = false;
+    public bool isCollision = false;
 
-    public CollisionRect()
+    public CollisionData()
     {
-        isSlope = false;
+
     }
 
     public void Reset(Entity entity, Vector3 newPosition)

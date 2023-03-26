@@ -2,15 +2,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(SpriteRenderer))]
-public class SimpleAnimator : MonoBehaviour
+[RequireComponent(typeof(SpriteAnimator))]
+public class EnemyAnimator : MonoBehaviour
 {
     public Actor actor;
 
+    // components
+    SpriteAnimator animator;
     SpriteRenderer spriteRenderer;
 
     void Awake()
     {
+        animator = GetComponent<SpriteAnimator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
     }
 

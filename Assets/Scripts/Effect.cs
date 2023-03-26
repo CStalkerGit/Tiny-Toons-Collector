@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class Effect : MonoBehaviour
 {
-    AnimatedSprite animatedSprite;
+    SpriteAnimator anim;
     AudioSource audioSource;
 
     // Start is called before the first frame update
     void Start()
     {
-        animatedSprite = GetComponent<AnimatedSprite>();
+        anim = GetComponent<SpriteAnimator>();
         audioSource = GetComponent<AudioSource>();
     }
 
@@ -19,7 +19,7 @@ public class Effect : MonoBehaviour
         bool audioEnd = true;
         if (audioSource) audioEnd = !audioSource.isPlaying;
         bool animationEnd = true;
-        if (animatedSprite) animationEnd = !animatedSprite.isPlaying;
+        if (anim) animationEnd = !anim.isPlaying;
 
         if (audioEnd && animationEnd) Destroy(gameObject);
     }

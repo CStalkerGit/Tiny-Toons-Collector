@@ -97,18 +97,28 @@ public class Actor : MonoBehaviour
         if (IsInvulnerable) return;
         if (IsDown) return;
 
+        WasHit = true;
+
         FacingRight = attacker.transform.position.x > transform.position.x;
 
         health--;
-        if (health <= 0)
-        {
-            if (!keepBody) Destroy(gameObject);
-            IsDown = true;
-        }
+        if (health <= 0) Kill();
 
-        WasHit = true;
-        IsInvulnerable = true;
-        statusTimer = 1.0f;
+        if (health > 0)
+        {
+            IsInvulnerable = true;
+            statusTimer = 1.0f;
+        }
+    }
+
+    public void Kill()
+    {
+        if (IsDown) return;
+
+        IsInvulnerable = false;
+        health = 0;
+        if (!keepBody) Destroy(gameObject);
+        IsDown = true;
     }
 
     public void Move(float v) => move = v;
