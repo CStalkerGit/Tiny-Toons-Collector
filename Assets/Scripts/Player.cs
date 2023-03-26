@@ -31,7 +31,13 @@ public class Player : MonoBehaviour
         // unstuck
         var data = CollisionGrid.IsSpecialCollision(entity);
         if (data.isStuck) entity.pos.y += 0.01f;
-        if (data.isSpike) actor.Kill();
+        if (data.isSpike)
+        {
+            actor.physics.velocity.x = 0;
+            actor.physics.velocity.y = 5;
+            actor.Kill();
+            EffectSpawner.Down(entity.pos);
+        }
     }
 
     public static bool IsCollision(Entity target)
@@ -55,11 +61,17 @@ public class Player : MonoBehaviour
     public static void TakeDamage(Entity attacker)
     {
         if (ptr == null) return;
-        if (!ptr.actor.IsInvulnerable && !ptr.actor.IsDown)
-        {
-            float x = 5 * (attacker.pos.x > ptr.transform.position.x ? -1 : 1);
-            ptr.actor.physics.velocity = new Vector3(x, 5, 0);
-        }
+        if (ptr.actor.IsInvulnerable || ptr.actor.IsDown) return;
+
         ptr.actor.TakeDamage(attacker);
+
+        float x = 5 * (attacker.pos.x > ptr.transform.position.x ? -1 : 1);
+        if (ptr.actor.health < 1) x = 0;
+        ptr.actor.physics.velocity = new Vector3(x, 5, 0);
+
+        if (ptr.actor.IsDown)
+            EffectSpawner.Down(ptr.entity.pos);
+        else
+            EffectSpawner.Hit(ptr.entity.pos);
     }
 }

@@ -43,4 +43,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 136443b65702ec444a4d7bea9bb8a2d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Poof: {fileID: 0}
+  poof: {fileID: 2938460903009222486, guid: 6873f3aab12edd24c820317af325e055, type: 3}
+  pickup: {fileID: 2938460903009222486, guid: c58ee53002779a449b7845cbf3214587, type: 3}
+  hit: {fileID: 2938460903009222486, guid: 844f6cedef0d11d4eadc5d5d27c3e83c, type: 3}
+  down: {fileID: 2938460903009222486, guid: 01be8544cc446c54abac6b995aeaf610, type: 3}

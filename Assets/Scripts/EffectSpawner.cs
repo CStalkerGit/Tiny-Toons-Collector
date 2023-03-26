@@ -6,18 +6,20 @@ public class EffectSpawner : MonoBehaviour
 {
     public Effect poof;
     public Effect pickup;
+    public Effect hit;
+    public Effect down;
 
-    static EffectSpawner instance = null;
+    static EffectSpawner ptr = null;
 
     // Start is called before the first frame update
     void Awake()
     {
-        instance = this;
+        ptr = this;
     }
 
     void OnDestroy()
     {
-        instance = null;
+        ptr = null;
     }
 
     // Update is called once per frame
@@ -26,11 +28,13 @@ public class EffectSpawner : MonoBehaviour
         
     }
 
-    public static void Poof(Vector3 position) => SpawnEffect(instance?.poof, position);
-    public static void Pickup(Vector3 position) => SpawnEffect(instance?.pickup, position);
+    public static void Poof(Vector3 position) => SpawnEffect(ptr?.poof, position);
+    public static void Pickup(Vector3 position) => SpawnEffect(ptr?.pickup, position);
+    public static void Hit(Vector3 position) => SpawnEffect(ptr?.hit, position);
+    public static void Down(Vector3 position) => SpawnEffect(ptr?.down, position);
 
     static void SpawnEffect(Effect effect, Vector3 position)
     {
-        if (instance && effect) Instantiate(effect, position, Quaternion.identity);
+        if (ptr && effect) Instantiate(effect, position, Quaternion.identity);
     }
 }
