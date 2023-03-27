@@ -53,3 +53,6 @@ TagManager:
   - name: Effects
     uniqueID: 1368079889
     locked: 0
+  - name: BlackScreen
+    uniqueID: 4217482565
+    locked: 0

@@ -33,10 +33,8 @@ public class Player : MonoBehaviour
         if (data.isStuck) entity.pos.y += 0.01f;
         if (data.isSpike)
         {
-            actor.physics.velocity.x = 0;
-            actor.physics.velocity.y = 5;
             actor.Kill();
-            EffectSpawner.Down(entity.pos);
+            KillEffect();
         }
     }
 
@@ -66,12 +64,19 @@ public class Player : MonoBehaviour
         ptr.actor.TakeDamage(attacker);
 
         float x = 5 * (attacker.pos.x > ptr.transform.position.x ? -1 : 1);
-        if (ptr.actor.health < 1) x = 0;
         ptr.actor.physics.velocity = new Vector3(x, 5, 0);
 
         if (ptr.actor.IsDown)
-            EffectSpawner.Down(ptr.entity.pos);
+            ptr.KillEffect();
         else
             EffectSpawner.Hit(ptr.entity.pos);
+    }
+
+    void KillEffect()
+    {
+        actor.physics.velocity.x = 0;
+        actor.physics.velocity.y = 5;
+        EffectSpawner.Down(entity.pos);
+        BlackScreen.FadeInEffect(actor.transform.position);
     }
 }
