@@ -53,6 +53,9 @@ public class Game : MonoBehaviour
                     BlackScreen.FadeInEffect(Player.LastPosition);
                 }
                 break;
+            case GameState.Fading:
+                if (BlackScreen.Finished) SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+                break;
         }
     }
 
@@ -70,7 +73,7 @@ public class Game : MonoBehaviour
     public void _EndScene(bool defeat)
     {
         state = GameState.Ending;
-        timer = 1.5f;
+        timer = 1f;
         this.defeat = defeat;
     }
 }

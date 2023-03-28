@@ -32,17 +32,13 @@ public class CollisionGrid : MonoBehaviour
     public static CollisionData IsCollision(Entity entity)
     {
         var data = new CollisionData();
-        const float offset = 0.1f;
 
         data.Reset(entity, entity.pos);
 
-        int x1 = Mathf.FloorToInt(entity.pos.x - entity.rw + 0.0f - offset);
-        int x2 = Mathf.CeilToInt(entity.pos.x + entity.rw - 1.0f + offset);
-        int y1 = Mathf.FloorToInt(entity.pos.y - entity.rh + 0.0f - offset);
-        int y2 = Mathf.CeilToInt(entity.pos.y + entity.rh - 1.0f + offset);
+        var bounds = GetEntityBounds(entity);
 
-        for (int x = x1; x <= x2; x++)
-            for (int y = y1; y <= y2; y++)
+        for (int x = bounds.x; x <= bounds.xMax; x++)
+            for (int y = bounds.y; y <= bounds.yMax; y++)
             {
                 var tile = instance.map.GetTile<CollisionTile>(new Vector3Int(x, y, 0));
                 if (tile == null) continue;
@@ -59,15 +55,11 @@ public class CollisionGrid : MonoBehaviour
     public static SpecialCollision IsSpecialCollision(Entity entity)
     {
         SpecialCollision data = new SpecialCollision();
-        const float offset = 0.1f;
 
-        int x1 = Mathf.FloorToInt(entity.pos.x - entity.rw + 0.0f - offset);
-        int x2 = Mathf.CeilToInt(entity.pos.x + entity.rw - 1.0f + offset);
-        int y1 = Mathf.FloorToInt(entity.pos.y - entity.rh + 0.0f - offset);
-        int y2 = Mathf.CeilToInt(entity.pos.y + entity.rh - 1.0f + offset);
+        var bounds = GetEntityBounds(entity);
 
-        for (int x = x1; x <= x2; x++)
-            for (int y = y1; y <= y2; y++)
+        for (int x = bounds.x; x <= bounds.xMax; x++)
+            for (int y = bounds.y; y <= bounds.yMax; y++)
             {
                 var tile = instance.map.GetTile<CollisionTile>(new Vector3Int(x, y, 0));
                 if (tile == null) continue;
@@ -84,6 +76,20 @@ public class CollisionGrid : MonoBehaviour
             }
 
         return data;
+    }
+
+    static BoundsInt GetEntityBounds(Entity entity)
+    {
+        const float offset = 0.1f;
+   
+        int x1 = Mathf.FloorToInt(entity.pos.x - entity.rw + 0.0f - offset);
+        int x2 = Mathf.CeilToInt(entity.pos.x + entity.rw - 1.0f + offset);
+        int y1 = Mathf.FloorToInt(entity.pos.y - entity.rh + 0.0f - offset);
+        int y2 = Mathf.CeilToInt(entity.pos.y + entity.rh - 1.0f + offset);
+
+        BoundsInt bounds = new BoundsInt();
+        bounds.SetMinMax(new Vector3Int(x1, y1, 0), new Vector3Int(x2, y2, 0));
+        return bounds;
     }
 
     [ContextMenu("Clear All Tiles")]
