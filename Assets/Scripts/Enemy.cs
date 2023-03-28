@@ -26,7 +26,7 @@ public class Enemy : MonoBehaviour
             if (Player.IsTargetWasStomped(entity))
             {
                 actor.Kill();
-                EffectSpawner.Poof(transform.position);
+                Game.Poof(transform.position);
                 Player.GiveFrag();
             }
             else

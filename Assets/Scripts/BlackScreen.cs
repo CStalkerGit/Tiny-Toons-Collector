@@ -54,11 +54,16 @@ public class BlackScreen : MonoBehaviour
     public void FadeIn(Vector3 pos)
     {
         fading = true;
-        fadingPos = new Vector2Int(Mathf.RoundToInt((pos.x - cam.transform.position.x) * 2), Mathf.RoundToInt((pos.y - cam.transform.position.y) * 2));
-        radius = 10;
+        fadingPos = new Vector2Int(Mathf.RoundToInt((pos.x - cam.transform.position.x) * 2 - 0.5f), Mathf.RoundToInt((pos.y - cam.transform.position.y) * 2 - 0.5f));
+        radius = 15;
         timer = speed;
     }
 
     public static void ClearTiles() => ptr?.Clear();
     public static void FadeInEffect(Vector3 pos) => ptr?.FadeIn(pos);
+    public static bool Finished()
+    {
+        if (!ptr) return false;
+        return ptr.radius < 0;
+    }
 }

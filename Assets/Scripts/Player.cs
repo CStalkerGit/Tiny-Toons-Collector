@@ -9,7 +9,9 @@ public class Player : MonoBehaviour
 
     private static Player ptr = null;
 
-   void Awake()
+    public static Vector3 LastPosition;
+
+    void Awake()
     {
         ptr = this;
         entity = GetComponent<Entity>();
@@ -24,6 +26,7 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        LastPosition = actor.transform.position;
         Stats.health = actor.health;
 
         if (actor.IsDown) return;
@@ -34,7 +37,7 @@ public class Player : MonoBehaviour
         if (data.isSpike)
         {
             actor.Kill();
-            KillEffect();
+            EndScene();
         }
     }
 
@@ -67,16 +70,16 @@ public class Player : MonoBehaviour
         ptr.actor.physics.velocity = new Vector3(x, 5, 0);
 
         if (ptr.actor.IsDown)
-            ptr.KillEffect();
+            ptr.EndScene();
         else
-            EffectSpawner.Hit(ptr.entity.pos);
+            Game.Hit(ptr.entity.pos);
     }
 
-    void KillEffect()
+    void EndScene()
     {
         actor.physics.velocity.x = 0;
         actor.physics.velocity.y = 5;
-        EffectSpawner.Down(entity.pos);
-        BlackScreen.FadeInEffect(actor.transform.position);
+        Game.Down(entity.pos);
+        Game.EndScene(true);  
     }
 }
