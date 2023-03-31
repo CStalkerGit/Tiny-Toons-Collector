@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.U2D;
 
 public class Player : MonoBehaviour
 {
@@ -14,8 +15,10 @@ public class Player : MonoBehaviour
     void Awake()
     {
         ptr = this;
+        LastPosition = transform.position;
         entity = GetComponent<Entity>();
         actor = GetComponent<Actor>();
+        BlackScreen.FadeOut();
     }
 
     void OnDestroy()

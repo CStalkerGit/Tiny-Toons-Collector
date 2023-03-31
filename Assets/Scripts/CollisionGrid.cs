@@ -9,13 +9,13 @@ public class CollisionGrid : MonoBehaviour
     public static float Gravity => 18f;
     public static float MinStep => 0.01f;
 
-    static CollisionGrid instance = null;
+    static CollisionGrid ptr = null;
 
     // Start is called before the first frame update
     void Awake()
     {
-        if (instance) Debug.LogWarning("CollisionGrid pointer is not null");
-        instance = this;
+        if (ptr) Debug.LogWarning("CollisionGrid pointer is not null");
+        ptr = this;
     }
 
     // Update is called once per frame
@@ -26,7 +26,7 @@ public class CollisionGrid : MonoBehaviour
 
     void OnDestroy()
     {
-        instance = null;
+        ptr = null;
     }
 
     public static CollisionData IsCollision(Entity entity)
@@ -40,7 +40,7 @@ public class CollisionGrid : MonoBehaviour
         for (int x = bounds.x; x <= bounds.xMax; x++)
             for (int y = bounds.y; y <= bounds.yMax; y++)
             {
-                var tile = instance.map.GetTile<CollisionTile>(new Vector3Int(x, y, 0));
+                var tile = ptr.map.GetTile<CollisionTile>(new Vector3Int(x, y, 0));
                 if (tile == null) continue;
                 if (tile.IsCollision(x, y, entity))
                 {
@@ -61,7 +61,7 @@ public class CollisionGrid : MonoBehaviour
         for (int x = bounds.x; x <= bounds.xMax; x++)
             for (int y = bounds.y; y <= bounds.yMax; y++)
             {
-                var tile = instance.map.GetTile<CollisionTile>(new Vector3Int(x, y, 0));
+                var tile = ptr.map.GetTile<CollisionTile>(new Vector3Int(x, y, 0));
                 if (tile == null) continue;
 
                 if (tile.IsCollision(x, y, entity))
@@ -76,6 +76,19 @@ public class CollisionGrid : MonoBehaviour
             }
 
         return data;
+    }
+
+    public static bool IsPitAhead(Entity entity, bool toRight)
+    {
+        int x = Mathf.FloorToInt(entity.pos.x + (toRight? .5f : -.5f));
+        int y = Mathf.FloorToInt(entity.pos.y);
+        var tile = ptr.map.GetTile<CollisionTile>(new Vector3Int(x, y, 0));
+        if (tile) return false;
+
+        y = Mathf.FloorToInt(entity.pos.y - 1f);
+        tile = ptr.map.GetTile<CollisionTile>(new Vector3Int(x, y, 0));
+
+        return tile == null; 
     }
 
     static BoundsInt GetEntityBounds(Entity entity)

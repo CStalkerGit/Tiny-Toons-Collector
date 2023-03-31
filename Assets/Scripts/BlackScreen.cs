@@ -12,20 +12,24 @@ public class BlackScreen : MonoBehaviour
 
     static BlackScreen ptr = null;
 
-    bool fading;
-    Vector2Int fadingPos;
+    const int maxRadius = 18;
+
+    bool inProcess;
+    bool fadeIn;
+    Vector2Int fadePos;
     int radius;
     float timer;
 
     void Awake()
     {
         ptr = this;
-        Clear();
+        map.gameObject.SetActive(true);
+        //FadeOut();
     }
 
     void FixedUpdate()
     {
-        if (!fading) return;
+        if (!inProcess) return;
 
         timer -= Time.deltaTime;
 
@@ -35,31 +39,52 @@ public class BlackScreen : MonoBehaviour
 
         foreach (var pos in map.cellBounds.allPositionsWithin)
         {
-            var dist = Mathf.Abs((pos.x - fadingPos.x)) + Mathf.Abs((pos.y - fadingPos.y));
-            if (dist >= radius)
-                map.SetTile(pos, blackTile);
+            var dist = Mathf.Abs((pos.x - fadePos.x)) + Mathf.Abs((pos.y - fadePos.y));
+            if (fadeIn)
+            {
+                if (dist >= radius) map.SetTile(pos, blackTile);
+            }
+            else
+            {
+                if (dist <= radius) map.SetTile(pos, null);
+            }
         }
 
-        radius--;
-        if (radius < 0) fading = false;
+        if (fadeIn)
+        {
+            radius--;
+            if (radius < 0) inProcess = false;
+        }
+        else
+        {
+            radius++;
+            if (radius > maxRadius)
+            {
+                inProcess = false;
+                Clear(false);
+            }
+        }
     }
 
-    public void Clear()
+    public void Clear(bool black)
     {
-        // var tile = map.GetTile<Tile>(pos);
         foreach (var pos in map.cellBounds.allPositionsWithin)
-            map.SetTile(pos, null);
+            map.SetTile(pos, black ? blackTile : null);
     }
 
-    public void FadeIn(Vector3 pos)
+    void Fade(Vector3 pos, bool fadeIn)
     {
-        fading = true;
-        fadingPos = new Vector2Int(Mathf.RoundToInt((pos.x - cam.transform.position.x) * 2 - 0.5f), Mathf.RoundToInt((pos.y - cam.transform.position.y) * 2 - 0.5f));
-        radius = 18;
+        Clear(!fadeIn);
+        inProcess = true;
+        this.fadeIn = fadeIn;
+        fadePos = new Vector2Int(Mathf.RoundToInt((pos.x - cam.transform.position.x) * 2 - 0.5f), Mathf.RoundToInt((pos.y - cam.transform.position.y) * 2 - 0.5f));
+        if (!fadeIn) fadePos.Set(0, 0);
+        radius = fadeIn ? maxRadius : 0;
         timer = speed;
     }
 
-    public static void ClearTiles() => ptr?.Clear();
-    public static void FadeInEffect(Vector3 pos) => ptr?.FadeIn(pos);
-    public static bool Finished => ptr?.radius < 0;
+    public static void ClearTiles() => ptr?.Clear(false);
+    public static void FadeIn(Vector3 pos) => ptr?.Fade(pos, true);
+    public static void FadeOut() => ptr?.Fade(Vector3.zero, false);
+    public static bool InProcess => ptr ? ptr.inProcess : false;
 }

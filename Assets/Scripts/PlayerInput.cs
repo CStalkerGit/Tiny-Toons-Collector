@@ -18,12 +18,13 @@ public class PlayerInput : MonoBehaviour
 
     void Update()
     {
+        if (BlackScreen.InProcess) return;
+
         if (Input.GetButton("Jump"))
             userPressJump = true;
 
         //actor.Move(-1);
         actor.Move(Input.GetAxisRaw("Horizontal"));
-        if (Input.GetKeyDown(KeyCode.F)) actor.AddForce(new Vector3(10, 0, 0));
     }
 
     void FixedUpdate()

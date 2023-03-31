@@ -50,11 +50,11 @@ public class Game : MonoBehaviour
                 {
                     state = GameState.Fading;
                     audioSource.PlayOneShot(clipDefeat);
-                    BlackScreen.FadeInEffect(Player.LastPosition);
+                    BlackScreen.FadeIn(Player.LastPosition);
                 }
                 break;
             case GameState.Fading:
-                if (BlackScreen.Finished) SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+                if (!BlackScreen.InProcess) SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
                 break;
         }
     }

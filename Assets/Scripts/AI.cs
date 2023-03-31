@@ -5,6 +5,8 @@ using UnityEngine;
 [RequireComponent(typeof(Actor))]
 public class AI : MonoBehaviour
 {
+    public bool avoidPits;
+
     Actor actor;
     bool moveToRight;
 
@@ -17,6 +19,13 @@ public class AI : MonoBehaviour
     void FixedUpdate()
     {
         if (actor.WasBlocked()) moveToRight = !moveToRight;
-        actor.Move(moveToRight? 1 : -1);
+
+        if (avoidPits && actor.physics.OnGround)
+        {
+            if (CollisionGrid.IsPitAhead(actor.entity, actor.FacingRight))
+                moveToRight = !moveToRight;
+        }
+
+        actor.Move(moveToRight ? 1 : -1);
     }
 }
