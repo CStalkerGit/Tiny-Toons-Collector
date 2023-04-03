@@ -66,8 +66,8 @@ public class Actor : MonoBehaviour
 
         if (jump && physics.OnGround && canMove)
         {
-            //add sound
-            physics.velocity.y = Mathf.Sqrt(2 * CollisionGrid.Gravity * jumpHeight);
+            if (!CollisionGrid.IsCollision(entity, 0, 0.2f))
+                physics.velocity.y = Mathf.Sqrt(2 * CollisionGrid.Gravity * jumpHeight);
         }
         jump = false;
 

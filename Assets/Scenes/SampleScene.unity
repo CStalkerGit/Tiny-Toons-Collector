@@ -1703,6 +1703,7 @@ MonoBehaviour:
   pickup: {fileID: 2938460903009222486, guid: c58ee53002779a449b7845cbf3214587, type: 3}
   hit: {fileID: 2938460903009222486, guid: 844f6cedef0d11d4eadc5d5d27c3e83c, type: 3}
   down: {fileID: 2938460903009222486, guid: 01be8544cc446c54abac6b995aeaf610, type: 3}
+  clipJump: {fileID: 8300000, guid: 84ae5a689a3d66748b4a042bb535a0b8, type: 3}
   clipDefeat: {fileID: 8300000, guid: fd1736e848939c544b4d3cc524357e1e, type: 3}
 --- !u!4 &1603699080
 Transform:
@@ -1728,11 +1729,11 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 0
+  m_audioClip: {fileID: 8300000, guid: 3e204c9ac7368d64ca405186127aed5a, type: 3}
+  m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0

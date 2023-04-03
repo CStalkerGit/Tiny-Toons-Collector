@@ -78,6 +78,30 @@ public class CollisionGrid : MonoBehaviour
         return data;
     }
 
+    public static bool IsCollision(Entity entity, float offsetX, float offsetY)
+    {
+        var lastPos = entity.pos;
+        entity.pos.x += offsetX;
+        entity.pos.y += offsetY;
+
+        var bounds = GetEntityBounds(entity);
+
+        for (int x = bounds.x; x <= bounds.xMax; x++)
+            for (int y = bounds.y; y <= bounds.yMax; y++)
+            {
+                var tile = ptr.map.GetTile<CollisionTile>(new Vector3Int(x, y, 0));
+                if (tile == null) continue;
+                if (tile.IsCollision(x, y, entity))
+                {
+                    entity.pos = lastPos;
+                    return true;
+                }
+            }
+
+        entity.pos = lastPos;
+        return false;
+    }
+
     public static bool IsPitAhead(Entity entity, bool toRight)
     {
         int x = Mathf.FloorToInt(entity.pos.x + (toRight? .5f : -.5f));

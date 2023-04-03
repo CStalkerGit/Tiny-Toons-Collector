@@ -17,6 +17,7 @@ public class Game : MonoBehaviour
     public Effect hit;
     public Effect down;
 
+    public AudioClip clipJump;
     public AudioClip clipDefeat;
 
     AudioSource audioSource;
@@ -32,6 +33,11 @@ public class Game : MonoBehaviour
     {
         ptr = this;
         audioSource = GetComponent<AudioSource>();
+    }
+
+    void Start()
+    {
+        
     }
 
     void OnDestroy()
@@ -68,6 +74,12 @@ public class Game : MonoBehaviour
     static void SpawnEffect(Effect effect, Vector3 position)
     {
         if (ptr && effect) Instantiate(effect, position, Quaternion.identity);
+    }
+
+    public static void JumpEffect() => PlayClip(ptr?.clipJump);
+    static void PlayClip(AudioClip clip)
+    {
+        if (ptr && clip) ptr.audioSource.PlayOneShot(clip);
     }
 
     public void _EndScene(bool defeat)
