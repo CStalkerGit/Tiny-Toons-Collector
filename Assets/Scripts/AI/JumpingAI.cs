@@ -4,17 +4,19 @@ using UnityEngine;
 
 public class JumpingAI : BaseAI
 {
-    public
+    public float jumpingTime = 3.0f;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    float timer;
 
-    // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
-        
+        timer += Time.deltaTime;
+        if (timer >= jumpingTime)
+        {
+            timer = 0;
+            actor.Jump();
+        }
+
+        actor.FaceTo(Player.LastPosition);
     }
 }

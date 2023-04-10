@@ -2,17 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(Actor))]
 public class BaseAI : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    protected Actor actor;
 
-    // Update is called once per frame
-    void Update()
+    protected virtual void Awake()
     {
-        
+        actor = GetComponent<Actor>();
     }
 }

@@ -11,7 +11,8 @@ public enum CollisionState
 public class EntityPhysics : MonoBehaviour
 {
     // data
-    public bool bouncing;
+    public bool gravity = true;
+    public bool bouncing = false;
 
     // components
     Entity entity = null;
@@ -23,7 +24,8 @@ public class EntityPhysics : MonoBehaviour
     public bool deceleration;
     public bool OnGround { get; private set; }
     public bool OnSlope { get; private set; }
-    public bool Blocked { get; set; }
+    public bool BlockedX { get; set; }
+    public bool BlockedY { get; set; }
 
     void Awake()
     {
@@ -56,8 +58,9 @@ public class EntityPhysics : MonoBehaviour
             OnGround = false;
             if (stateY != CollisionState.None)
             {
-                if (velocity.y < 0) OnGround = true;                   
-                velocity.y = -1;
+                BlockedY = true;
+                if (velocity.y < 0) OnGround = true;
+                if (gravity) velocity.y = -1; else velocity.y = 0;
             }
             OnSlope = (stateY == CollisionState.Slope && OnGround);
         }
@@ -75,7 +78,7 @@ public class EntityPhysics : MonoBehaviour
                 if (Mathf.Abs(entity.pos.x - lastPosition.x) < CollisionGrid.MinStep / 2) // distanceX / 2
                 {
                     velocity.x = 0;
-                    Blocked = true;
+                    BlockedX = true;
                 }
             }
             else if (OnSlope) //&& stateX == CollisionState.None
@@ -87,7 +90,7 @@ public class EntityPhysics : MonoBehaviour
             if (stateX == CollisionState.Wall)
             {
                 velocity.x = 0;
-                Blocked = true;
+                BlockedX = true;
             }
         }
 
@@ -95,8 +98,11 @@ public class EntityPhysics : MonoBehaviour
         transform.position = entity.pos;
 
         // gravity
-        velocity.y -= CollisionGrid.Gravity * Time.deltaTime;
-        if (velocity.y < -20) velocity.y = -20;
+        if (gravity)
+        {
+            velocity.y -= CollisionGrid.Gravity * Time.deltaTime;
+            if (velocity.y < -20) velocity.y = -20;
+        }
 
         // deceleration
         if (deceleration)

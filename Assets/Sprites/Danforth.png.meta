@@ -1,9 +1,10 @@
 fileFormatVersion: 2
-guid: cdadbc0f99c954147bad881a672fb937
+guid: ba86cb8dfd8d86542bcd30f597437a36
 TextureImporter:
   fileIDToRecycleName:
-    21300000: Rat_0
-    21300002: Rat_1
+    21300000: Danforth_0
+    21300002: Danforth_1
+    21300004: Danforth_2
   externalObjects: {}
   serializedVersion: 9
   mipmaps:
@@ -44,7 +45,7 @@ TextureImporter:
   compressionQuality: 50
   spriteMode: 2
   spriteExtrude: 1
-  spriteMeshType: 1
+  spriteMeshType: 0
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
   spritePixelsToUnits: 32
@@ -75,41 +76,61 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Rat_0
+      name: Danforth_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
         width: 32
         height: 32
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 27c2b2edbc88d664bbd10bcf24b8f607
+      spriteID: 0a931a99c0442c547a54b7d250d4e745
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Rat_1
+      name: Danforth_1
       rect:
         serializedVersion: 2
         x: 32
         y: 0
         width: 32
         height: 32
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1ae2f05a26dfc1b45b12f97eb6f6fe6a
+      spriteID: 5f8b4fabb76d23a4d9eeb3d755d93591
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Danforth_2
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 47a04322ad858a040bfd7c9c9d938aaf
       vertices: []
       indices: 
       edges: []

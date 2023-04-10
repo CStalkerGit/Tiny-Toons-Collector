@@ -27,7 +27,7 @@ public class Actor : MonoBehaviour
     float statusTimer = -1;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         entity = GetComponent<Entity>();
         physics = GetComponent<EntityPhysics>();
@@ -90,10 +90,22 @@ public class Actor : MonoBehaviour
         //if (physics.velocity.y > 0) physics.velocity.y = 0;
     }
 
-    public bool WasBlocked()
+    public void FaceTo(Vector3 position)
     {
-        bool result = physics.Blocked;
-        physics.Blocked = false;
+        FacingRight = position.x > transform.position.x;
+    }
+
+    public bool WasBlockedX()
+    {
+        bool result = physics.BlockedX;
+        physics.BlockedX = false;
+        return result;
+    }
+
+    public bool WasBlockedY()
+    {
+        bool result = physics.BlockedY;
+        physics.BlockedY = false;
         return result;
     }
 
@@ -126,9 +138,15 @@ public class Actor : MonoBehaviour
         IsDown = true;
     }
 
+    public void AddForceY(float y, float maxForce)
+    {
+        physics.velocity.y += y;
+        physics.velocity.y = Mathf.Clamp(physics.velocity.y, -maxForce, maxForce);
+    }
+
     public void Move(float v) => move = v;
     public void Jump() => jump = true;
-    public void AddForce(Vector3 force) => physics.velocity += force;
+    public void AddForce(Vector3 force) => physics.velocity += force; 
     public bool FacingRight { get; private set; } = true;
     public bool Moving { get; private set; }
     public bool WasHit { get; private set; } = false;

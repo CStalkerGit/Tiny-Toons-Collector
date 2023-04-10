@@ -2,23 +2,21 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(Actor))]
 public class WalkingAI : BaseAI
 {
     public bool avoidPits;
-
-    Actor actor;
+    
     bool moveToRight;
 
-    void Awake()
+    protected override void Awake()
     {
-        actor = GetComponent<Actor>();
+        base.Awake();
         moveToRight = false;
     }
 
     void FixedUpdate()
     {
-        if (actor.WasBlocked()) moveToRight = !moveToRight;
+        if (actor.WasBlockedX()) moveToRight = !moveToRight;
 
         if (avoidPits && actor.physics.OnGround)
         {
