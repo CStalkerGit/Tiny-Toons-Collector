@@ -34,7 +34,6 @@ public class PlayerInput : MonoBehaviour
             actor.Jump();
             originPosY = transform.position.y;
             actorIsJumping = true;
-            Game.JumpEffect();
         }
 
         if (actorIsJumping && !userPressJump && originPosY < transform.position.y - 1.1f)
