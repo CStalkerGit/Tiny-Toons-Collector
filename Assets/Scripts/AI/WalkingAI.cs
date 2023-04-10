@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class WalkingAI : BaseAI
 {
+    public bool waitForPlayer;
     public bool avoidPits;
     
     bool moveToRight;
@@ -11,11 +12,21 @@ public class WalkingAI : BaseAI
     protected override void Awake()
     {
         base.Awake();
-        moveToRight = false;
+    }
+
+    void Start()
+    {
+        moveToRight = actor.FacingRight;
     }
 
     void FixedUpdate()
     {
+        if (waitForPlayer)
+        {
+            if (Mathf.Abs(transform.position.x - Player.LastPosition.x) < 6) waitForPlayer = false;
+            return;
+        }
+
         if (actor.WasBlockedX()) moveToRight = !moveToRight;
 
         if (avoidPits && actor.physics.OnGround)

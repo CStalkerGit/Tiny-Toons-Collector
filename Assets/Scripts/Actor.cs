@@ -7,7 +7,8 @@ using UnityEngine;
 public class Actor : MonoBehaviour
 {
     public int health = 1;
-    public bool keepBody = false;
+    public bool FacingRight;
+    public bool keepBody = false; 
 
     public float acceleration = 2.5f;
     public float maxSpeed = 3.5f;
@@ -147,7 +148,6 @@ public class Actor : MonoBehaviour
     public void Move(float v) => move = v;
     public void Jump() => jump = true;
     public void AddForce(Vector3 force) => physics.velocity += force; 
-    public bool FacingRight { get; private set; } = true;
     public bool Moving { get; private set; }
     public bool WasHit { get; private set; } = false;
     public bool IsInvulnerable { get; private set; } = false;

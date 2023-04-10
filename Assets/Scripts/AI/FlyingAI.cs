@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class FlyingAI : BaseAI
 {
+    public bool waitForPlayer;
     public bool movingX;
     public float distanceY;
     public float speedY;
@@ -16,10 +17,17 @@ public class FlyingAI : BaseAI
     void Start()
     {
         originY = transform.position.y;
+        actor.FaceTo(Player.LastPosition);
     }
 
     void FixedUpdate()
     {
+        if (waitForPlayer)
+        {
+            if (Mathf.Abs(transform.position.x - Player.LastPosition.x) < 6) waitForPlayer = false;
+            return;
+        }
+
         if (movingX)
         {
             actor.Move(moveToRight ? 1 : -1);
