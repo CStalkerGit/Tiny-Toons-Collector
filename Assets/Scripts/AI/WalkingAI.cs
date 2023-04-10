@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Actor))]
-public class AI : MonoBehaviour
+public class WalkingAI : BaseAI
 {
     public bool avoidPits;
 

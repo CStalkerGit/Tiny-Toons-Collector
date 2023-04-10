@@ -7,6 +7,10 @@ public class EnemyAnimator : MonoBehaviour
 {
     public Actor actor;
 
+    public Sprite staying;
+    public SpriteAnimation walking;
+    public Sprite jumping;
+
     // components
     SpriteAnimator animator;
     SpriteRenderer spriteRenderer;
@@ -21,5 +25,13 @@ public class EnemyAnimator : MonoBehaviour
     {
         // direction
         spriteRenderer.flipX = !actor.FacingRight;
+
+        if (jumping)
+        {
+            if (actor.physics.OnGround)
+                animator.SetSprite(staying);
+            else
+                animator.SetSprite(jumping);
+        }
     }
 }
