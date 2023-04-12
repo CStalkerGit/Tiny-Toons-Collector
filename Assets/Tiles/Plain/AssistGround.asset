@@ -28,3 +28,11 @@ MonoBehaviour:
   - {fileID: 21300034, guid: e62f63c34a7a15e4e8770f72c10f2b0c, type: 3}
   - {fileID: 21300036, guid: e62f63c34a7a15e4e8770f72c10f2b0c, type: 3}
   - {fileID: 21300038, guid: e62f63c34a7a15e4e8770f72c10f2b0c, type: 3}
+  groundToWall:
+  - {fileID: 21300046, guid: e62f63c34a7a15e4e8770f72c10f2b0c, type: 3}
+  - {fileID: 21300048, guid: e62f63c34a7a15e4e8770f72c10f2b0c, type: 3}
+  - {fileID: 21300050, guid: e62f63c34a7a15e4e8770f72c10f2b0c, type: 3}
+  slopeToWall:
+  - {fileID: 21300052, guid: e62f63c34a7a15e4e8770f72c10f2b0c, type: 3}
+  - {fileID: 21300054, guid: e62f63c34a7a15e4e8770f72c10f2b0c, type: 3}
+  - {fileID: 21300056, guid: e62f63c34a7a15e4e8770f72c10f2b0c, type: 3}

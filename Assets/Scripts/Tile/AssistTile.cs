@@ -10,7 +10,8 @@ public class AssistTile : CollisionTile
     public Sprite[] sideSlopes; // 2
     public Sprite[] plainGround; // 3
     public Sprite[] groundToSlope; // 4
-    public Sprite[] groundToWall; // 2
+    public Sprite[] groundToWall; // 3
+    public Sprite[] slopeToWall; // 3
 
     public override void GetTileData(Vector3Int location, ITilemap tilemap, ref TileData tileData)
     {
@@ -39,7 +40,18 @@ public class AssistTile : CollisionTile
         }
         else if (upIsFullBlock)
         {
-
+            bool leftCorner = !IsFullBlock(tilemap, location + new Vector3Int(-1, 1, 0));
+            bool rightCorner = !IsFullBlock(tilemap, location + new Vector3Int(1, 1, 0));
+            int index = 0;
+            if (leftCorner)
+            {
+                if (rightCorner) index = 2; else index = 0;
+            }
+            else index = 1;
+            if (leftIsSlope || rightIsSlope)
+                tileData.sprite = slopeToWall[index];
+            else
+                tileData.sprite = groundToWall[index];
         }
         else
         {
