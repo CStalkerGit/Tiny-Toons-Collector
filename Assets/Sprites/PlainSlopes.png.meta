@@ -24,6 +24,9 @@ TextureImporter:
     21300038: PlainSlopes_11
     21300040: PlainSlopes_12
     21300042: PlainSlopes_13
+    21300044: PlainSlopes_14
+    21300046: PlainSlopes_15
+    21300048: PlainSlopes_16
   externalObjects: {}
   serializedVersion: 9
   mipmaps:
@@ -99,7 +102,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 96
+        y: 128
         width: 32
         height: 32
       alignment: 0
@@ -109,7 +112,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 430555179a4facb429a08d683fccb60e
+      spriteID: c6c2fd1c00700904f80a55c5e856f63b
       vertices: []
       indices: 
       edges: []
@@ -119,7 +122,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 32
-        y: 96
+        y: 128
         width: 32
         height: 32
       alignment: 0
@@ -129,7 +132,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9ff8831306a4bd34e97716c38c1fd9ab
+      spriteID: 0ba0df883c1a294488d76f32eee7c044
       vertices: []
       indices: 
       edges: []
@@ -139,7 +142,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 64
-        y: 96
+        y: 128
         width: 32
         height: 32
       alignment: 0
@@ -149,7 +152,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: df361eae05bed5640b3a21287b7ba230
+      spriteID: 5349da0976d3f0a47b14e33941056df1
       vertices: []
       indices: 
       edges: []
@@ -159,6 +162,26 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 96
+        y: 128
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 05eaedd7e9c73364e8abefd8b7a9a84c
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlainSlopes_4
+      rect:
+        serializedVersion: 2
+        x: 0
         y: 96
         width: 32
         height: 32
@@ -169,27 +192,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a5ca4ed0d7b8c5645b76ae07e9ebe337
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: PlainSlopes_4
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 64
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 4f7f1a1115c84dd4bba5552d55b5fc6f
+      spriteID: f9fcb762a03d8da44a0c7bb013e236ee
       vertices: []
       indices: 
       edges: []
@@ -199,7 +202,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 32
-        y: 64
+        y: 96
         width: 32
         height: 32
       alignment: 0
@@ -209,7 +212,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f49e35acae3fd98439ea01dbfcca4a9a
+      spriteID: 47a30ec7d46142a499bcb7d251d10f59
       vertices: []
       indices: 
       edges: []
@@ -219,6 +222,46 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 64
+        y: 96
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f3937f5c6ef5ece4493ebfe1591cc337
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlainSlopes_7
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 96
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5a24867781bc0d54cb2e5d871db8d191
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlainSlopes_8
+      rect:
+        serializedVersion: 2
+        x: 0
         y: 64
         width: 32
         height: 32
@@ -229,13 +272,53 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0f25041c12beea941bdbcd6bcfe012ac
+      spriteID: 36b2ec42980fcc94a8928d1f80fd2e40
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: PlainSlopes_7
+      name: PlainSlopes_9
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 64
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bbf7ddad632faa742bbf71ddef22dafd
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlainSlopes_10
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 64
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 57f4de8045b449d42b1662ebc93b05d3
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlainSlopes_11
       rect:
         serializedVersion: 2
         x: 96
@@ -249,13 +332,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7ce46dc6bd6ba7e4e968f860251e9129
+      spriteID: 7bdfa07e80118f342978f3bb1caf9506
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: PlainSlopes_8
+      name: PlainSlopes_12
       rect:
         serializedVersion: 2
         x: 0
@@ -269,13 +352,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 71e246967eb5c2d498549ebd8253f17c
+      spriteID: 00b17ac5111d57e419cf0d2e9305c4e0
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: PlainSlopes_9
+      name: PlainSlopes_13
       rect:
         serializedVersion: 2
         x: 32
@@ -289,13 +372,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 981f5b7b045ab554fbc762cc6106d206
+      spriteID: 4dd0d48879ec26d4588f01ed2518e292
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: PlainSlopes_10
+      name: PlainSlopes_14
       rect:
         serializedVersion: 2
         x: 64
@@ -309,13 +392,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a3596533071ca3d438bed6852fdb80eb
+      spriteID: a3ec6a585198dfe499c178fff285aa09
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: PlainSlopes_11
+      name: PlainSlopes_15
       rect:
         serializedVersion: 2
         x: 96
@@ -329,13 +412,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 82eb41b4550566f4f83e72559b1d5e90
+      spriteID: 4694168c159941040a6698d1d0da7d84
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: PlainSlopes_12
+      name: PlainSlopes_16
       rect:
         serializedVersion: 2
         x: 0
@@ -349,27 +432,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 39ec6ce797ec1dd48b0f755ac66f2cb8
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: PlainSlopes_13
-      rect:
-        serializedVersion: 2
-        x: 32
-        y: 0
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 658eb2c5c9c12be4f9536454bde037bd
+      spriteID: 291ac204048b8be4ea2a7d307f7386a3
       vertices: []
       indices: 
       edges: []

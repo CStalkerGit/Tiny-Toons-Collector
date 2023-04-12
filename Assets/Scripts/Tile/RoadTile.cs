@@ -3,20 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
-public enum TileCompatible
-{
-    OnlySelf,
-    Anything,
-    Wood,
-    Brick,
-    Ground
-}
-
 [CreateAssetMenu]
 public class RoadTile : CollisionTile
 {
-    public TileCompatible compatible;
-
     public Sprite[] sprites;
 
     static protected readonly int[] indices4 = new int[4] { 3, 2, 0, 1 };
@@ -98,9 +87,8 @@ public class RoadTile : CollisionTile
         var tile = tilemap.GetTile(position) as CollisionTile;
         if (tile == null) return false;
         if (tile == this) return true;
-        //if (sprites.Length < 16) return false;
-        if (compatible == TileCompatible.OnlySelf) return false;
-        if (compatible == TileCompatible.Anything) return true;
-        return false;// (tile.compatible == compatible);
+        if (tile.compatible) return true;
+        //if (sprites.Length < 16) return false
+        return false;
     }
 }

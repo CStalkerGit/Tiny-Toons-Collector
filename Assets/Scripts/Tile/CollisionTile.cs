@@ -18,6 +18,7 @@ public class CollisionTile : TileBase
 {
     public TileType type;
     public bool orientToRight;
+    public bool compatible;
 
     public bool IsCollision(int x, int y, Entity entity)
     {
