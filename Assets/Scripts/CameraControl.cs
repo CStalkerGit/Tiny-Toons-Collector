@@ -5,8 +5,8 @@ using UnityEngine;
 public class CameraControl : MonoBehaviour
 {
     public Transform follow;
-    public Transform cam1;
-    public Transform cam2;
+    public CameraRest cam1;
+    public CameraRest cam2;
 
     int x1, y1, x2, y2;
 
@@ -15,6 +15,7 @@ public class CameraControl : MonoBehaviour
     void Awake()
     {
         ptr = this;
+        RestrictRect(cam1, cam2);
     }
 
     // Update is called once per frame
@@ -30,18 +31,16 @@ public class CameraControl : MonoBehaviour
         transform.position = new Vector3(pos.x, pos.y, transform.position.z);
     }
 
-    public static void RestrictRect(int x1, int y1)
+    public static void RestrictRect(CameraRest cam1, CameraRest cam2)
     {
-        ptr.x1 = x1;
-        //ptr.x2 = x2;
-        ptr.y1 = y1;
-        //ptr.y2 = y2;
-    }
+        if (!cam1) return;
 
-    public static void RestrictRect(Vector3 pos)
-    {
-        int x1 = Mathf.FloorToInt(pos.x);
-        int y1 = Mathf.FloorToInt(pos.y);
-        RestrictRect(x1, y1);
+        ptr.x1 = cam1.X + 5;
+        ptr.x2 = (cam2 ? cam2.X : cam1.X) - 4;
+        if (ptr.x2 < ptr.x1) ptr.x2 = ptr.x1;
+
+        ptr.y1 = cam1.Y + 4;
+        ptr.y2 = (cam2 ? cam2.Y : cam1.Y) - 3;
+        if (ptr.y2 < ptr.y1) ptr.y2 = ptr.y1;
     }
 }

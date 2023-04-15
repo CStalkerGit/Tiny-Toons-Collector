@@ -5,8 +5,8 @@ using UnityEngine;
 public class Trigger : MonoBehaviour
 {
     public Transform exit;
-    public Transform camera1;
-    public Transform camera2;
+    public CameraRest camera1;
+    public CameraRest camera2;
 
     int tx, ty;
 
@@ -31,7 +31,7 @@ public class Trigger : MonoBehaviour
 
                 if (camera1)
                 {
-                    CameraControl.RestrictRect(camera1.position);
+                    CameraControl.RestrictRect(camera1, camera2);
                 }
             }
         }

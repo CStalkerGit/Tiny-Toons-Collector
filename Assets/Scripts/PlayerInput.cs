@@ -53,5 +53,6 @@ public class PlayerInput : MonoBehaviour
         }
 
         userPressJump = false;
+        userPressDown = false;
     }
 }

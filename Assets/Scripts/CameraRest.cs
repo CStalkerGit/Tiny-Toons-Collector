@@ -4,15 +4,8 @@ using UnityEngine;
 
 public class CameraRest : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public Color cameraBG; //AAE7FF
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    public int X => Mathf.FloorToInt(transform.position.x);
+    public int Y => Mathf.FloorToInt(transform.position.y);
 }
