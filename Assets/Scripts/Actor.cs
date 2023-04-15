@@ -86,6 +86,14 @@ public class Actor : MonoBehaviour
             Moving = false;
     }
 
+    public void Teleport(Vector3 pos)
+    {
+        transform.position = pos;
+        entity.pos = pos;
+        physics.velocity.Set(0, 0, 0);
+        move = 0;
+    }
+
     public void StopJumping()
     {
         //if (physics.velocity.y > 0) physics.velocity.y = 0;

@@ -8,6 +8,7 @@ public class PlayerInput : MonoBehaviour
     Actor actor;
 
     bool userPressJump = false;
+    bool userPressDown = false;
     bool actorIsJumping = false;
     float originPosY;
 
@@ -23,6 +24,9 @@ public class PlayerInput : MonoBehaviour
         if (Input.GetButton("Jump"))
             userPressJump = true;
 
+        if (Input.GetButton("Crouch"))
+            userPressDown = true;
+
         //actor.Move(-1);
         actor.Move(Input.GetAxisRaw("Horizontal"));
     }
@@ -34,6 +38,12 @@ public class PlayerInput : MonoBehaviour
             actor.Jump();
             originPosY = transform.position.y;
             actorIsJumping = true;
+        }
+
+        Player.pressedDown = userPressDown;
+        if (userPressDown)
+        {
+            
         }
 
         if (actorIsJumping && !userPressJump && originPosY < transform.position.y - 1.1f)

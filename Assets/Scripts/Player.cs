@@ -11,6 +11,7 @@ public class Player : MonoBehaviour
     private static Player ptr = null;
 
     public static Vector3 LastPosition;
+    public static bool pressedDown;
 
     void Awake()
     {
@@ -84,5 +85,10 @@ public class Player : MonoBehaviour
         actor.physics.velocity.y = 5;
         Game.Down(entity.pos);
         Game.EndScene(true);  
+    }
+
+    public static void Teleport(Vector3 pos)
+    {
+        if (ptr && ptr.actor) ptr.actor.Teleport(pos);
     }
 }

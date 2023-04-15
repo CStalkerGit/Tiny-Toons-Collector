@@ -4,15 +4,36 @@ using UnityEngine;
 
 public class Trigger : MonoBehaviour
 {
+    public Transform exit;
+    public Transform camera1;
+    public Transform camera2;
+
+    int tx, ty;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        tx = Mathf.FloorToInt(transform.position.x);
+        ty = Mathf.FloorToInt(transform.position.y);
     }
 
-    // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
-        
+        int px = Mathf.FloorToInt(Player.LastPosition.x);
+        int py = Mathf.FloorToInt(Player.LastPosition.y);
+
+        if (tx == px && ty == py)
+        {
+            //Debug.Log("trigger!");
+            if (Player.pressedDown && exit)
+            {
+                Player.Teleport(exit.transform.position);
+
+                if (camera1)
+                {
+                    CameraControl.RestrictRect(camera1.position);
+                }
+            }
+        }
     }
 }

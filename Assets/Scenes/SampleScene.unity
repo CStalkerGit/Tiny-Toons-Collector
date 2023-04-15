@@ -195,7 +195,7 @@ GameObject:
   - component: {fileID: 215598902}
   - component: {fileID: 215598901}
   m_Layer: 0
-  m_Name: StumpTrigger1
+  m_Name: Exit1
   m_TagString: Untagged
   m_Icon: {fileID: 7250588514170254948, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -213,6 +213,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6656812d0437e1b4c90a5caf6fa53cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  exit: {fileID: 1967331811}
+  cameraX1: {fileID: 1376379246}
+  cameraX2: {fileID: 0}
 --- !u!4 &215598902
 Transform:
   m_ObjectHideFlags: 0
@@ -485,6 +488,8 @@ MonoBehaviour:
   follow: {fileID: 1851207913}
   x1: -8
   x2: 34
+  y1: 0
+  y2: 0
 --- !u!1 &559112926
 GameObject:
   m_ObjectHideFlags: 0
@@ -1912,6 +1917,36 @@ MonoBehaviour:
   - {fileID: 21300002, guid: 80e403e2a5a46c541a10c9ca39983c44, type: 3}
   - {fileID: 21300004, guid: 80e403e2a5a46c541a10c9ca39983c44, type: 3}
   - {fileID: 21300006, guid: 80e403e2a5a46c541a10c9ca39983c44, type: 3}
+--- !u!1 &1376379245
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1376379246}
+  m_Layer: 0
+  m_Name: Cam2
+  m_TagString: Untagged
+  m_Icon: {fileID: 7250588514170254948, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1376379246
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1376379245}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -9.5, y: -13.5, z: -0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 12
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1400962133
 GameObject:
   m_ObjectHideFlags: 0
@@ -6019,6 +6054,36 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1941695423}
   m_CullTransparentMesh: 0
+--- !u!1 &1967331810
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1967331811}
+  m_Layer: 0
+  m_Name: Enter1
+  m_TagString: Untagged
+  m_Icon: {fileID: 7250588514170254948, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1967331811
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1967331810}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -8.5, y: -11.25, z: -0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 11
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2077239725
 GameObject:
   m_ObjectHideFlags: 0
