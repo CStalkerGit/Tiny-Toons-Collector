@@ -72,8 +72,6 @@ public class EntityPhysics : MonoBehaviour
             {
                 var tmp1 = ProcessMovingAxisY(distanceX);
                 var tmp2 = ProcessMovingAxisX(moving.x);
-                if (tmp1 == CollisionState.Wall)
-                    Debug.Log("Wall");
                 var tmp3 = ProcessMovingAxisY(-distanceX);
                 if (Mathf.Abs(entity.pos.x - lastPosition.x) < CollisionGrid.MinStep / 2) // distanceX / 2
                 {

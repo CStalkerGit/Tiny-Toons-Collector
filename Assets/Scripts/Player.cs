@@ -54,7 +54,7 @@ public class Player : MonoBehaviour
     {
         if (ptr == null) return false;
         if (ptr.actor.WasHit || ptr.actor.IsDown) return false;
-        return ptr.entity.PrevBottomCoord > target.TopCoord;
+        return ptr.entity.PrevBottomCoord > target.PrevTopCoord;
     }
 
     public static void GiveFrag()

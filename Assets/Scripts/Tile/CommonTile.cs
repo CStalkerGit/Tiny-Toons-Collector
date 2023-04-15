@@ -8,7 +8,6 @@ using UnityEditor;
 #endif
 
 [CreateAssetMenu]
-//[System.Serializable]
 public class CommonTile : CollisionTile
 {
     public Sprite sprite;

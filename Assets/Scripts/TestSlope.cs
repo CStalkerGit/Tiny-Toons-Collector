@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(Entity))]
 public class TestSlope : MonoBehaviour
 {
     // Start is called before the first frame update
