@@ -12,7 +12,8 @@ public enum TileType
     SlopeP8full,
     Platform,
     Spikes,
-    HalfBlock
+    HalfBlock,
+    HalfBlockCeil
 }
 
 public class CollisionTile : TileBase
@@ -46,6 +47,9 @@ public class CollisionTile : TileBase
                 break;
             case TileType.HalfBlock:
                 rect.UnionTile(tileX, tileY, 0.5f, 0, 1, 0);
+                break;
+            case TileType.HalfBlockCeil:
+                rect.UnionTile(tileX, tileY, 1, 0.5f, 1, 0);
                 break;
             case TileType.SlopeP4:
                 if (orientToRight)

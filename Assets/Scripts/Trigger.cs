@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class Trigger : MonoBehaviour
 {
-    public Transform exit;
+    public SpawnPoint exit;
     public CameraRest camera1;
     public CameraRest camera2;
+    public bool userInput = true;
 
     int tx, ty;
 
@@ -25,13 +26,12 @@ public class Trigger : MonoBehaviour
         if (tx == px && ty == py)
         {
             //Debug.Log("trigger!");
-            if (Player.pressedDown && exit)
+            if (Player.pressedDown || !userInput)
             {
-                Player.Teleport(exit.transform.position);
-
-                if (camera1)
+                if (exit)
                 {
-                    CameraControl.RestrictRect(camera1, camera2);
+                    Player.Teleport(exit.transform.position);
+                    CameraControl.Set(camera1, camera2);
                 }
             }
         }

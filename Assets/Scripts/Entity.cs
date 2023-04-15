@@ -63,6 +63,8 @@ public class Entity : MonoBehaviour
                 return true;
             case TileType.HalfBlock:
                 return (y + 0.5f) >= BottomCoord;
+            case TileType.HalfBlockCeil:
+                return (y + 0.5f) <= TopCoord;
             case TileType.Platform:
                 return PrevBottomCoord > y + 1;
         }
@@ -86,6 +88,7 @@ public class Entity : MonoBehaviour
         }
     }
 
+    public float TopCoord => pos.y + rh;
     public float BottomCoord => pos.y - rh;
     public float PrevTopCoord => prev_pos.y + rh;  
     public float PrevBottomCoord => prev_pos.y - rh;
