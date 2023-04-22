@@ -13,7 +13,8 @@ public enum TileType
     Platform,
     Spikes,
     HalfBlock,
-    HalfBlockCeil
+    HalfBlockCeil,
+    Exit
 }
 
 public class CollisionTile : TileBase

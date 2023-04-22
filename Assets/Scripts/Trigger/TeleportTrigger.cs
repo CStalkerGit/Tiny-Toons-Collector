@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Trigger : MonoBehaviour
+public class TeleportTrigger : MonoBehaviour
 {
     public SpawnPoint exit;
     public CameraRest camera1;

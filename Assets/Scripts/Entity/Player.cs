@@ -43,6 +43,11 @@ public class Player : MonoBehaviour
             actor.Kill();
             EndScene();
         }
+        if (data.isExit)
+        {
+            gameObject.SetActive(false);
+            Game.EndScene(false);
+        }
     }
 
     public static bool IsCollision(Entity target)
@@ -83,7 +88,7 @@ public class Player : MonoBehaviour
     {
         actor.physics.velocity.x = 0;
         actor.physics.velocity.y = 5;
-        Game.Down(entity.pos);
+        Game.DownSound(entity.pos);
         Game.EndScene(true);  
     }
 

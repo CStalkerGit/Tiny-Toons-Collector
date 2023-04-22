@@ -76,6 +76,9 @@ public class CollisionGrid : MonoBehaviour
                         case TileType.Spikes:
                             if (entity.BottomCoord < y + 0.5f) data.isSpike = true;
                             break;
+                        case TileType.Exit:
+                            data.isExit = true;
+                            break;
                     }
                 }
             }
