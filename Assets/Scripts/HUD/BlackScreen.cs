@@ -8,7 +8,9 @@ public class BlackScreen : MonoBehaviour
     public Tilemap map;
     public Camera cam;
     public Tile blackTile;
-    public float speed;
+
+    const float defSpeed = 0.05f;
+    float speed = 1;
 
     static BlackScreen ptr = null;
 
@@ -27,11 +29,11 @@ public class BlackScreen : MonoBehaviour
         //FadeOut();
     }
 
-    void FixedUpdate()
+    void Update()
     {
         if (!inProcess) return;
 
-        timer -= Time.deltaTime;
+        timer -= Time.unscaledDeltaTime;
 
         if (timer > 0) return;
 
@@ -72,7 +74,7 @@ public class BlackScreen : MonoBehaviour
             map.SetTile(pos, black ? blackTile : null);
     }
 
-    void Fade(Vector3 pos, bool fadeIn)
+    void Fade(Vector3 pos, bool fadeIn, bool slow)
     {
         Clear(!fadeIn);
         inProcess = true;
@@ -80,11 +82,12 @@ public class BlackScreen : MonoBehaviour
         fadePos = new Vector2Int(Mathf.RoundToInt((pos.x - cam.transform.position.x) * 2 - 0.5f), Mathf.RoundToInt((pos.y - cam.transform.position.y) * 2 - 0.5f));
         if (!fadeIn) fadePos.Set(0, 0);
         radius = fadeIn ? maxRadius : 0;
+        speed = slow ? defSpeed * 2 : defSpeed;
         timer = speed;
     }
 
     public static void ClearTiles() => ptr?.Clear(false);
-    public static void FadeIn(Vector3 pos) => ptr?.Fade(pos, true);
-    public static void FadeOut() => ptr?.Fade(Vector3.zero, false);
-    public static bool InProcess => ptr ? ptr.inProcess : false;
+    public static void FadeIn(Vector3 pos, bool slow) => ptr?.Fade(pos, true, slow);
+    public static void FadeOut() => ptr?.Fade(Vector3.zero, false, false);
+    public static bool InProcess => ptr ? ptr.inProcess : false;  
 }

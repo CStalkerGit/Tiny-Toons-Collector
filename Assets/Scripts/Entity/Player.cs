@@ -45,7 +45,7 @@ public class Player : MonoBehaviour
         }
         if (data.isExit)
         {
-            gameObject.SetActive(false);
+            //gameObject.SetActive(false);
             Game.EndScene(false);
         }
     }

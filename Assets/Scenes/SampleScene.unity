@@ -2468,7 +2468,6 @@ MonoBehaviour:
   map: {fileID: 592240052}
   cam: {fileID: 519420031}
   blackTile: {fileID: 11400000, guid: bf8d44309d2a1414b953adeb0d30efef, type: 2}
-  speed: 0.05
 --- !u!1 &1515961309
 GameObject:
   m_ObjectHideFlags: 0
@@ -2826,7 +2825,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 3e204c9ac7368d64ca405186127aed5a, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1

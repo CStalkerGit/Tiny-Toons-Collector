@@ -7,7 +7,8 @@ enum GameState
 {
     Playing,
     Ending,
-    Fading
+    Fading,
+    Starting
 }
 
 public class Game : MonoBehaviour
@@ -33,6 +34,8 @@ public class Game : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
+        state = GameState.Starting;
+        Time.timeScale = 0;
         ptr = this;
         audioSource = GetComponent<AudioSource>();
     }
@@ -47,12 +50,19 @@ public class Game : MonoBehaviour
         ptr = null;
     }
 
-    void FixedUpdate()
+    void Update()
     {
-        if (timer > -1) timer -= Time.deltaTime;
+        if (timer > -1) timer -= Time.unscaledDeltaTime;
 
         switch (state)
         {
+            case GameState.Starting:
+                if (!BlackScreen.InProcess)
+                {
+                    state = GameState.Playing;
+                    Time.timeScale = 1;
+                }
+                break;
             case GameState.Ending:
                 if (timer < 0)
                 {
@@ -60,7 +70,7 @@ public class Game : MonoBehaviour
                     audioSource.clip = defeat ? clipDefeat : clipVictory;
                     audioSource.loop = false;
                     audioSource.Play();
-                    BlackScreen.FadeIn(Player.LastPosition);
+                    BlackScreen.FadeIn(Player.LastPosition, !defeat);
                     Time.timeScale = 0;
                 }
                 break;
