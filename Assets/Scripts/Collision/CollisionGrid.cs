@@ -67,11 +67,14 @@ public class CollisionGrid : MonoBehaviour
                 if (tile.IsCollision(x, y, entity))
                 {
                     data.isStuck = true;
+                }
 
+                if (entity.IsCollision(x + 0.5f, y + 0.5f, 0.5f))
+                {
                     switch (tile.type)
                     {
                         case TileType.Spikes:
-                            data.isSpike = true;
+                            if (entity.BottomCoord < y + 0.5f) data.isSpike = true;
                             break;
                     }
                 }

@@ -59,8 +59,9 @@ public class Entity : MonoBehaviour
         switch (type)
         {
             case TileType.FullBlock:
-            case TileType.Spikes:
                 return true;
+            case TileType.Spikes:
+                return false;
             case TileType.HalfBlock:
                 return (y + 0.5f) >= BottomCoord;
             case TileType.HalfBlockCeil:

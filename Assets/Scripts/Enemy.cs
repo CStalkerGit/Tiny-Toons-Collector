@@ -5,6 +5,8 @@ using UnityEngine;
 [RequireComponent(typeof(Entity))]
 public class Enemy : MonoBehaviour
 {
+    public bool spikeImmunity;
+
     Entity entity;
     Actor actor;
 
@@ -19,7 +21,7 @@ public class Enemy : MonoBehaviour
         // unstuck
         var data = CollisionGrid.IsSpecialCollision(entity);
         if (data.isStuck) entity.pos.y += 0.01f;
-        if (data.isSpike) actor.Kill();
+        if (data.isSpike && !spikeImmunity) actor.Kill();
 
         if (Player.IsCollision(entity))
         {
