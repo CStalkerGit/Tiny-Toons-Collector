@@ -5,8 +5,8 @@ using UnityEngine;
 public class CameraControl : MonoBehaviour
 {
     public Transform follow;
-    public CameraRest cam1;
-    public CameraRest cam2;
+    public CameraPosition cam1;
+    public CameraPosition cam2;
 
     int x1, y1, x2, y2;
 
@@ -31,7 +31,7 @@ public class CameraControl : MonoBehaviour
         transform.position = new Vector3(pos.x, pos.y, transform.position.z);
     }
 
-    public static void Set(CameraRest cam1, CameraRest cam2)
+    public static void Set(CameraPosition cam1, CameraPosition cam2)
     {
         if (!cam1) return;
 
@@ -43,6 +43,6 @@ public class CameraControl : MonoBehaviour
         ptr.y2 = (cam2 ? cam2.Y : cam1.Y) - 3;
         if (ptr.y2 < ptr.y1) ptr.y2 = ptr.y1;
 
-        Camera.main.backgroundColor = cam1.backgroundColor;
+        Camera.main.backgroundColor = cam1.GetBackgroundColor();
     }
 }

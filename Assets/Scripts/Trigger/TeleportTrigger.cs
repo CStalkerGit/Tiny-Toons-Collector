@@ -5,8 +5,8 @@ using UnityEngine;
 public class TeleportTrigger : MonoBehaviour
 {
     public SpawnPoint exit;
-    public CameraRest camera1;
-    public CameraRest camera2;
+    public CameraPosition camera1;
+    public CameraPosition camera2;
     public bool userInput = true;
 
     int tx, ty;
