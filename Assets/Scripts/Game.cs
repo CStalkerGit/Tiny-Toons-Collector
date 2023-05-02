@@ -14,14 +14,7 @@ enum GameState
 public class Game : MonoBehaviour
 {
     public string nextScene;
-
-    public Effect poof;
-    public Effect pickup;
-    public Effect hit;
-    public Effect down;
-
-    public AudioClip clipDefeat;
-    public AudioClip clipVictory;
+    public GameData gameData;
 
     AudioSource audioSource;
 
@@ -67,7 +60,7 @@ public class Game : MonoBehaviour
                 if (timer < 0)
                 {
                     state = GameState.Fading;
-                    audioSource.clip = defeat ? clipDefeat : clipVictory;
+                    audioSource.clip = defeat ? gameData.clipDefeat : gameData.clipVictory;
                     audioSource.loop = false;
                     audioSource.Play();
                     BlackScreen.FadeIn(Player.LastPosition, !defeat);
@@ -87,10 +80,10 @@ public class Game : MonoBehaviour
     }
 
     public static void EndScene(bool defeat) => ptr?._EndScene(defeat);
-    public static void Poof(Vector3 position) => SpawnEffect(ptr?.poof, position);
-    public static void Pickup(Vector3 position) => SpawnEffect(ptr?.pickup, position);
-    public static void Hit(Vector3 position) => SpawnEffect(ptr?.hit, position);
-    public static void DownSound(Vector3 position) => SpawnEffect(ptr?.down, position);
+    public static void Poof(Vector3 position) => SpawnEffect(ptr?.gameData.poof, position);
+    public static void Pickup(Vector3 position) => SpawnEffect(ptr?.gameData.pickup, position);
+    public static void Hit(Vector3 position) => SpawnEffect(ptr?.gameData.hit, position);
+    public static void DownSound(Vector3 position) => SpawnEffect(ptr?.gameData.down, position);
 
     static void SpawnEffect(Effect effect, Vector3 position)
     {
@@ -100,6 +93,15 @@ public class Game : MonoBehaviour
     public static void PlayClip(AudioClip clip)
     {
         if (ptr && clip) ptr.audioSource.PlayOneShot(clip);
+    }
+
+    public static void SpawnPopUp(int number, Vector3 position)
+    {
+        if (ptr)
+        {
+            var obj = Instantiate(ptr.gameData.popUp, position, Quaternion.identity);
+            obj.SetNumber(number);
+        }
     }
 
     public void _EndScene(bool defeat)

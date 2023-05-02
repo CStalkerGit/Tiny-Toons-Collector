@@ -25,6 +25,7 @@ public class Item : MonoBehaviour
             if (OnCollision())
             {
                 Stats.points += Points;
+                Game.SpawnPopUp(Points, transform.position);
                 Game.Pickup(transform.position);
                 Destroy(gameObject);
             }
