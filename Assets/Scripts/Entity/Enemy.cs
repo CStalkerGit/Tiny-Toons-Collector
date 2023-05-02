@@ -5,6 +5,7 @@ using UnityEngine;
 [RequireComponent(typeof(Entity))]
 public class Enemy : MonoBehaviour
 {
+    public int Points;
     public bool spikeImmunity;
 
     Entity entity;
@@ -29,7 +30,8 @@ public class Enemy : MonoBehaviour
             {
                 actor.Kill();
                 Game.Poof(transform.position);
-                Player.GiveFrag();
+                Stats.points += Points;
+                Player.EnemyWasStomped();
             }
             else
             {

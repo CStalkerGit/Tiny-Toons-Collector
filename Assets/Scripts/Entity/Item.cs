@@ -2,8 +2,10 @@
 using UnityEngine.Events;
 
 [RequireComponent(typeof(Entity))]
+[DisallowMultipleComponent]
 public class Item : MonoBehaviour
 {
+    public int Points;
     Entity entity;
 
     void Awake()
@@ -15,11 +17,19 @@ public class Item : MonoBehaviour
     {
         if (Player.IsCollision(entity))
         {
-            Stats.carrots++;
-            Game.Pickup(transform.position);
-            Destroy(gameObject);
+            if (OnCollision())
+            {
+                Stats.points += Points;
+                Game.Pickup(transform.position);
+                Destroy(gameObject);
+            }
         }
     }
 
     public bool IsCollision(Entity actor) => entity.IsCollision(actor);
+
+    protected virtual bool OnCollision()
+    {
+        return true;
+    }
 }

@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class HUD : MonoBehaviour
 {
-    public Digits carrots;
+    public Digits points;
     public Image[] imgHealth;
     public Sprite[] sprHealth;
 
@@ -21,7 +21,7 @@ public class HUD : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (carrots) carrots.Set(Stats.carrots);
+        if (points) points.Set(Stats.points);
 
         if (playerHealth != Stats.health)
         {

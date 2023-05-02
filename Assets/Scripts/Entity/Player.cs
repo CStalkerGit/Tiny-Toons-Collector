@@ -63,7 +63,7 @@ public class Player : MonoBehaviour
         return ptr.entity.PrevBottomCoord > target.PrevTopCoord;
     }
 
-    public static void GiveFrag()
+    public static void EnemyWasStomped()
     {
         if (ptr) ptr.actor.physics.velocity.y = 7f;
     }
@@ -82,6 +82,13 @@ public class Player : MonoBehaviour
             ptr.EndScene();
         else
             Game.Hit(ptr.entity.pos);
+    }
+
+    public static void RestoreHealth(int count)
+    {
+        if (ptr == null) return;
+        ptr.actor.health += count;
+        if (ptr.actor.health > Stats.maxHealth) ptr.actor.health = Stats.maxHealth;
     }
 
     void EndScene()
