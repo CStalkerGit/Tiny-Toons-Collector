@@ -21,15 +21,15 @@ public class HUD : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (points) points.Set(Stats.points);
+        if (points) points.Set(Data.points);
 
-        if (playerHealth != Stats.health)
+        if (playerHealth != Data.health)
         {
-            playerHealth = Stats.health;
+            playerHealth = Data.health;
             for (int i = 0; i < imgHealth.Length; i++)
             {
                 var hp = (i + 1) * 2;
-                if (hp > Stats.maxHealth)
+                if (hp > Data.maxHealth)
                     imgHealth[i].sprite = sprHealth[3]; // no heart
                 else if (hp <= playerHealth)
                     imgHealth[i].sprite = sprHealth[0]; // full heart

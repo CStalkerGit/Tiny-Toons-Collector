@@ -71,9 +71,15 @@ public class Game : MonoBehaviour
                 if (!BlackScreen.InProcess && !audioSource.isPlaying)
                 {
                     if (defeat)
+                    {
+                        if (Data.lives < 1) Data.startFromCheckpoint = false; // + LoadMainMap
                         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+                    }
                     else
+                    {
+                        Data.startFromCheckpoint = false;
                         SceneManager.LoadScene(nextScene);
+                    }
                 }
                 break;
         }

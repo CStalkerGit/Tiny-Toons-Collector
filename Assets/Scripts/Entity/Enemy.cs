@@ -30,7 +30,7 @@ public class Enemy : MonoBehaviour
             {
                 actor.Kill();
                 Game.Poof(transform.position);
-                Stats.points += Points;
+                Data.points += Points;
                 Player.EnemyWasStomped();
             }
             else

@@ -16,9 +16,18 @@ public class Player : MonoBehaviour
     void Awake()
     {
         ptr = this;
-        LastPosition = transform.position;
         entity = GetComponent<Entity>();
         actor = GetComponent<Actor>();
+
+        if (Data.startFromCheckpoint)
+        {
+            Debug.Log("startFromCheckpoint");
+            transform.position = Data.lastCheckpoint;
+        }
+
+        LastPosition = transform.position;
+        entity.pos = transform.position;
+
         BlackScreen.FadeOut();
     }
 
@@ -31,7 +40,7 @@ public class Player : MonoBehaviour
     void FixedUpdate()
     {
         LastPosition = actor.transform.position;
-        Stats.health = actor.health;
+        Data.health = actor.health;
 
         if (actor.IsDown) return;
 
@@ -88,7 +97,7 @@ public class Player : MonoBehaviour
     {
         if (ptr == null) return;
         ptr.actor.health += count;
-        if (ptr.actor.health > Stats.maxHealth) ptr.actor.health = Stats.maxHealth;
+        if (ptr.actor.health > Data.maxHealth) ptr.actor.health = Data.maxHealth;
     }
 
     void EndScene()
