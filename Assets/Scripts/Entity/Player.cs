@@ -27,6 +27,7 @@ public class Player : MonoBehaviour
                 if ((transform.position - chk.transform.position).sqrMagnitude < 0.2f)
                 {
                     chk.Activate();
+                    Data.lastCheckpoint = chk.transform.position; // HACK checkpoint may miss Awake()
                     break;
                 }
         }

@@ -15,6 +15,7 @@ public class Game : MonoBehaviour
 {
     public string nextScene;
     public GameData gameData;
+    public HUD hud;
 
     AudioSource audioSource;
 
@@ -56,6 +57,7 @@ public class Game : MonoBehaviour
                 {
                     state = GameState.Playing;
                     Time.timeScale = 1;
+                    if (hud) hud.gameObject.SetActive(true);
                 }
                 break;
             case GameState.Ending:

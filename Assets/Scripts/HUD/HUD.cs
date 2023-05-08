@@ -12,10 +12,13 @@ public class HUD : MonoBehaviour
 
     int playerHealth = -1;
 
-    // Start is called before the first frame update
-    void Awake()
+    void Start()
     {
-
+        points.Set(0);
+        for (int i = 0; i < imgHealth.Length; i++)
+        {
+            imgHealth[i].sprite = sprHealth[3];
+        }
     }
 
     // Update is called once per frame
