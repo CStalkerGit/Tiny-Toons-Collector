@@ -24,6 +24,8 @@ public class Game : MonoBehaviour
     float timer;
     bool defeat;
 
+    Checkpoint lastCheckpoint;
+
     // Start is called before the first frame update
     void Awake()
     {
@@ -90,6 +92,9 @@ public class Game : MonoBehaviour
     public static void Pickup(Vector3 position) => SpawnEffect(ptr?.gameData.pickup, position);
     public static void Hit(Vector3 position) => SpawnEffect(ptr?.gameData.hit, position);
     public static void DownSound(Vector3 position) => SpawnEffect(ptr?.gameData.down, position);
+
+    public static Checkpoint LastCheckpoint => ptr?.lastCheckpoint;
+    public static void SetLastCheckpoint(Checkpoint chk) => ptr.lastCheckpoint = chk;
 
     static void SpawnEffect(Effect effect, Vector3 position)
     {

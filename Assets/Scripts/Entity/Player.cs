@@ -21,8 +21,14 @@ public class Player : MonoBehaviour
 
         if (Data.startFromCheckpoint)
         {
-            Debug.Log("startFromCheckpoint");
             transform.position = Data.lastCheckpoint;
+            var checkpoints = FindObjectsOfType<Checkpoint>();
+            foreach (var chk in checkpoints)
+                if ((transform.position - chk.transform.position).sqrMagnitude < 0.2f)
+                {
+                    chk.Activate();
+                    break;
+                }
         }
 
         LastPosition = transform.position;
