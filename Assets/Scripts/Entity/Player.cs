@@ -28,6 +28,7 @@ public class Player : MonoBehaviour
                 {
                     chk.Activate();
                     Data.lastCheckpoint = chk.transform.position; // HACK checkpoint may miss Awake()
+                    if (chk.camera1) CameraControl.Set(chk.camera1, chk.camera2);
                     break;
                 }
         }
@@ -36,6 +37,8 @@ public class Player : MonoBehaviour
         entity.pos = transform.position;
 
         BlackScreen.FadeOut();
+
+        actor.FacingRight = true;
     }
 
     void OnDestroy()

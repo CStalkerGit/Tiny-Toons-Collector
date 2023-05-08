@@ -33,13 +33,20 @@ public class CameraControl : MonoBehaviour
 
     public static void Set(CameraPosition cam1, CameraPosition cam2)
     {
-        if (!cam1) return;
+        if (!cam1)
+        {
+            ptr.x1 = -9999;
+            ptr.x2 = 9999;
+            ptr.y1 = -9999;
+            ptr.y2 = 9999;
+            return;
+        }
 
         ptr.x1 = cam1.X + 5;
         ptr.x2 = (cam2 ? cam2.X : cam1.X) - 4;
         if (ptr.x2 < ptr.x1) ptr.x2 = ptr.x1;
 
-        ptr.y1 = cam1.Y + 4;
+        ptr.y1 = cam1.Y + 3;
         ptr.y2 = (cam2 ? cam2.Y : cam1.Y) - 3;
         if (ptr.y2 < ptr.y1) ptr.y2 = ptr.y1;
 

@@ -7,6 +7,8 @@ public class Checkpoint : MonoBehaviour
 {
     public Sprite activated;
     public Sprite waiting;
+    public CameraPosition camera1;
+    public CameraPosition camera2;
 
     Entity entity;
 
