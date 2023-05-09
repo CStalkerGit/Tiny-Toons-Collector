@@ -100,7 +100,10 @@ public class Player : MonoBehaviour
         if (ptr.actor.IsDown)
             ptr.EndScene();
         else
+        {
+            Debug.Log(ptr.entity.pos);
             Game.Hit(ptr.entity.pos);
+        }
     }
 
     public static void RestoreHealth(int count)

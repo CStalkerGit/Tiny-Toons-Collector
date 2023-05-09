@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
-[CreateAssetMenu]
+[CreateAssetMenu(menuName = "Tiles/AssistTile")]
 public class AssistTile : CollisionTile
 {
     public Sprite defSprite;

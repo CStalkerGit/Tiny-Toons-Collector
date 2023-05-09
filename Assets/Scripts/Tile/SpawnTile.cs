@@ -7,10 +7,11 @@ using UnityEngine.Tilemaps;
 using UnityEditor;
 #endif
 
-[CreateAssetMenu(menuName = "Tiles/CommonTile")]
-public class CommonTile : CollisionTile
+[CreateAssetMenu(menuName = "Tiles/SpawnTile")]
+public class SpawnTile : TileBase
 {
     public Sprite sprite;
+    public GameObject prefab;
 
     public override void GetTileData(Vector3Int location, ITilemap tilemap, ref TileData tileData)
     {
@@ -19,10 +20,10 @@ public class CommonTile : CollisionTile
 }
 
 #if UNITY_EDITOR
-[CustomEditor(typeof(CommonTile))]
-public class ExampleEditor : UnityEditor.Editor
+[CustomEditor(typeof(SpawnTile))]
+public class SpawnTileEditor : UnityEditor.Editor
 {
-    private CommonTile tile => (target as CommonTile);
+    private SpawnTile tile => (target as SpawnTile);
 
     public override Texture2D RenderStaticPreview(string assetPath, Object[] subAssets, int width, int height)
     {
@@ -37,4 +38,3 @@ public class ExampleEditor : UnityEditor.Editor
     }
 }
 #endif
-

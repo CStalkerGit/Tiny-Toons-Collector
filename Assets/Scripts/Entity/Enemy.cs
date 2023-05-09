@@ -31,6 +31,7 @@ public class Enemy : MonoBehaviour
                 actor.Kill();
                 Game.Poof(transform.position);
                 Data.points += Points;
+                Game.SpawnPopUp(Points, transform.position);
                 Player.EnemyWasStomped();
             }
             else

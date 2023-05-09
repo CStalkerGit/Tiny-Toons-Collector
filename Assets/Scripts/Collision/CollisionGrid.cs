@@ -16,6 +16,17 @@ public class CollisionGrid : MonoBehaviour
     {
         if (ptr) Debug.LogWarning("CollisionGrid pointer is not null");
         ptr = this;
+
+        // spawn entities from tiles
+        foreach (var pos in map.cellBounds.allPositionsWithin)
+        {
+            var tile = map.GetTile<SpawnTile>(pos);
+            if (tile)
+            {
+                Instantiate(tile.prefab, pos, Quaternion.identity);
+                map.SetTile(pos, null);
+            }
+        }
     }
 
     // Update is called once per frame
@@ -119,8 +130,12 @@ public class CollisionGrid : MonoBehaviour
 
         y = Mathf.FloorToInt(entity.pos.y - 1f);
         tile = ptr.map.GetTile<CollisionTile>(new Vector3Int(x, y, 0));
-
-        return tile == null; 
+        if (tile)
+        {
+            return tile.type == TileType.Background;
+        }
+        else 
+            return true;
     }
 
     static BoundsInt GetEntityBounds(Entity entity)
