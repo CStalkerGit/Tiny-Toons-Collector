@@ -5,8 +5,6 @@ using UnityEngine;
 public class TeleportTrigger : MonoBehaviour
 {
     public SpawnPoint exit;
-    public CameraPosition camera1;
-    public CameraPosition camera2;
     public bool userInput = true;
 
     int tx, ty;
@@ -31,7 +29,7 @@ public class TeleportTrigger : MonoBehaviour
                 if (exit)
                 {
                     Player.Teleport(exit.transform.position);
-                    CameraControl.Set(camera1, camera2);
+                    //CameraControl.Set(camera1, camera2);
                 }
             }
         }

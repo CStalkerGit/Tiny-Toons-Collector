@@ -7,8 +7,6 @@ public class Checkpoint : MonoBehaviour
 {
     public Sprite activated;
     public Sprite waiting;
-    public CameraPosition camera1;
-    public CameraPosition camera2;
 
     Entity entity;
 
@@ -18,7 +16,6 @@ public class Checkpoint : MonoBehaviour
     void Awake()
     {
         entity = GetComponent<Entity>();
-
         origin = transform.position;
     }
 

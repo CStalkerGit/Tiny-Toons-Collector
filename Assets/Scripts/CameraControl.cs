@@ -5,8 +5,6 @@ using UnityEngine;
 public class CameraControl : MonoBehaviour
 {
     public Transform follow;
-    public CameraPosition cam1;
-    public CameraPosition cam2;
 
     int x1, y1, x2, y2;
 
@@ -15,7 +13,6 @@ public class CameraControl : MonoBehaviour
     void Awake()
     {
         ptr = this;
-        Set(cam1, cam2);
     }
 
     // Update is called once per frame
@@ -31,9 +28,9 @@ public class CameraControl : MonoBehaviour
         transform.position = new Vector3(pos.x, pos.y, transform.position.z);
     }
 
-    public static void Set(CameraPosition cam1, CameraPosition cam2)
+    public static void Set(CameraPosition cam)
     {
-        if (!cam1)
+        if (!cam)
         {
             ptr.x1 = -9999;
             ptr.x2 = 9999;
@@ -42,14 +39,33 @@ public class CameraControl : MonoBehaviour
             return;
         }
 
-        ptr.x1 = cam1.X + 5;
-        ptr.x2 = (cam2 ? cam2.X : cam1.X) - 4;
+        ptr.x1 = cam.X1 + 5;
+        ptr.x2 = cam.X2 - 4;
         if (ptr.x2 < ptr.x1) ptr.x2 = ptr.x1;
 
-        ptr.y1 = cam1.Y + 3;
-        ptr.y2 = (cam2 ? cam2.Y : cam1.Y) - 3;
+        ptr.y1 = cam.Y1 + 3;
+        ptr.y2 = cam.Y2 - 3;
         if (ptr.y2 < ptr.y1) ptr.y2 = ptr.y1;
 
-        Camera.main.backgroundColor = cam1.GetBackgroundColor();
+        Camera.main.backgroundColor = cam.GetBackgroundColor();
+    }
+
+    public static void Find(Vector3 pos)
+    {
+        var cameras = FindObjectsOfType<CameraPosition>();
+        int cx1 = Mathf.FloorToInt(pos.x);
+        int cx2 = Mathf.CeilToInt(pos.x);
+        int cy1 = Mathf.FloorToInt(pos.y);
+        int cy2 = Mathf.CeilToInt(pos.y);
+
+        foreach (var cam in cameras)
+        {
+            if (cx1 >= cam.X1 && cx2 <= cam.X2)
+                if (cy1 >= cam.Y1 && cy2 <= cam.Y2)
+                {
+                    Set(cam);
+                    break;
+                }
+        }
     }
 }

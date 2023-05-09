@@ -35,11 +35,12 @@ public class Player : MonoBehaviour
                 if ((transform.position - chk.transform.position).sqrMagnitude < 0.2f)
                 {
                     chk.Activate();
-                    Data.lastCheckpoint = chk.transform.position; // HACK checkpoint may miss Awake()
-                    if (chk.camera1) CameraControl.Set(chk.camera1, chk.camera2);
+                    //Data.lastCheckpoint = chk.transform.position; // HACK checkpoint may miss Awake()
+                    //if (chk.camera1) CameraControl.Set(chk.camera1, chk.camera2);
                     break;
                 }
         }
+        CameraControl.Find(transform.position);
 
         BlackScreen.FadeOut();
     }

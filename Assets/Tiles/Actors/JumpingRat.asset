@@ -1,0 +1,16 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 955b856c856d8984693e6aa81c1bd5b5, type: 3}
+  m_Name: JumpingRat
+  m_EditorClassIdentifier: 
+  sprite: {fileID: 21300000, guid: 149f60bfd4b28da48aa36dc09e54f547, type: 3}
+  prefab: {fileID: 75354710275330518, guid: 0a8e9983b2c66b046bf20a376a919d0e, type: 3}

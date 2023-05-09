@@ -11,9 +11,12 @@ public enum BackgroundColor
 public class CameraPosition : MonoBehaviour
 {
     public BackgroundColor backgroundColor; //AAE7FF
+    public Transform topRightCorner;
 
-    public int X => Mathf.FloorToInt(transform.position.x);
-    public int Y => Mathf.FloorToInt(transform.position.y);
+    public int X1 => Mathf.FloorToInt(transform.position.x);
+    public int Y1 => Mathf.FloorToInt(transform.position.y);
+    public int X2 => topRightCorner ? Mathf.FloorToInt(topRightCorner.transform.position.x) : X1;
+    public int Y2 => topRightCorner ? Mathf.FloorToInt(topRightCorner.transform.position.y) : Y1;
 
     public Color GetBackgroundColor()
     {
