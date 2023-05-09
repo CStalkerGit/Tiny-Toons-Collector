@@ -16,14 +16,17 @@ public class CollisionGrid : MonoBehaviour
     {
         if (ptr) Debug.LogWarning("CollisionGrid pointer is not null");
         ptr = this;
+    }
 
-        // spawn entities from tiles
+    void Start()
+    {
+        // spawn entities from SpawnTile
         foreach (var pos in map.cellBounds.allPositionsWithin)
         {
             var tile = map.GetTile<SpawnTile>(pos);
             if (tile)
             {
-                Instantiate(tile.prefab, pos, Quaternion.identity);
+                Instantiate(tile.prefab, new Vector3(pos.x + 0.5f, pos.y + 0.5f, 0), Quaternion.identity);
                 map.SetTile(pos, null);
             }
         }

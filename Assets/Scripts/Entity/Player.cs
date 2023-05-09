@@ -19,6 +19,14 @@ public class Player : MonoBehaviour
         entity = GetComponent<Entity>();
         actor = GetComponent<Actor>();
 
+        LastPosition = transform.position;
+        entity.pos = transform.position;
+
+        actor.FacingRight = true;
+    }
+
+    private void Start()
+    {
         if (Data.startFromCheckpoint)
         {
             transform.position = Data.lastCheckpoint;
@@ -33,12 +41,7 @@ public class Player : MonoBehaviour
                 }
         }
 
-        LastPosition = transform.position;
-        entity.pos = transform.position;
-
         BlackScreen.FadeOut();
-
-        actor.FacingRight = true;
     }
 
     void OnDestroy()

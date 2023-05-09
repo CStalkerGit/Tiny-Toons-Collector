@@ -86,7 +86,7 @@ public class BlackScreen : MonoBehaviour
         timer = speed;
     }
 
-    public static void ClearTiles() => ptr?.Clear(false);
+    //public static void ClearTiles() => ptr?.Clear(false);
     public static void FadeIn(Vector3 pos, bool slow) => ptr?.Fade(pos, true, slow);
     public static void FadeOut() => ptr?.Fade(Vector3.zero, false, false);
     public static bool InProcess => ptr ? ptr.inProcess : false;  
