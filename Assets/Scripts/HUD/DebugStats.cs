@@ -7,6 +7,7 @@ public class DebugStats : MonoBehaviour
 {
     public Text text;
     public EntityPhysics entity;
+    public static string debug;
 
     // Start is called before the first frame update
     void Start()
@@ -19,7 +20,8 @@ public class DebugStats : MonoBehaviour
     {
         text.text = $"speed = {entity.velocity}\n" +
             $"coord = {entity.transform.position}\n" +
-            $"OnGround = {entity.OnGround}, OnSlope = {entity.OnSlope}\n";// +
+            debug;
+            //$"OnGround = {entity.OnGround}, OnSlope = {entity.OnSlope}\n";// +
             //$"BlockedX = {entity.BlockedX}, BlockedY = {entity.BlockedY}";
     }
 }

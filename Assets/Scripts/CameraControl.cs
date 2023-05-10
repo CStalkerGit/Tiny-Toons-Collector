@@ -10,9 +10,12 @@ public class CameraControl : MonoBehaviour
 
     static CameraControl ptr;
 
+    private CameraPosition[] cameras;
+
     void Awake()
     {
         ptr = this;
+        cameras = FindObjectsOfType<CameraPosition>();
     }
 
     // Update is called once per frame
@@ -52,20 +55,21 @@ public class CameraControl : MonoBehaviour
 
     public static void Find(Vector3 pos)
     {
-        var cameras = FindObjectsOfType<CameraPosition>();
         int cx1 = Mathf.FloorToInt(pos.x);
         int cx2 = Mathf.CeilToInt(pos.x);
         int cy1 = Mathf.FloorToInt(pos.y);
         int cy2 = Mathf.CeilToInt(pos.y);
 
-        foreach (var cam in cameras)
+        CameraPosition newCamera = null;
+        foreach (var cam in ptr.cameras)
         {
             if (cx1 >= cam.X1 && cx2 <= cam.X2)
                 if (cy1 >= cam.Y1 && cy2 <= cam.Y2)
                 {
-                    Set(cam);
+                    newCamera = cam;
                     break;
                 }
         }
+        Set(newCamera);
     }
 }

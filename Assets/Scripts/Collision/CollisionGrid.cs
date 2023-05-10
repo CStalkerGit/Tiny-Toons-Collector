@@ -75,8 +75,11 @@ public class CollisionGrid : MonoBehaviour
         for (int x = bounds.x; x <= bounds.xMax; x++)
             for (int y = bounds.y; y <= bounds.yMax; y++)
             {
-                var tile = ptr.map.GetTile<CollisionTile>(new Vector3Int(x, y, 0));
+                var pos = new Vector3Int(x, y, 0);
+                var tile = ptr.map.GetTile<CollisionTile>(pos);
                 if (tile == null) continue;
+
+                data.position = pos;
 
                 if (tile.IsCollision(x, y, entity))
                 {
@@ -85,13 +88,15 @@ public class CollisionGrid : MonoBehaviour
 
                 if (entity.IsCollision(x + 0.5f, y + 0.5f, 0.5f))
                 {
+                    data.trigger = tile.trigger;
+
                     switch (tile.type)
                     {
                         case TileType.Spikes:
                             if (entity.BottomCoord < y + 0.5f) data.isSpike = true;
                             break;
                         case TileType.Exit:
-                            data.isExit = true;
+                            data.trigger = TriggerType.Exit;
                             break;
                     }
                 }
@@ -153,6 +158,26 @@ public class CollisionGrid : MonoBehaviour
         BoundsInt bounds = new BoundsInt();
         bounds.SetMinMax(new Vector3Int(x1, y1, 0), new Vector3Int(x2, y2, 0));
         return bounds;
+    }
+
+    public static bool FindNearestTeleport(Vector3Int tilePos, bool searchDown, out Vector3 result)
+    {
+        Vector3Int position = tilePos;
+        TriggerType search = searchDown ? TriggerType.TeleportUp : TriggerType.TeleportDown;
+        result = tilePos;
+
+        for (int i = 0; i < 20; i++)
+        {
+            position.y += searchDown ? -1 : 1;
+            var tile = ptr.map.GetTile<CollisionTile>(position);
+            if (tile && tile.trigger == search)
+            {
+                result = position + new Vector3(0.5f, searchDown ? -0.5f : 1.5f, 0);
+                return true;
+            }
+        }
+
+        return false;
     }
 
     [ContextMenu("Clear All Tiles")]

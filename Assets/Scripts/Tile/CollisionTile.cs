@@ -17,9 +17,18 @@ public enum TileType
     Exit
 }
 
+public enum TriggerType
+{
+    None,
+    TeleportDown,
+    TeleportUp,
+    Exit
+}
+
 public class CollisionTile : TileBase
 {
-    public TileType type;
+    public TileType type; 
+    public TriggerType trigger;
     public bool orientToRight;
     public bool compatible;
 

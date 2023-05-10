@@ -6,7 +6,8 @@ public class SpecialCollision
 {
     public bool isSpike = false;
     public bool isStuck = false;
-    public bool isExit = false;
+    public TriggerType trigger;
+    public Vector3Int position;
 
     public SpecialCollision()
     {

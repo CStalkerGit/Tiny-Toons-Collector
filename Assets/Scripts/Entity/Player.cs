@@ -66,10 +66,26 @@ public class Player : MonoBehaviour
             actor.Kill();
             EndScene();
         }
-        if (data.isExit)
+
+        switch (data.trigger)
         {
-            //gameObject.SetActive(false);
-            Game.EndScene(false);
+            case TriggerType.Exit:
+                Game.EndScene(false);
+                break;
+            case TriggerType.TeleportDown:
+                if (pressedDown)
+                {
+                    if (CollisionGrid.FindNearestTeleport(data.position, true, out Vector3 teleportDown))
+                        Teleport(teleportDown);
+                }
+                break;
+            case TriggerType.TeleportUp:
+                if (actor.physics.velocity.y > 0.1f)
+                {
+                    if (CollisionGrid.FindNearestTeleport(data.position, false, out Vector3 teleportUp))
+                        Teleport(teleportUp);
+                }
+                break;
         }
     }
 
