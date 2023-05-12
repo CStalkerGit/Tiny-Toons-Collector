@@ -16,12 +16,6 @@ public class CameraControl : MonoBehaviour
     {
         ptr = this;
         cameras = FindObjectsOfType<CameraArea>();
-
-        foreach (var cam in cameras)
-        {
-            var obj = Instantiate(cam, new Vector3(cam.X2 + 0.5f, cam.Y2 + 0.5f), Quaternion.identity);
-            obj.name = "Cam";
-        }
     }
 
     // Update is called once per frame
