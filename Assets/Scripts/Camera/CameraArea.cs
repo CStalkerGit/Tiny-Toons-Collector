@@ -8,15 +8,15 @@ public enum BackgroundColor
     Blue 
 }
 
-public class CameraPosition : MonoBehaviour
+public class CameraArea : MonoBehaviour
 {
     public BackgroundColor backgroundColor; //AAE7FF
-    public Transform topRightCorner;
+    public CameraCoord topRightCorner;
 
     public int X1 => Mathf.FloorToInt(transform.position.x);
     public int Y1 => Mathf.FloorToInt(transform.position.y);
-    public int X2 => topRightCorner ? Mathf.FloorToInt(topRightCorner.transform.position.x) : X1;
-    public int Y2 => topRightCorner ? Mathf.FloorToInt(topRightCorner.transform.position.y) : Y1;
+    public int X2 => topRightCorner ? topRightCorner.X : Mathf.FloorToInt(transform.position.x + 8);
+    public int Y2 => topRightCorner ? topRightCorner.Y : Mathf.FloorToInt(transform.position.y + 6);
 
     public Color GetBackgroundColor()
     {

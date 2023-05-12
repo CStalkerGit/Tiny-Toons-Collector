@@ -10,12 +10,18 @@ public class CameraControl : MonoBehaviour
 
     static CameraControl ptr;
 
-    private CameraPosition[] cameras;
+    private CameraArea[] cameras;
 
     void Awake()
     {
         ptr = this;
-        cameras = FindObjectsOfType<CameraPosition>();
+        cameras = FindObjectsOfType<CameraArea>();
+
+        foreach (var cam in cameras)
+        {
+            var obj = Instantiate(cam, new Vector3(cam.X2 + 0.5f, cam.Y2 + 0.5f), Quaternion.identity);
+            obj.name = "Cam";
+        }
     }
 
     // Update is called once per frame
@@ -31,7 +37,7 @@ public class CameraControl : MonoBehaviour
         transform.position = new Vector3(pos.x, pos.y, transform.position.z);
     }
 
-    public static void Set(CameraPosition cam)
+    public static void Set(CameraArea cam)
     {
         if (!cam)
         {
@@ -60,7 +66,7 @@ public class CameraControl : MonoBehaviour
         int cy1 = Mathf.FloorToInt(pos.y);
         int cy2 = Mathf.CeilToInt(pos.y);
 
-        CameraPosition newCamera = null;
+        CameraArea newCamera = null;
         foreach (var cam in ptr.cameras)
         {
             if (cx1 >= cam.X1 && cx2 <= cam.X2)

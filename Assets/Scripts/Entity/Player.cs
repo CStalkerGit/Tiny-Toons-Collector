@@ -73,20 +73,25 @@ public class Player : MonoBehaviour
                 Game.EndScene(false);
                 break;
             case TriggerType.TeleportDown:
-                if (pressedDown)
+                if (pressedDown && CheckTeleportPositiob(data.position))
                 {
                     if (CollisionGrid.FindNearestTeleport(data.position, true, out Vector3 teleportDown))
                         Teleport(teleportDown);
                 }
                 break;
             case TriggerType.TeleportUp:
-                if (actor.physics.velocity.y > 0.1f)
+                if (actor.physics.velocity.y > 0.1f && CheckTeleportPositiob(data.position))
                 {
                     if (CollisionGrid.FindNearestTeleport(data.position, false, out Vector3 teleportUp))
                         Teleport(teleportUp);
                 }
                 break;
         }
+    }
+
+    bool CheckTeleportPositiob(Vector3Int pos)
+    {
+        return Mathf.Abs(transform.position.x - pos.x - 0.5f) < 0.4f;
     }
 
     public static bool IsCollision(Entity target)
@@ -143,6 +148,10 @@ public class Player : MonoBehaviour
 
     public static void Teleport(Vector3 pos)
     {
-        if (ptr && ptr.actor) ptr.actor.Teleport(pos);
+        if (ptr && ptr.actor)
+        {
+            ptr.actor.Teleport(pos);
+            CameraControl.Find(ptr.transform.position);
+        }
     }
 }
