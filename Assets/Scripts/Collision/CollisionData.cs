@@ -41,4 +41,17 @@ public class CollisionData
         if (right < localRight) right = Mathf.Min(localRight, tileX + 1f);
         if (left > localLeft) left = Mathf.Max(localLeft, tileX);
     }
+
+    public void Intersect(float _top, float _bottom, float _right, float _left)
+    {
+        top = Mathf.Max(top, _top);
+        bottom = Mathf.Min(bottom, _bottom);
+        right = Mathf.Max(right, _right);
+        left = Mathf.Min(left, _left);
+    }
+
+    public void Intersect(Rect rect)
+    {
+        Intersect(rect.yMax, rect.yMin, rect.xMax, rect.xMin);
+    }
 }

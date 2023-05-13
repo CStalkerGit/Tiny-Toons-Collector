@@ -11,6 +11,8 @@ public class CollisionGrid : MonoBehaviour
 
     static CollisionGrid ptr = null;
 
+    Platform[] platforms;
+
     // Start is called before the first frame update
     void Awake()
     {
@@ -30,6 +32,9 @@ public class CollisionGrid : MonoBehaviour
                 map.SetTile(pos, null);
             }
         }
+
+        // find all platforms
+        platforms = FindObjectsOfType<Platform>();
     }
 
     // Update is called once per frame
@@ -62,6 +67,15 @@ public class CollisionGrid : MonoBehaviour
                     data.isCollision = true;
                 }
             }
+
+        foreach(var platform in ptr.platforms)
+        {
+            if (entity.IsCollision(platform.entity))
+            {
+                data.Intersect(platform.entity.GetRect());
+                data.isCollision = true;
+            }
+        }
 
         return data;
     }

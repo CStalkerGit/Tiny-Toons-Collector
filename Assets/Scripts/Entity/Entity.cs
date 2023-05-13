@@ -89,6 +89,11 @@ public class Entity : MonoBehaviour
         }
     }
 
+    public Rect GetRect()
+    {
+        return new Rect(transform.position.x, transform.position.y, rw, rh);
+    }
+
     public float TopCoord => pos.y + rh;
     public float BottomCoord => pos.y - rh;
     public float PrevTopCoord => prev_pos.y + rh;  
