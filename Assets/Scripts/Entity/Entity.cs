@@ -91,7 +91,13 @@ public class Entity : MonoBehaviour
 
     public Rect GetRect()
     {
-        return new Rect(transform.position.x, transform.position.y, rw, rh);
+        //var r = new Rect(pos.x - rw, pos.y + rh, rw * 2, rh * 2);
+        var r = new Rect();
+        r.xMin = pos.x - rw;
+        r.xMax = pos.x + rw;
+        r.yMin = pos.y - rh;
+        r.yMax = pos.y + rh;
+        return r;
     }
 
     public float TopCoord => pos.y + rh;
