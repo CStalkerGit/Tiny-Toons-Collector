@@ -18,7 +18,7 @@ public class TestSlope : MonoBehaviour
         var entity = GetComponent<Entity>();
         
         var data = CollisionGrid.IsCollision(entity);
-        data.Reset(entity, entity.transform.position);
+        //data.Reset(entity, entity.transform.position);
         if (data.isCollision)
             spr.color = Color.red;
         else

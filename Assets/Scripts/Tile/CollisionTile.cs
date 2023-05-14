@@ -42,7 +42,7 @@ public class CollisionTile : TileBase
         switch (type)
         {
             case TileType.FullBlock:
-                rect.UnionTile(tileX, tileY);
+                rect.IntersectTile(tileX, tileY);
                 return;
         }
 
@@ -53,33 +53,33 @@ public class CollisionTile : TileBase
         {
             case TileType.FullBlock:
             case TileType.Platform:
-                rect.UnionTile(tileX, tileY);
+                rect.IntersectTile(tileX, tileY);
                 break;
             case TileType.HalfBlock:
-                rect.UnionTile(tileX, tileY, 0.5f, 0, 1, 0);
+                rect.IntersectTile(tileX, tileY, 0.5f, 0, 1, 0);
                 break;
             case TileType.HalfBlockCeil:
-                rect.UnionTile(tileX, tileY, 1, 0.5f, 1, 0);
+                rect.IntersectTile(tileX, tileY, 1, 0.5f, 1, 0);
                 break;
             case TileType.SlopeP4:
                 if (orientToRight)
-                    rect.UnionTile(tileX, tileY, 1 - point.x, 0, 1 - point.y, 0f);
+                    rect.IntersectTile(tileX, tileY, 1 - point.x, 0, 1 - point.y, 0f);
                 else
-                    rect.UnionTile(tileX, tileY, point.x, 0, 1f, point.y);
+                    rect.IntersectTile(tileX, tileY, point.x, 0, 1f, point.y);
                 rect.isSlope = true;
                 break;
             case TileType.SlopeP8half:
                 if (orientToRight)
-                    rect.UnionTile(tileX, tileY, Mathf.Min(0.5f - point.x / 2, 0.5f), 0, 1 - point.y * 2, 0f);
+                    rect.IntersectTile(tileX, tileY, Mathf.Min(0.5f - point.x / 2, 0.5f), 0, 1 - point.y * 2, 0f);
                 else
-                    rect.UnionTile(tileX, tileY, Mathf.Min(point.x / 2, 0.5f), 0, 1f, point.y * 2);
+                    rect.IntersectTile(tileX, tileY, Mathf.Min(point.x / 2, 0.5f), 0, 1f, point.y * 2);
                 rect.isSlope = true;
                 break;
             case TileType.SlopeP8full:
                 if (orientToRight)
-                    rect.UnionTile(tileX, tileY, 1 - point.x / 2, 0, 1 - (point.y - 0.5f) * 2, 0f);
+                    rect.IntersectTile(tileX, tileY, 1 - point.x / 2, 0, 1 - (point.y - 0.5f) * 2, 0f);
                 else
-                    rect.UnionTile(tileX, tileY, point.x / 2 + 0.5f, 0, 1f, (point.y - 0.5f) * 2);
+                    rect.IntersectTile(tileX, tileY, point.x / 2 + 0.5f, 0, 1f, (point.y - 0.5f) * 2);
                 rect.isSlope = true;
                 break;
         }

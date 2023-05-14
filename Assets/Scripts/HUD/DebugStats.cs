@@ -20,8 +20,8 @@ public class DebugStats : MonoBehaviour
     {
         text.text = $"speed = {entity.velocity}\n" +
             $"coord = {entity.transform.position}\n" +
-            debug;
-            //$"OnGround = {entity.OnGround}, OnSlope = {entity.OnSlope}\n";// +
+            //debug;
+            $"OnGround = {entity.OnGround}, OnSlope = {entity.OnSlope}\n";// +
             //$"BlockedX = {entity.BlockedX}, BlockedY = {entity.BlockedY}";
     }
 }

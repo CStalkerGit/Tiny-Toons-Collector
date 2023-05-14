@@ -50,10 +50,7 @@ public class CollisionGrid : MonoBehaviour
 
     public static CollisionData IsCollision(Entity entity)
     {
-        var data = new CollisionData();
-
-        data.Reset(entity, entity.pos);
-
+        var data = new CollisionData(entity);
         var bounds = GetEntityBounds(entity);
 
         for (int x = bounds.x; x <= bounds.xMax; x++)
