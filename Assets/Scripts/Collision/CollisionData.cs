@@ -24,6 +24,10 @@ public class CollisionData
 
     public void IntersectTile(float tileX, float tileY, float localTop, float localBottom, float localRight, float localLeft)
     {
+        localTop = Mathf.Clamp(localTop, 0, 1);
+        localBottom = Mathf.Clamp(localBottom, 0, 1);
+        localRight = Mathf.Clamp(localRight, 0, 1);
+        localLeft = Mathf.Clamp(localLeft, 0, 1);
         Intersect(tileY + localTop, tileY + localBottom, tileX + localRight, tileX + localLeft);
     }
 
