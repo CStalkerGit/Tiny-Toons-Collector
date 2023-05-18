@@ -69,6 +69,7 @@ public class CollisionGrid : MonoBehaviour
         {
             if (entity.IsCollision(platform.entity))
             {
+                if (!platform.solid && entity.PrevBottomCoord <= platform.entity.TopCoord) continue;
                 data.Intersect(platform.entity.GetRect());
                 data.isCollision = true;
             }

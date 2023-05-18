@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Platform : MonoBehaviour
 {
+    public bool solid;
     public Entity entity { get; private set; }
 
     void Awake()
