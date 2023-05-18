@@ -100,6 +100,17 @@ public class Player : MonoBehaviour
         return ptr.entity.IsCollision(target); 
     }
 
+    public static bool IsPlayerOnPlatform(Entity target)
+    {
+        if (ptr == null) return false;
+        return ptr.entity.IsOnPlatform(target) && ptr.actor.physics.OnGround;
+    }
+
+    public static void AddImpulse(float x, float y)
+    {
+        if (ptr) ptr.actor.AddImpulse(new Vector3(x, y, 0));
+    }
+
     public static bool IsTargetWasStomped(Entity target)
     {
         if (ptr == null) return false;

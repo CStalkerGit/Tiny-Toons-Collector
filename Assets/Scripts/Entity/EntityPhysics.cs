@@ -21,6 +21,8 @@ public class EntityPhysics : MonoBehaviour
     [System.NonSerialized]
     public Vector3 velocity;
     [System.NonSerialized]
+    public Vector3 impulse;
+    [System.NonSerialized]
     public bool deceleration;
     public bool OnGround { get; private set; }
     public bool OnSlope { get; private set; }
@@ -44,7 +46,8 @@ public class EntityPhysics : MonoBehaviour
 
     void FixedUpdate()
     {
-        Vector3 moving = velocity * Time.deltaTime;
+        Vector3 moving = (velocity + impulse) * Time.deltaTime;
+        impulse = Vector3.zero;
         entity.prev_pos = transform.position;
         entity.pos = transform.position;
 

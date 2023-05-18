@@ -89,6 +89,12 @@ public class Entity : MonoBehaviour
         }
     }
 
+    public bool IsOnPlatform(Entity entity)
+    {
+        if (Mathf.Abs(pos.x - entity.pos.x) > (rw + entity.rw)) return false;
+        return (entity.TopCoord <= BottomCoord) && (BottomCoord <= entity.TopCoord + 0.1f);
+    }
+
     public Rect GetRect()
     {
         //var r = new Rect(pos.x - rw, pos.y + rh, rw * 2, rh * 2);

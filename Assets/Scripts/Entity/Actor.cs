@@ -155,7 +155,8 @@ public class Actor : MonoBehaviour
 
     public void Move(float v) => move = v;
     public void Jump() => jump = true;
-    public void AddForce(Vector3 force) => physics.velocity += force; 
+    public void AddForce(Vector3 force) => physics.velocity += force;
+    public void AddImpulse(Vector3 force) => physics.impulse += force;
     public bool Moving { get; private set; }
     public bool WasHit { get; private set; } = false;
     public bool IsInvulnerable { get; private set; } = false;
